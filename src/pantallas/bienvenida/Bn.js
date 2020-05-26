@@ -19,7 +19,9 @@ const Bn = props => {
           <Bn3 />
         </View>
         <View style={{flex: 0.2, alignItems: 'center'}}>
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('Catalogo')}>
             <Boton titulo="Comenzar" />
           </TouchableOpacity>
         </View>

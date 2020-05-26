@@ -1,14 +1,11 @@
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+
 const Fondo = ({children}) => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <LinearGradient
         style={{flex: 1}}
         start={{x: 1, y: 0}}

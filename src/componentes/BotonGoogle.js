@@ -26,7 +26,7 @@ class BotonGoogle extends React.Component {
 const styles = StyleSheet.create({
   button: {
     width: wp('70'),
-    height: hp('6'),
+    height: hp('7'),
     flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: wp('6'),
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   texto: {
     flex: 2,
     color: 'black',
-    fontSize: hp('2'),
+    fontSize: hp('2.2'),
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },

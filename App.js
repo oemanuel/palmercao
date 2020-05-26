@@ -8,6 +8,9 @@ import Login from './src/pantallas/login/Login';
 import Confirmacion from './src/pantallas/confirmacio/Confirmacion';
 import Recuperar from './src/pantallas/recuperar/Recuperar';
 import Bienvenida from './src/pantallas/bienvenida/Bienvenida';
+import Catalogo from './src/pantallas/catalogo/Catalogo';
+import InfoCategoria from './src/pantallas/infoCategoria/InfoCategoria';
+import InfoProducto from './src/pantallas/infoProducto/InfoProducto';
 
 const Stack = createStackNavigator();
 
@@ -43,6 +46,21 @@ const App = () => {
         <Stack.Screen
           name="Bienvenida"
           component={Bienvenida}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Catalogo"
+          component={Catalogo}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="InfoCategoria"
+          component={InfoCategoria}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="InfoProducto"
+          component={InfoProducto}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

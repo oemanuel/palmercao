@@ -1,28 +1,29 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import BarraBusqueda from '../../componentes/BarraBusqueda';
+import BarraInfoCompra from '../../componentes/BarraInfoCompra';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
-
+import Boton from '../../componentes/Boton';
+import Modal from '../../componentes/Modal';
 const InfoCategoria = ({navigation}) => {
   return (
     <>
+      <Modal exito={true} />
       <View style={styles.contain}>
         <View style={styles.header}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.goBack()}>
+              onPress={() => navigation.navigate('Catalogo')}>
               <Image
                 style={styles.flecha}
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate('Menu')}>
+            onPress={() => navigation.navigate('Catalogo')}>
             <Image
               style={styles.menu}
               source={require('../../assets/Icon/menu.png')}
@@ -30,25 +31,26 @@ const InfoCategoria = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.info}>
+          <Image
+            style={styles.canasta}
+            source={require('../../assets/Img/canastaCompra.png')}
+          />
+          <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text>
+          <View style={styles.ccantidad}>
+            <Text style={styles.texto}>1</Text>
+          </View>
           <View style={styles.children}>
-            <View style={styles.cartac}>
-              <View style={styles.carta}>
-                <Image
-                  style={styles.imagen}
-                  source={{
-                    uri:
-                      'https://m.lopido.com/images/productos/sii/F/300x300/arroz_diana_premium-130127-1557347133.png',
-                  }}
-                />
-              </View>
-            </View>
+            <BarraInfoCompra />
           </View>
         </View>
         <View style={styles.separador} />
         <View style={{alignItems: 'center', flex: 0.73}}>
-          <Text style={[styles.texto, {color: '#FF694E'}]}>
-            Nombre producto
-          </Text>
+          <ContenedorProducto />
+        </View>
+        <View style={styles.boton}>
+          <TouchableOpacity style={{alignItems: 'center'}} activeOpacity={0.5}>
+            <Boton titulo="Comprar" />
+          </TouchableOpacity>
         </View>
       </View>
     </>

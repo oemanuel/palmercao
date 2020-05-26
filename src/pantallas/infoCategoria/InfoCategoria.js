@@ -20,10 +20,14 @@ const InfoCategoria = ({navigation}) => {
             </TouchableOpacity>
             <Text style={styles.texto}>Nombre Categoria</Text>
           </View>
-          <Image
-            style={styles.menu}
-            source={require('../../assets/Icon/menu.png')}
-          />
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('Menu')}>
+            <Image
+              style={styles.menu}
+              source={require('../../assets/Icon/menu.png')}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.info}>
           <View style={styles.children}>

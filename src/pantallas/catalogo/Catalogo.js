@@ -10,10 +10,14 @@ const Catalogo = ({navigation}) => {
     <>
       <View style={styles.fondo}>
         <View style={styles.header}>
-          <Image
-            style={styles.menu}
-            source={require('../../assets/Icon/menu.png')}
-          />
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('Menu')}>
+            <Image
+              style={styles.menu}
+              source={require('../../assets/Icon/menu.png')}
+            />
+          </TouchableOpacity>
         </View>
         <Informacion>
           <BarraBusqueda />

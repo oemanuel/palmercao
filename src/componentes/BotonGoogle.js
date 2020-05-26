@@ -6,10 +6,10 @@ import {
 } from 'react-native-responsive-screen';
 class BotonGoogle extends React.Component {
   render() {
-    const {titulo} = this.props;
+    const {titulo, onPressAction} = this.props;
     return (
       <>
-        <View style={styles.contain}>
+        <TouchableOpacity style={styles.contain} onPress={onPressAction}>
           <View style={styles.button}>
             <Image
               style={styles.icono}
@@ -17,7 +17,7 @@ class BotonGoogle extends React.Component {
             />
             <Text style={styles.texto}> {titulo}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </>
     );
   }
@@ -35,13 +35,15 @@ const styles = StyleSheet.create({
   contain: {
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'green',
   },
   icono: {
     flex: 1,
-    width: wp('5'),
-    height: wp('5'),
+    width: '100%',
+    height: '50%',
     resizeMode: 'contain',
     alignSelf: 'center',
+    // backgroundColor: 'blue',
   },
   texto: {
     flex: 2,
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
     fontSize: hp('2.2'),
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
+    // backgroundColor: 'yellow',
   },
 });
 export default BotonGoogle;

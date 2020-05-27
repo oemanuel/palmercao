@@ -9,7 +9,10 @@ class BotonGoogle extends React.Component {
     const {titulo, onPressAction} = this.props;
     return (
       <>
-        <TouchableOpacity style={styles.contain} onPress={onPressAction}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.contain}
+          onPress={onPressAction}>
           <View style={styles.button}>
             <Image
               style={styles.icono}
@@ -35,7 +38,6 @@ const styles = StyleSheet.create({
   contain: {
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'green',
   },
   icono: {
     flex: 1,
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
     height: '50%',
     resizeMode: 'contain',
     alignSelf: 'center',
-    // backgroundColor: 'blue',
   },
   texto: {
     flex: 2,
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
     fontSize: hp('2.2'),
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
-    // backgroundColor: 'yellow',
   },
 });
 export default BotonGoogle;

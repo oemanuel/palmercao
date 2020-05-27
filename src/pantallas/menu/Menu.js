@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Text,
   View,
@@ -13,16 +13,15 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const Menu = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(true);
+const Menu = props => {
+  const {navigation, visible, setMenuVisible} = props;
   return (
     <Modal
-      visible={modalVisible}
-      animationType="slide"
+      visible={visible}
+      animationType="fade"
       transparent={true}
       onRequestClose={() => {
-        setModalVisible(!modalVisible);
-        navigation.goBack();
+        setMenuVisible(false);
       }}>
       <View style={styles.contain}>
         <View style={styles.barra}>
@@ -30,8 +29,7 @@ const Menu = ({navigation}) => {
             <TouchableOpacity
               activeOpacity={0.5}
               onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.goBack();
+                setMenuVisible(false);
               }}>
               <Image
                 style={styles.menu}
@@ -45,14 +43,14 @@ const Menu = ({navigation}) => {
               source={require('../../assets/logo/Componente2.png')}
             />
           </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
+
+          <Boton
+            titulo="Lista de compra"
             onPress={() => {
-              setModalVisible(!modalVisible);
+              setMenuVisible(false);
               navigation.navigate('ListaCompra');
-            }}>
-            <Boton titulo="Lista de compra" />
-          </TouchableOpacity>
+            }}
+          />
           <View style={styles.textoc}>
             <TouchableOpacity activeOpacity={0.5}>
               <Text style={styles.texto}>Cerrar cesision</Text>
@@ -71,6 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   barra: {
     flex: 0.8,
@@ -79,6 +78,14 @@ const styles = StyleSheet.create({
     marginBottom: hp('5'),
     borderBottomLeftRadius: hp('5'),
     borderTopLeftRadius: hp('5'),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
   },
   logoc: {
     flex: 0.4,

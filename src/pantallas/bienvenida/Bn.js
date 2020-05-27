@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import Bn1 from '../../componentes/Bn1';
 import Bn2 from '../../componentes/Bn2';
 import Bn3 from '../../componentes/Bn3';
@@ -19,11 +19,10 @@ const Bn = props => {
           <Bn3 />
         </View>
         <View style={{flex: 0.2, alignItems: 'center'}}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('Catalogo')}>
-            <Boton titulo="Comenzar" />
-          </TouchableOpacity>
+          <Boton
+            titulo="Comenzar"
+            onPress={() => navigation.navigate('Catalogo')}
+          />
         </View>
       </>
     );

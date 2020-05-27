@@ -9,7 +9,10 @@ class BotonFace extends React.Component {
     const {titulo, onPressAction} = this.props;
     return (
       <>
-        <TouchableOpacity style={styles.contain} onPress={onPressAction}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.contain}
+          onPress={onPressAction}>
           <View style={styles.button}>
             <Image
               style={styles.icono}
@@ -31,10 +34,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#059CE5',
     borderRadius: wp('6'),
     alignItems: 'center',
-    // justifyContent: 'space-around',
   },
   contain: {
-    justifyContent: 'center', //Centered vertically
+    justifyContent: 'center',
     alignItems: 'center',
   },
   icono: {
@@ -43,16 +45,13 @@ const styles = StyleSheet.create({
     height: '50%',
     resizeMode: 'contain',
     alignSelf: 'center',
-    // backgroundColor: 'blue',
   },
   texto: {
     flex: 2,
     color: 'white',
     fontSize: hp('2.2'),
     fontFamily:
-      // eslint-disable-next-line no-undef
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
-    // backgroundColor: 'yellow',
   },
 });
 export default BotonFace;

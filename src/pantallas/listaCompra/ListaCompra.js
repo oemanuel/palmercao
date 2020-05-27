@@ -1,20 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import BarraInfoCompra from '../../componentes/BarraInfoCompra';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Boton from '../../componentes/Boton';
 import Modal from '../../componentes/Modal';
-const InfoCategoria = ({navigation}) => {
+import Menu from '../menu/Menu';
+
+const ListaCompras = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
-      <Modal exito={true} />
+      <Modal
+        exito={false}
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
+      <Menu
+        navigation={navigation}
+        visible={menuVisible}
+        setMenuVisible={setMenuVisible}
+      />
       <View style={styles.contain}>
         <View style={styles.header}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.navigate('Catalogo')}>
+              onPress={() => navigation.goBack()}>
               <Image
                 style={styles.flecha}
                 source={require('../../assets/Icon/flecha.png')}
@@ -23,7 +36,7 @@ const InfoCategoria = ({navigation}) => {
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate('Catalogo')}>
+            onPress={() => setMenuVisible(true)}>
             <Image
               style={styles.menu}
               source={require('../../assets/Icon/menu.png')}
@@ -48,13 +61,22 @@ const InfoCategoria = ({navigation}) => {
           <ContenedorProducto />
         </View>
         <View style={styles.boton}>
-          <TouchableOpacity style={{alignItems: 'center'}} activeOpacity={0.5}>
-            <Boton titulo="Comprar" />
-          </TouchableOpacity>
+          <Boton
+            titulo="Comprar"
+            onPress={() => {
+              setModalVisible(true);
+              setTimeout(
+                () => {
+                  setModalVisible(false);
+                },
+                5000,
+                this,
+              );
+            }}
+          />
         </View>
       </View>
     </>
   );
 };
-
-export default InfoCategoria;
+export default ListaCompras;

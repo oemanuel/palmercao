@@ -13,8 +13,7 @@ import {
 } from 'react-native-responsive-screen';
 
 const Modales = props => {
-  const {exito} = props;
-  const [modalVisible, setModalVisible] = useState(true);
+  const {exito, visible, setModalVisible} = props;
   var imagencarreta = '',
     tx1 = '',
     tx2 = '';
@@ -32,11 +31,11 @@ const Modales = props => {
   return (
     <Modal
       style={styles.moda}
-      visible={modalVisible}
+      visible={visible}
       animationType="slide"
       transparent={true}
       onRequestClose={() => {
-        setModalVisible(!modalVisible);
+        setModalVisible(false);
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
@@ -47,9 +46,9 @@ const Modales = props => {
           </Text>
           <TouchableOpacity
             onPress={() => {
-              setModalVisible(!modalVisible);
+              setModalVisible(false);
             }}>
-            <Text style={[styles.text, {color: 'black', fontSize: hp('2')}]}>
+            <Text style={[styles.text, {color: '#000', fontSize: hp('2')}]}>
               Cerrar
             </Text>
           </TouchableOpacity>
@@ -78,12 +77,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalView: {
-    flex: 1,
     backgroundColor: 'white',
     borderRadius: wp('20'),
-    marginTop: hp('37'),
+    marginTop: hp('10'),
     padding: wp('10'),
     alignItems: 'center',
     shadowColor: '#000',

@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import Informacion from '../../componentes/InformacionCatalogo';
 import ContenedorCategoria from '../../componentes/ContenedorCategoria';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
+import Menu from '../menu/Menu';
 const Catalogo = ({navigation}) => {
+  const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
+      <Menu
+        navigation={navigation}
+        visible={menuVisible}
+        setMenuVisible={setMenuVisible}
+      />
       <View style={styles.fondo}>
         <View style={styles.header}>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate('Menu')}>
+            onPress={() => setMenuVisible(true)}>
             <Image
               style={styles.menu}
               source={require('../../assets/Icon/menu.png')}

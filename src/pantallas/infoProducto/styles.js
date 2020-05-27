@@ -81,5 +81,4 @@ const styles = StyleSheet.create({
     height: wp('40'),
   },
 });
-
 export default styles;

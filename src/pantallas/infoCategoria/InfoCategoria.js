@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
+import Menu from '../menu/Menu';
 
 const InfoCategoria = ({navigation}) => {
+  const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
+      <Menu
+        navigation={navigation}
+        visible={menuVisible}
+        setMenuVisible={setMenuVisible}
+      />
       <View style={styles.contain}>
         <View style={styles.header}>
           <View style={{flexDirection: 'row'}}>
@@ -22,7 +29,7 @@ const InfoCategoria = ({navigation}) => {
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate('Menu')}>
+            onPress={() => setMenuVisible(true)}>
             <Image
               style={styles.menu}
               source={require('../../assets/Icon/menu.png')}

@@ -3,32 +3,32 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import Bn from './Bn';
 class Bienvenida extends React.Component {
-  componentDidMount() {
-    setTimeout(
-      () => {
-        this.setState({
-          colorFonco: '#FACC43',
-          f1: false,
-          f2: true,
-          f3: false,
-        });
-      },
-      2500,
-      this,
-    );
-    setTimeout(
-      () => {
-        this.setState({
-          colorFonco: '#FF694E',
-          f1: false,
-          f2: false,
-          f3: true,
-        });
-      },
-      5000,
-      this,
-    );
-  }
+  // componentDidMount() {
+  //   setTimeout(
+  //     () => {
+  //       this.setState({
+  //         colorFonco: '#FACC43',
+  //         f1: false,
+  //         f2: true,
+  //         f3: false,
+  //       });
+  //     },
+  //     2500,
+  //     this,
+  //   );
+  //   setTimeout(
+  //     () => {
+  //       this.setState({
+  //         colorFonco: '#FF694E',
+  //         f1: false,
+  //         f2: false,
+  //         f3: true,
+  //       });
+  //     },
+  //     5000,
+  //     this,
+  //   );
+  // }
   state = {
     colorFonco: '#00B46B',
     f1: true,
@@ -65,6 +65,7 @@ class Bienvenida extends React.Component {
                   <Text
                     style={[
                       styles.circulo,
+                      // eslint-disable-next-line react-native/no-inline-styles
                       {
                         color: this.state.f1 ? '#00B46B' : 'white',
                         backgroundColor: this.state.f1
@@ -90,6 +91,7 @@ class Bienvenida extends React.Component {
                   <Text
                     style={[
                       styles.circulo,
+                      // eslint-disable-next-line react-native/no-inline-styles
                       {
                         color: this.state.f2 ? '#FACC43' : 'white',
                         backgroundColor: this.state.f2
@@ -115,6 +117,7 @@ class Bienvenida extends React.Component {
                   <Text
                     style={[
                       styles.circulo,
+                      // eslint-disable-next-line react-native/no-inline-styles
                       {
                         color: this.state.f3 ? '#FF694E' : 'white',
                         backgroundColor: this.state.f3

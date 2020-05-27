@@ -69,6 +69,7 @@ const Bienvenida = ({navigation}) => {
                 <Text
                   style={[
                     styles.circulo,
+                    // eslint-disable-next-line react-native/no-inline-styles
                     {
                       color: f1 ? '#00B46B' : 'white',
                       backgroundColor: f1 ? 'white' : colorFondo,
@@ -83,6 +84,7 @@ const Bienvenida = ({navigation}) => {
                 <Text
                   style={[
                     styles.circulo,
+                    // eslint-disable-next-line react-native/no-inline-styles
                     {
                       color: f2 ? '#FACC43' : 'white',
                       backgroundColor: f2 ? 'white' : colorFondo,
@@ -97,6 +99,7 @@ const Bienvenida = ({navigation}) => {
                 <Text
                   style={[
                     styles.circulo,
+                    // eslint-disable-next-line react-native/no-inline-styles
                     {
                       color: f3 ? '#FF694E' : 'white',
                       backgroundColor: f3 ? 'white' : colorFondo,

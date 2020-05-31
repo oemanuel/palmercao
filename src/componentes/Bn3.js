@@ -4,8 +4,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import Boton from './Boton';
-
 const Bn3 = () => {
   return (
     <View style={styles.contain}>

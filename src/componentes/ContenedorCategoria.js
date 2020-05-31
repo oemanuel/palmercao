@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Contenedor = ({navigation}) => {
-
-
   return (
     <View style={styles.body}>
       <TouchableOpacity
@@ -16,7 +14,7 @@ const Contenedor = ({navigation}) => {
         onPress={() => navigation.navigate('InfoCategoria')}
         // style={{backgroundColor:"blue"}}
       >
-        <View style={styles.contain} >
+        <View style={styles.contain}>
           <Image
             style={styles.imagen}
             source={{
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor: '#00B46B',
     // elevation: wp('0.1'),
-    marginHorizontal:wp('2')
+    marginHorizontal: wp('2'),
   },
 });
 

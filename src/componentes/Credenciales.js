@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import * as validante from "validate.js"
+import * as validante from 'validate.js';
 import Boton from './Boton';
-
 
 //cositas de redux
 // import { connect } from 'react-redux';
 // import { crear_usuario } from "../redux/actions/auth.action";
-
 
 const constraints = {
   clave: {
@@ -19,93 +17,85 @@ const constraints = {
     length: {
       minimum: 5,
       maximum: 10,
-      message: ": La clave debe tener mínimo 6 carácteres y máximo 10."
-    }
+      message: ': La clave debe tener mínimo 6 carácteres y máximo 10.',
+    },
   },
   correo: {
     presence: true,
-    email: { message: ": El correo debe tener un formato válido." },
-  }
-}
-
-
+    email: {message: ': El correo debe tener un formato válido.'},
+  },
+};
 
 const Splash = props => {
-
-  const { type, navigation} = props;
-
+  const {type, navigation} = props;
 
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
 
-
-
   const BotonD = () => {
+    if (type == 'crear') {
+      return (
+        <Boton
+          titulo="Crear mi cuenta"
+          onPress={() => {
+            let msj = '';
+            let validadorEmail = validante.validate(
+              {correo: correo},
+              constraints,
+            );
+            let validadorPwd = validante.validate({clave: clave}, constraints);
 
+            if (validadorEmail.correo) {
+              msj += '\n * ' + validadorEmail.correo + ' \n ';
+              setCorreo('');
+            }
 
-    if (type == "crear") {
-      return <Boton titulo="Crear mi cuenta" onPress={() => {
-        let msj = "";
-        let validadorEmail = validante.validate({ correo: correo }, constraints);
-        let validadorPwd = validante.validate({ clave: clave }, constraints);
+            if (validadorPwd.clave) {
+              msj += '\n * ' + validadorPwd.clave + ' \n ';
+              setClave('');
+            }
+            //console.log("anterior: " + user_success);
 
-
-
-        if (validadorEmail.correo) {
-          msj += ("\n * " + validadorEmail.correo + " \n ");
-          setCorreo("");
-
-        }
-
-        if (validadorPwd.clave) {
-          msj += ("\n * " + validadorPwd.clave + " \n ");
-          setClave("");
-        }
-        console.log("anterior: " + user_success);
-
-
-        if (msj == "") {
-          //crear peticion de registro
-          // registrar({ email: correo, password: clave });
-
-
-
-
-        } else {
-          alert("Errores en algunos campos: \n  " + msj);
-        }
-
-
-      }} />
+            if (msj == '') {
+              //crear peticion de registro
+              // registrar({ email: correo, password: clave });
+            } else {
+              alert('Errores en algunos campos: \n  ' + msj);
+            }
+          }}
+        />
+      );
     } else {
-      return <Boton titulo="Entrar" onPress={() => {
+      return (
+        <Boton
+          titulo="Entrar"
+          onPress={() => {
+            let msj = '';
+            let validadorEmail = validante.validate(
+              {correo: correo},
+              constraints,
+            );
+            let validadorPwd = validante.validate({clave: clave}, constraints);
 
-        let msj = "";
-        let validadorEmail = validante.validate({ correo: correo }, constraints);
-        let validadorPwd = validante.validate({ clave: clave }, constraints);
+            if (validadorEmail.correo) {
+              msj += '\n * ' + validadorEmail.correo + ' \n ';
+            }
 
+            if (validadorPwd.clave) {
+              msj += '\n * ' + validadorPwd.clave + ' \n ';
+            }
 
-
-        if (validadorEmail.correo) {
-          msj += ("\n * " + validadorEmail.correo + " \n ");
-        }
-
-        if (validadorPwd.clave) {
-          msj += ("\n * " + validadorPwd.clave + " \n ");
-        }
-
-
-        if (msj == "") {
-          //crear peticion de login
-          navigation.navigate("Bienvenida");
-
-        } else {
-          alert("Errores en algunos campos: \n  " + msj);
-        }
-
-      }} />
+            if (msj == '') {
+              //crear peticion de login
+              navigation.navigate('Bienvenida');
+            } else {
+              alert('Errores en algunos campos: \n  ' + msj);
+            }
+          }}
+        />
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -119,7 +109,7 @@ const Splash = props => {
             autoCapitalize="none"
             autoCorrect={false}
             blurOnSubmit={false}
-            onChangeText={(value) => setCorreo(value)}
+            onChangeText={value => setCorreo(value)}
             value={correo}
           />
           <Text style={styles.texto}>Contraseña:</Text>
@@ -127,7 +117,7 @@ const Splash = props => {
             style={styles.input}
             secureTextEntry={true}
             returnKeyLabel="Enviar"
-            onChangeText={(value) => setClave(value)}
+            onChangeText={value => setClave(value)}
             value={clave}
           />
         </View>
@@ -135,7 +125,6 @@ const Splash = props => {
           <BotonD />
         </View>
       </View>
-
     </>
   );
 };
@@ -149,13 +138,13 @@ const styles = StyleSheet.create({
   },
   contain: {
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
     height: hp(41),
-    justifyContent: "space-evenly"
+    justifyContent: 'space-evenly',
   },
   c1: {
-    width: "80%",
-    height: "65%",
+    width: '80%',
+    height: '65%',
     justifyContent: 'space-evenly',
   },
   input: {
@@ -181,16 +170,13 @@ export default Splash;
 //     loading: state.auth.loading,
 //   }
 
-
 // }
 // const mapDispatchToProps = dispatch => {
-
 
 //   return {
 //     registrar: value => dispatch(crear_usuario(value)),
 //   }
 
 // }
-
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Splash);

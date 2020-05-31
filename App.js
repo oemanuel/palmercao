@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import Splash from './src/pantallas/splash/Splash';
 import Registro from './src/pantallas/registro/Registro';
 import Login from './src/pantallas/login/Login';
@@ -13,11 +13,13 @@ import InfoCategoria from './src/pantallas/infoCategoria/InfoCategoria';
 import InfoProducto from './src/pantallas/infoProducto/InfoProducto';
 import ListaCompra from './src/pantallas/listaCompra/ListaCompra';
 import registro from './src/pantallas/registro2/registro';
+import DatosPedidos from './src/pantallas/datosPedidos/DatosPedidos';
+import MiCuenta from './src/pantallas/miCuenta/MiCuenta';
 
 const Stack = createStackNavigator();
 
 //lmejiaf
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './src/redux/store';
 
 const App = () => {
@@ -28,57 +30,67 @@ const App = () => {
           <Stack.Screen
             name="Registro2"
             component={registro}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Registro"
             component={Registro}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Splash"
             component={Splash}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Login"
             component={Login}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Recuperar"
             component={Recuperar}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Confirmacion"
             component={Confirmacion}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Bienvenida"
             component={Bienvenida}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="Catalogo"
             component={Catalogo}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="InfoCategoria"
             component={InfoCategoria}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="InfoProducto"
             component={InfoProducto}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name="ListaCompra"
             component={ListaCompra}
-            options={{ headerShown: false }}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="DatosPedidos"
+            component={DatosPedidos}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MiCuenta"
+            component={MiCuenta}
+            options={{headerShown: false}}
           />
         </Stack.Navigator>
       </NavigationContainer>

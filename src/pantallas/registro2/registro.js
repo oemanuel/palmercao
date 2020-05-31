@@ -10,12 +10,15 @@ import {
   ScrollView,
 } from 'react-native';
 import Fondo from '../../componentes/Fondo';
-import styles from './styles';
-import BotonGoogle from '../../componentes/BotonGoogle';
-import BotonFace from '../../componentes/BotonFace';
+import styles from '../login/styles';
 import Credendiales from '../../componentes/Credenciales';
-import Boton from '../../componentes/Boton';
-const Splash = ({ navigation }) => {
+
+
+
+
+
+const Splash = ({ navigation}) => {
+  
   return (
     <Fondo>
       <KeyboardAvoidingView
@@ -29,18 +32,21 @@ const Splash = ({ navigation }) => {
             <View style={styles.separadores}>
               <View style={styles.c2} />
               <View style={styles.c5}>
-                <Text style={styles.texto}>Bienvenido a Pa'lmercao</Text>
+                <Text style={styles.texto}>Registrate en Pa'lmercao</Text>
               </View>
               <View style={styles.c2} />
             </View>
             <View style={styles.credenciales}>
-              <Credendiales type="login" navigation={navigation}/>
+              <Credendiales type="crear" navigation={navigation}/>
             </View>
-
             <View style={styles.recuperacion}>
-              <Text onPress={() => navigation.navigate('Recuperar')} style={[styles.texto, { textDecorationLine: 'underline' }]}>
-                ¿Se te olvidó la contraseña?
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Login')}>
+                <Text style={[styles.texto, { textDecorationLine: 'underline' }]}>
+                  Inicia sesión
                 </Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
@@ -49,3 +55,19 @@ const Splash = ({ navigation }) => {
   );
 };
 export default Splash;
+// const mapStateToProps = state => {
+
+//   return {
+//     email: state.registrar.email,
+//     password: state.registrar.password,
+//     error: state.auth.error,
+//   }
+// }
+// const mapDispatchToProps = dispatch => {
+
+//   return {
+//     registrar: value => dispatch(fetch_register(value))
+    
+//   }
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(Splash);

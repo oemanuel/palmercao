@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1023446056187",
+    "firebase_url": "https://palmercao-3c01f.firebaseio.com",
+    "project_id": "palmercao-3c01f",
+    "storage_bucket": "palmercao-3c01f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023446056187:android:ae2a2d84bbbea64a1d445e",
+        "android_client_info": {
+          "package_name": "com.palmercado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023446056187-t55un3omhmen5c46o6ghtc7jccgduubc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHe73auQDBPwPklJS-XyAswfUEH2-AcWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023446056187-t55un3omhmen5c46o6ghtc7jccgduubc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

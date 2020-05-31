@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,13 +7,15 @@ import {
 
 class Boton extends React.Component {
   render() {
-    const {titulo} = this.props;
+    const {titulo, onPress} = this.props;
     return (
-      <View style={styles.contain}>
-        <View style={styles.button}>
-          <Text style={styles.texto}> {titulo}</Text>
+      <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+        <View style={styles.contain}>
+          <View style={styles.button}>
+            <Text style={styles.texto}> {titulo}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

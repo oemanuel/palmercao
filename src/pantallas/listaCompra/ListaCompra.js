@@ -1,14 +1,22 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import BarraBusqueda from '../../componentes/BarraBusqueda';
+import BarraInfoCompra from '../../componentes/BarraInfoCompra';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
+import Boton from '../../componentes/Boton';
+import Modal from '../../componentes/Modal';
 import Menu from '../menu/Menu';
 
-const InfoCategoria = ({navigation}) => {
+const ListaCompras = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
+      <Modal
+        exito={false}
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}
@@ -25,7 +33,6 @@ const InfoCategoria = ({navigation}) => {
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -37,17 +44,39 @@ const InfoCategoria = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.info}>
+          <Image
+            style={styles.canasta}
+            source={require('../../assets/Img/canastaCompra.png')}
+          />
+          <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text>
+          <View style={styles.ccantidad}>
+            <Text style={styles.texto}>1</Text>
+          </View>
           <View style={styles.children}>
-            <BarraBusqueda />
+            <BarraInfoCompra />
           </View>
         </View>
         <View style={styles.separador} />
         <View style={{alignItems: 'center', flex: 0.73}}>
           <ContenedorProducto />
         </View>
+        <View style={styles.boton}>
+          <Boton
+            titulo="Comprar"
+            onPress={() => {
+              setModalVisible(true);
+              setTimeout(
+                () => {
+                  setModalVisible(false);
+                },
+                5000,
+                this,
+              );
+            }}
+          />
+        </View>
       </View>
     </>
   );
 };
-
-export default InfoCategoria;
+export default ListaCompras;

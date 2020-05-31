@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     width: wp('80'),
     justifyContent: 'space-between',
     flexDirection: 'row',
+    marginVertical:hp(1)
   },
   titulo: {
     flex: 0.7,

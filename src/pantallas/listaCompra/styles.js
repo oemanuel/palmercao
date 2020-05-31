@@ -8,8 +8,13 @@ const styles = StyleSheet.create({
   texto: {
     color: 'white',
     marginLeft: wp('5'),
+    textAlign: 'center',
     fontSize: hp('3'),
-    fontFamily: Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Bold',
+    fontFamily:
+      Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
+  },
+  titulo: {
+    top: hp('-4%'),
   },
   info: {
     flex: 0.3,
@@ -18,28 +23,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: hp('5'),
   },
   separador: {
-    flex: 0.3,
-  },
-  carta: {
-    width: wp('50'),
-    height: wp('50'),
-    backgroundColor: 'white',
-    borderRadius: wp('5'),
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-
-    elevation: 24,
-  },
-  cartac: {
     flex: 0.1,
-    alignItems: 'center',
   },
   contain: {
     flex: 1,
@@ -57,8 +41,15 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginLeft: wp('5'),
   },
+  canasta: {
+    height: wp('30'),
+    width: wp('30'),
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    top: hp('-5%'),
+  },
   header: {
-    flex: 0.15,
+    flex: 0.1,
     flexDirection: 'row',
     backgroundColor: '#FF694E',
     justifyContent: 'space-between',
@@ -70,15 +61,36 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   children: {
-    height: hp('7%'),
+    top: hp('21%'),
     width: wp('100'),
     position: 'absolute',
     justifyContent: 'flex-end',
   },
-  imagen: {
-    resizeMode: 'contain',
-    width: wp('40'),
-    height: wp('40'),
+  ccantidad: {
+    top: hp('5%'),
+    left: wp('56%'),
+    backgroundColor: '#00B46B',
+    position: 'absolute',
+    width: hp('7'),
+    height: hp('7'),
+    borderRadius: wp('6'),
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 12.35,
+    elevation: 19,
+  },
+  boton: {
+    top: hp('85%'),
+    height: hp('8'),
+    width: wp('100%'),
+    position: 'absolute',
   },
 });
+
 export default styles;

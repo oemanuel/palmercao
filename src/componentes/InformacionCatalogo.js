@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF694E',
     borderBottomLeftRadius: hp('5'),
     borderBottomRightRadius: hp('5'),
+    
   },
   canasta: {
     resizeMode: 'contain',

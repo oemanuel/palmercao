@@ -22,21 +22,8 @@ const Confimacion = ({navigation}) => {
               revisa tu correo.
             </Text>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('Login')}>
-            <Boton titulo="Salir" />
-          </TouchableOpacity>
+            <Boton titulo="Salir" onPress={() => navigation.navigate('Login')}/>
           <View style={styles.texto2}>
-            <TouchableOpacity activeOpacity={0.5}>
-              <Text
-                style={[
-                  styles.texto,
-                  {color: '#00B46B', textDecorationLine: 'underline'},
-                ]}>
-                ¿Volver a enviar?
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
       </View>

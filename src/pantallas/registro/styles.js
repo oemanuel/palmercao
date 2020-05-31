@@ -56,6 +56,11 @@ const styles = StyleSheet.create({
     bottom: hp('2%'),
     // backgroundColor: 'green',
   },
+  enviar: {
+    flex: 0.2,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
 });
 
 export default styles;

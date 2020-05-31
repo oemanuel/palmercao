@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -19,15 +19,29 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const Confimacion = ({navigation}) => {
+import * as validante from "validate.js"
+
+
+const constraints = {
+  correo: {
+    presence: true,
+    email: { message: ": El correo debe tener un formato válido." },
+  }
+}
+
+
+const Confimacion = ({ navigation }) => {
+
+  const [correo, setCorreo] = useState("");
   return (
     <Fondo>
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
         enabled
-        style={{flex: 1}}>
+        style={{ flex: 1 }}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView>
+
             <View style={styles.icono}>
               <Image
                 style={styles.image}
@@ -35,14 +49,14 @@ const Confimacion = ({navigation}) => {
               />
             </View>
             <View style={styles.texto1}>
-              <Text style={[styles.texto, {fontSize: hp('3')}]}>
+              <Text style={[styles.texto, { fontSize: hp('3') }]}>
                 Recuperar contraseña
               </Text>
               <Text
-                style={[styles.texto, {fontSize: hp('2'), marginTop: hp('2')}]}>
+                style={[styles.texto, { fontSize: hp('2'), marginTop: hp('2') }]}>
                 Introduce la dirección de correo electrónico
               </Text>
-              <Text style={[styles.texto, {fontSize: hp('2')}]}>
+              <Text style={[styles.texto, { fontSize: hp('2') }]}>
                 que proporcionaste al registrarte.
               </Text>
             </View>
@@ -51,7 +65,7 @@ const Confimacion = ({navigation}) => {
                 <Text
                   style={[
                     styles.texto,
-                    {fontSize: hp('2.5'), textAlign: 'left'},
+                    { fontSize: hp('2.5'), textAlign: 'left' },
                   ]}>
                   Correo:
                 </Text>
@@ -61,16 +75,34 @@ const Confimacion = ({navigation}) => {
                   keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
-                  onSubmitEditing={() => navigation.navigate('Confirmacion')}
+                  value={correo}
+                  onChangeText={(value)=> setCorreo(value)}
                 />
               </View>
             </View>
             <View style={styles.boton}>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Confirmacion')}>
-                <Boton titulo="Enviar" />
-              </TouchableOpacity>
+              <Boton titulo="Enviar" onPress={() =>
+              {
+                let msj = "";
+                let validadorEmail = validante.validate({ correo: correo }, constraints);
+                
+                if (typeof  validadorEmail !== 'undefined') {
+                  msj += ("\n * " + validadorEmail.correo + " \n ");
+                  
+                }
+
+
+                if (msj == "") {
+                  //crear peticion de recuperación
+
+                } else {
+                  alert("Errores en algunos campos: \n  " + msj);
+                }
+
+
+              }}
+
+              />
             </View>
             <View style={styles.texto2}>
               <TouchableOpacity
@@ -79,7 +111,7 @@ const Confimacion = ({navigation}) => {
                 <Text
                   style={[
                     styles.texto,
-                    {fontSize: hp('3'), textDecorationLine: 'underline'},
+                    { fontSize: hp('3'), textDecorationLine: 'underline' },
                   ]}>
                   Volver
                 </Text>

@@ -15,60 +15,76 @@ class BarraBusqueda extends React.Component {
             style={styles.lupa}
             source={require('../assets/Icon/Lupa.png')}
           />
-          <TextInput style={styles.input} placeholder="Buscar producto" />
         </View>
+        <TextInput style={styles.input} placeholder="Buscar producto" />
+{/* 
         <View style={styles.filtroc}>
           <Image
             style={styles.filtro}
             source={require('../assets/Icon/filtro.png')}
           />
-        </View>
+        </View> */}
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   barra: {
-    width: wp('70'),
+    width: wp('7'),
     height: hp('7'),
     flexDirection: 'row',
     backgroundColor: 'white',
-    borderRadius: wp('6'),
+    borderTopLeftRadius: wp('5'),
+    borderBottomLeftRadius:wp('5'),
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
+    justifyContent:"center",
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 12,
+    // },
+    // shadowOpacity: 0.58,
+    // shadowRadius: 16.0,
 
-    elevation: 24,
+    elevation: 10,
   },
   contain: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor:"blue"
   },
   lupa: {
-    flex: 0.15,
+    
     resizeMode: 'contain',
     tintColor: '#FF694E',
-    width: wp('3'),
-    height: hp('3'),
+    width: "80%",
+    height: "80%",
+    
+    // backgroundColor:"yellow"
+
   },
   filtro: {
     resizeMode: 'contain',
     tintColor: '#FF694E',
     width: wp('4'),
     height: hp('4'),
+    // backgroundColor:"green"
+
   },
   input: {
-    flex: 0.85,
+    width: "60%",
+    height: "100%",
     color: '#FF694E',
     fontSize: hp('2.5'),
+    borderTopRightRadius: wp('5'),
+    borderBottomRightRadius:wp('5'),
+    
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
+      backgroundColor:"white",
+      elevation: 10,
+    
   },
   filtroc: {
     width: hp('7'),
@@ -78,15 +94,16 @@ const styles = StyleSheet.create({
     marginLeft: wp('1'),
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 12,
+    // },
+    // shadowOpacity: 0.58,
+    // shadowRadius: 16.0,
+    // backgroundColor:"pink",
 
-    elevation: 24,
+    elevation: 10,
   },
 });
 export default BarraBusqueda;

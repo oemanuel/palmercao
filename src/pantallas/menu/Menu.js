@@ -53,7 +53,10 @@ const Menu = props => {
           />
           <View style={styles.textoc}>
             <TouchableOpacity activeOpacity={0.5}>
-              <Text style={styles.texto}>Cerrar cesision</Text>
+              <Text onPress={() => {
+              setMenuVisible(false);
+              navigation.navigate('Registro');
+            }} style={styles.texto}>Cerrar sesión</Text>
             </TouchableOpacity>
           </View>
           <View style={{flex: 0.4, justifyContent: 'flex-end'}}>

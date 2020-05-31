@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   separadores: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom:hp(6),
   },
   c5: {
     flex: 0.6,

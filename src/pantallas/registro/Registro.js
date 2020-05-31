@@ -3,8 +3,7 @@ import { View, Text, Image} from 'react-native';
 import Fondo from '../../componentes/Fondo';
 import Logo from '../../componentes/Logo';
 import styles from './styles';
-import BotonGoogle from '../../componentes/BotonGoogle';
-import BotonFace from '../../componentes/BotonFace';
+import Boton from '../../componentes/Boton';
 
 const Registro = ({navigation}) => {
   return (
@@ -17,14 +16,9 @@ const Registro = ({navigation}) => {
           <Text style={styles.texto}>¡Todos tus productos a la mano!</Text>
         </View>
         <View style={styles.c2}>
-          <BotonGoogle
-            titulo="Entrar con google"
-            onPressAction={() => navigation.navigate('Bienvenida')}
-          />
-          <BotonFace
-            titulo="Entrar con Facebook"
-            onPressAction={() => navigation.navigate('Bienvenida')}
-          />
+          <Boton titulo="Iniciar sesión" onPress={()=>navigation.navigate('Login')}/>
+          <Text onPress={()=>navigation.navigate('Registro2')} style={[styles.texto, {textDecorationLine: 'underline',}]}>¡registrarse!</Text>
+          
         </View>
         <View style={{flex: 0.1}} />
         <View style={styles.c3}>

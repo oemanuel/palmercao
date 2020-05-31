@@ -1,11 +1,18 @@
+
+//crear
 export const CREAR_USUARIO = 'CREAR_USUARIO';
 export const CREAR_USUARIO_SUCCESSFULL = 'CREAR_USUARIO_SUCCESFULL';
 export const CREAR_USUARIO_ERROR = 'CREAR_USUARIO_ERROR';
-// export const RESPONSE_LOGIN = 'RESPONSE_LOGIN';
-// export const FETCH_REGISTER = 'FETCH_REGISTER';
-// export const RESPONSE_REGISTER = 'RESPONSE_REGISTER';
-// export const ERROR = 'ERROR';
 
+//entrar
+export const ENTRAR_USUARIO = 'ENTRAR_USUARIO';
+export const ENTRAR_USUARIO_SUCCESSFULL = 'ENTRAR_USUARIO_SUCCESFULL';
+export const ENTRAR_USUARIO_ERROR = 'ENTRAR_USUARIO_ERROR';
+
+//clear auth
+export const LIMPIAR_AUTH = 'LIMPIAR_AUTH';
+
+//crear
 export const crear_usuario = payload => {
   return {type: CREAR_USUARIO, payload};
 };
@@ -15,12 +22,20 @@ export const crear_usuario_successfull = data => {
 export const crear_usuario_error = data => {
   return {type: CREAR_USUARIO_ERROR, data};
 };
-// export const fetch_register = payload => {
-//   return {type: FETCH_REGISTER, payload};
-// };
-// export const response_register = data => {
-//   return {type: RESPONSE_REGISTER, data};
-// };
-// export const error = data => {
-//   return {type: ERROR, data};
-// };
+
+//entrar
+export const entrar_usuario = payload => {
+  return {type: ENTRAR_USUARIO, payload};
+};
+export const entrar_usuario_successfull = data => {
+  return {type: ENTRAR_USUARIO_SUCCESSFULL, data};
+};
+export const entrar_usuario_error = data => {
+  return {type: ENTRAR_USUARIO_ERROR, data};
+};
+
+//clear auth
+export const limpiar_auth = () => {
+  return {type: LIMPIAR_AUTH};
+};
+

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
@@ -39,15 +38,6 @@ const Splash = ({ navigation}) => {
             <View style={styles.credenciales}>
               <Credendiales type="crear" navigation={navigation}/>
             </View>
-            <View style={styles.recuperacion}>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Login')}>
-                <Text style={[styles.texto, { textDecorationLine: 'underline' }]}>
-                  Inicia sesión
-                </Text>
-              </TouchableOpacity>
-            </View>
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -55,19 +45,4 @@ const Splash = ({ navigation}) => {
   );
 };
 export default Splash;
-// const mapStateToProps = state => {
 
-//   return {
-//     email: state.registrar.email,
-//     password: state.registrar.password,
-//     error: state.auth.error,
-//   }
-// }
-// const mapDispatchToProps = dispatch => {
-
-//   return {
-//     registrar: value => dispatch(fetch_register(value))
-    
-//   }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Splash);

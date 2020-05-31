@@ -10,11 +10,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  enviar: {
-    flex: 0.2,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
   c1: {
     flex: 0.56,
     justifyContent: 'space-around',
@@ -25,13 +20,14 @@ const styles = StyleSheet.create({
     height: hp('0.25'),
   },
   credenciales: {
-    height: hp('30%'),
+    height: hp('50%'),
     justifyContent: 'center',
   },
   separadores: {
+    
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom:hp(6),
+    marginBottom:hp(2),
   },
   c5: {
     flex: 0.6,

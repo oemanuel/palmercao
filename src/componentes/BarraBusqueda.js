@@ -7,16 +7,19 @@ import {
 
 class BarraBusqueda extends React.Component {
   render() {
-    const {titulo} = this.props;
+    const {titulo, color} = this.props;
     return (
       <View style={styles.contain}>
         <View style={styles.barra}>
           <Image
-            style={styles.lupa}
+            style={[styles.lupa, {tintColor: color}]}
             source={require('../assets/Icon/Lupa.png')}
           />
         </View>
-        <TextInput style={styles.input} placeholder="Buscar producto" />
+        <TextInput
+          style={[styles.input, {color: color}]}
+          placeholder="Buscar producto"
+        />
         {/* 
         <View style={styles.filtroc}>
           <Image
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
   input: {
     width: '60%',
     height: '100%',
-    color: '#FF694E',
+    //color: '#FF694E',
     fontSize: hp('2.5'),
     borderTopRightRadius: wp('5'),
     borderBottomRightRadius: wp('5'),

@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Menu from '../menu/Menu';
 
-const InfoCategoria = ({navigation}) => {
+const InfoCategoria = props => {
+  const {navigation, route} = props;
   const [menuVisible, setMenuVisible] = useState(false);
+  const [lista, setLista] = useState([
+    {key: '1'},
+    {key: '2'},
+    {key: '3'},
+    {key: '4'},
+    {key: '5'},
+  ]);
   return (
     <>
       <Menu
@@ -15,7 +23,7 @@ const InfoCategoria = ({navigation}) => {
         setMenuVisible={setMenuVisible}
       />
       <View style={styles.contain}>
-        <View style={styles.header}>
+        <View style={[styles.header, {backgroundColor: route.params.color}]}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
@@ -25,7 +33,7 @@ const InfoCategoria = ({navigation}) => {
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
+            <Text style={styles.texto}>{route.params.nombre}</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -36,15 +44,25 @@ const InfoCategoria = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.info}>
+        <View style={[styles.info, {backgroundColor: route.params.color}]}>
           <View style={styles.children}>
-            <BarraBusqueda />
+            <BarraBusqueda color={route.params.color} />
           </View>
         </View>
         <View style={styles.separador} />
-        <View style={{alignItems: 'center', flex: 0.73}}>
-          <ContenedorProducto navigation={navigation} />
-        </View>
+        <FlatList
+          data={lista}
+          contentContainerStyle={{alignItems: 'center'}}
+          renderItem={() => {
+            return (
+              <ContenedorProducto
+                navigation={navigation}
+                color={route.params.color}
+                nombre={route.params.nombre}
+              />
+            );
+          }}
+        />
       </View>
     </>
   );

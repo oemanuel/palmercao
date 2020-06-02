@@ -14,10 +14,8 @@ import {
 } from 'react-native-responsive-screen';
 
 //cositas de redux
-import { connect } from 'react-redux';
-import {salir  } from "../../redux/auth/login/actions/entrar.actions";
-
-
+import {connect} from 'react-redux';
+import {salir} from '../../redux/auth/login/actions/entrar.actions';
 
 const Menu = props => {
   const {navigation, visible, setMenuVisible, salir} = props;
@@ -64,6 +62,13 @@ const Menu = props => {
                 navigation.navigate('MiCuenta');
               }}
             />
+            <Boton
+              titulo="Catalogo"
+              onPress={() => {
+                setMenuVisible(false);
+                navigation.navigate('Catalogo');
+              }}
+            />
           </View>
           <View style={styles.textoc}>
             <TouchableOpacity activeOpacity={0.5}>
@@ -79,7 +84,7 @@ const Menu = props => {
             </TouchableOpacity>
           </View>
           <View style={{flex: 0.4, justifyContent: 'flex-end'}}>
-            <Text style={styles.texto2}>Pa'l Mercado App</Text>
+            <Text style={styles.texto2}>Pa'l Mercao App</Text>
           </View>
         </View>
       </View>
@@ -144,15 +149,18 @@ const styles = StyleSheet.create({
     marginTop: hp('2'),
   },
   botones: {
-    flex: 0.25,
+    flex: 0.45,
     justifyContent: 'space-between',
   },
 });
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
   return {
     salir: () => dispatch(salir()),
-  }
-}
+  };
+};
 
-export default connect(null,mapDispatchToProps)(Menu);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Menu);

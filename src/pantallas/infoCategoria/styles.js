@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Bold',
   },
   info: {
-    flex: 0.07,
-    backgroundColor: '#FF694E',
+    height: hp('5'),
+    //backgroundColor: '#FF694E',
     borderBottomLeftRadius: hp('5'),
     borderBottomRightRadius: hp('5'),
   },
   separador: {
-    flex: 0.1,
+    height: hp('5'),
   },
   contain: {
     flex: 1,
@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
     marginLeft: wp('5'),
   },
   header: {
-    flex: 0.1,
+    height: hp('10'),
     flexDirection: 'row',
-    backgroundColor: '#FF694E',
+    //backgroundColor: '#FF694E',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   children: {
-    height: hp('10%'),
+    height: hp('7%'),
     width: wp('100'),
     position: 'absolute',
     justifyContent: 'flex-end',

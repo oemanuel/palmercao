@@ -5,11 +5,14 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const Contenedor = ({navigation}) => {
+const Contenedor = props => {
+  const {navigation, color, nombre} = props;
   return (
     <TouchableOpacity
       activeOpacity={0.5}
-      onPress={() => navigation.navigate('InfoProducto')}>
+      onPress={() =>
+        navigation.navigate('InfoProducto', {nombre: nombre, color: color})
+      }>
       <View style={styles.body}>
         <View
           style={[
@@ -29,7 +32,7 @@ const Contenedor = ({navigation}) => {
         </View>
         <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
           <View style={styles.titulo}>
-            <Text style={[styles.texto, {color: '#FFC043'}]}>
+            <Text style={[styles.texto, {color: color}]}>
               Arroz Diana Premiun
             </Text>
             <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 12.35,
 
-    elevation: 19,
+    elevation: 5,
   },
   imagen: {
     resizeMode: 'contain',

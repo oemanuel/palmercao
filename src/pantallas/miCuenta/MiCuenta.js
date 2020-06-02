@@ -28,10 +28,12 @@ const MiCuenta = ({navigation}) => {
           </Text>
           <TextInput
             style={styles.input}
+            secureTextEntry={true}
             placeholder="Ingrese la nueva contraseña"
           />
           <TextInput
             style={styles.input}
+            secureTextEntry={true}
             placeholder="Confirme la contraseña"
           />
           <Boton titulo="Enviar" onPress={() => secambioVisible(false)} />
@@ -99,6 +101,8 @@ const MiCuenta = ({navigation}) => {
               <View style={styles.forma}>
                 <Text style={[styles.texto, styles.texto2]}>Mi correo</Text>
                 <TextInput
+                  keyboardType="email-address"
+                  autoCapitalize="none"
                   style={styles.input}
                   defaultValue="Tugorditobeelo@gmail.com"
                   editable={false}

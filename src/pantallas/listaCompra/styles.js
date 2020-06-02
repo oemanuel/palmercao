@@ -17,13 +17,16 @@ const styles = StyleSheet.create({
     top: hp('-4%'),
   },
   info: {
-    flex: 0.3,
+    height: hp('20'),
     backgroundColor: '#FF694E',
     borderBottomLeftRadius: hp('5'),
     borderBottomRightRadius: hp('5'),
   },
   separador: {
-    flex: 0.1,
+    height: hp('10'),
+  },
+  separador1: {
+    height: hp('4'),
   },
   contain: {
     flex: 1,
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     top: hp('-5%'),
   },
   header: {
-    flex: 0.1,
+    height: hp('7'),
     flexDirection: 'row',
     backgroundColor: '#FF694E',
     justifyContent: 'space-between',
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   children: {
-    top: hp('21%'),
+    top: hp('16%'),
     width: wp('100'),
     position: 'absolute',
     justifyContent: 'flex-end',
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: hp('7'),
     height: hp('7'),
-    borderRadius: wp('6'),
+    borderRadius: wp('10'),
     justifyContent: 'center',
     alignItems: 'flex-start',
     shadowColor: '#000',
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     elevation: 19,
   },
   boton: {
-    top: hp('85%'),
+    top: hp('87%'),
     height: hp('8'),
     width: wp('100%'),
     position: 'absolute',

@@ -39,9 +39,17 @@ const Formulario = () => {
             </Text>
             <View style={styles.forma}>
               <Text style={styles.texto}>Pedido a nombre de:</Text>
-              <TextInput style={styles.input} placeholder="Obligatorio" />
+              <TextInput
+                keyboardType="url"
+                style={styles.input}
+                placeholder="Obligatorio"
+              />
               <Text style={styles.texto}>Telefono:</Text>
-              <TextInput style={styles.input} placeholder="Obligatorio" />
+              <TextInput
+                keyboardType="numeric"
+                style={styles.input}
+                placeholder="Obligatorio"
+              />
               <Text style={styles.texto}>Dirección:</Text>
               <TextInput style={styles.input} placeholder="Obligatorio" />
               <View
@@ -60,7 +68,11 @@ const Formulario = () => {
                 </View>
               </View>
               <Text style={styles.texto}>Comentarios:</Text>
-              <TextInput style={styles.input} placeholder="Opcional" />
+              <TextInput
+                multiline={true}
+                style={styles.input}
+                placeholder="Opcional"
+              />
               <Boton titulo="Comprar" />
             </View>
           </View>
@@ -78,7 +90,7 @@ const styles = StyleSheet.create({
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },
   contain: {
-    height: hp('88'),
+    height: hp('100'),
   },
   forma: {
     marginLeft: wp('7'),

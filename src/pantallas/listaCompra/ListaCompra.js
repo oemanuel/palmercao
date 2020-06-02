@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import styles from './styles';
 import BarraInfoCompra from '../../componentes/BarraInfoCompra';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
@@ -9,6 +9,13 @@ import Menu from '../menu/Menu';
 
 const ListaCompras = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [lista, setLista] = useState([
+    {key: '1'},
+    {key: '2'},
+    {key: '3'},
+    {key: '4'},
+    {key: '5'},
+  ]);
   return (
     <>
       <Menu
@@ -50,10 +57,17 @@ const ListaCompras = ({navigation}) => {
             <BarraInfoCompra />
           </View>
         </View>
+        <View style={styles.separador1} />
+        <FlatList
+          data={lista}
+          contentContainerStyle={{alignItems: 'center'}}
+          renderItem={() => {
+            return (
+              <ContenedorProducto navigation={navigation} color={'#FFC043'} />
+            );
+          }}
+        />
         <View style={styles.separador} />
-        <View style={{alignItems: 'center', flex: 0.73}}>
-          <ContenedorProducto />
-        </View>
         <View style={styles.boton}>
           <Boton
             titulo="Comprar"

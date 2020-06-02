@@ -6,26 +6,21 @@ import {
 } from 'react-native-responsive-screen';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Contenedor = ({navigation}) => {
+const Contenedor = props => {
+  const {navigation, nombre, color, icono} = props;
   return (
     <View style={styles.body}>
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => navigation.navigate('InfoCategoria')}
-        // style={{backgroundColor:"blue"}}
-      >
-        <View style={styles.contain}>
-          <Image
-            style={styles.imagen}
-            source={{
-              uri:
-                'https://m.lopido.com/images/productos/sii/F/300x300/arroz_diana_premium-130127-1557347133.png',
-            }}
-          />
+        onPress={() =>
+          navigation.navigate('InfoCategoria', {nombre: nombre, color: color})
+        }>
+        <View style={[styles.contain, {backgroundColor: color}]}>
+          <Image style={styles.imagen} source={icono} />
         </View>
       </TouchableOpacity>
 
-      <Text style={styles.texto}>Categoria </Text>
+      <Text style={styles.texto}>{nombre} </Text>
     </View>
   );
 };
@@ -33,7 +28,7 @@ const Contenedor = ({navigation}) => {
 const styles = StyleSheet.create({
   texto: {
     color: '#707070',
-    fontSize: hp('2.5'),
+    fontSize: hp('2.1'),
 
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
@@ -41,7 +36,7 @@ const styles = StyleSheet.create({
   contain: {
     width: wp('30'),
     height: wp('30'),
-    backgroundColor: '#00B46B',
+    //backgroundColor: '#00B46B',
     borderRadius: wp('5'),
     justifyContent: 'center',
     alignItems: 'center',

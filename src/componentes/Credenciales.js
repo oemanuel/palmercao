@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ActivityIndicator, Alert } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,17 +14,21 @@ import {
 import * as validante from 'validate.js';
 import Boton from './Boton';
 
-
 //cositas de redux
-import { connect } from 'react-redux';
-import { entrar, limpiar_error } from "../redux/auth/login/actions/entrar.actions"
-import { registrar, limpiar_error as limpiar_error_r } from "../redux/auth/registrar/actions/registrar.actions"
-
+import {connect} from 'react-redux';
+import {
+  entrar,
+  limpiar_error,
+} from '../redux/auth/login/actions/entrar.actions';
+import {
+  registrar,
+  limpiar_error as limpiar_error_r,
+} from '../redux/auth/registrar/actions/registrar.actions';
 
 const constraintsEmail = {
   correo: {
     presence: true,
-    email: { message: ': El correo debe tener un formato válido.' },
+    email: {message: ': El correo debe tener un formato válido.'},
   },
 };
 const constraintsPwd = {
@@ -29,137 +40,150 @@ const constraintsPwd = {
       message: ': La clave debe tener mínimo 6 carácteres y máximo 10.',
     },
   },
-}
+};
 
 const Splash = props => {
-
-  const { type, navigation } = props;
-  const { usuario, error_entrar, entrar, cargando_entrar, limpiar_error_entrar } = props;
-  const { registrado, error_registrar, registrar, cargando_registrar, limpiar_error_registrar } = props;
-
+  const {type, navigation} = props;
+  const {
+    usuario,
+    error_entrar,
+    entrar,
+    cargando_entrar,
+    limpiar_error_entrar,
+  } = props;
+  const {
+    registrado,
+    error_registrar,
+    registrar,
+    cargando_registrar,
+    limpiar_error_registrar,
+  } = props;
 
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
-  const [showIndicator, setShowIndicator] = useState(false)
+  const [showIndicator, setShowIndicator] = useState(false);
 
   const TextoUnderline = () => {
-    if (type == "crear") {
-      return (<Text onPress={() => navigation.navigate('Login')} style={[styles.texto, { textDecorationLine: 'underline' }]}>
-        Iniciar sesión
-      </Text>);
+    if (type == 'crear') {
+      return (
+        <Text
+          onPress={() => navigation.navigate('Login')}
+          style={[styles.texto, {textDecorationLine: 'underline'}]}>
+          Iniciar sesión
+        </Text>
+      );
     } else {
-      return (<Text onPress={() => navigation.navigate('Recuperar')} style={[styles.texto, { textDecorationLine: 'underline' }]}>
-        ¿Se te olvidó la contraseña?
-      </Text>);
-    }
-
-  }
-  useEffect(() => { 
-    if (registrado) { 
-      limpiar_error_registrar()
-      navigation.navigate("Confirmacion");
-    }
-  },[registrado])
-  useEffect(() => {
-
-    if (error_registrar) {
-      Alert.alert(
-        "Oops!",
-        "ha ocurrido un error al registrar",
-        [
-          {
-            text: "Ok, lo intentaré despues",
-            onPress: () => { limpiar_error_registrar(); setClave(""), setCorreo("") },
-            style: "cancel"
-          },
-        ],
-        { cancelable: false }
+      return (
+        <Text
+          onPress={() => navigation.navigate('Recuperar')}
+          style={[styles.texto, {textDecorationLine: 'underline'}]}>
+          ¿Se te olvidó la contraseña?
+        </Text>
       );
     }
-
-  }, [error_registrar])
+  };
   useEffect(() => {
-
-    if (error_entrar) {
+    if (registrado) {
+      limpiar_error_registrar();
+      navigation.navigate('Confirmacion');
+    }
+  }, [registrado]);
+  useEffect(() => {
+    if (error_registrar) {
       Alert.alert(
-        "Oops!",
-        "ha ocurrido un error al ingresar",
+        'Oops!',
+        'ha ocurrido un error al registrar',
         [
           {
-            text: "Ok, lo intentaré despues",
-            onPress: () => { limpiar_error_entrar(); setClave(""), setCorreo("") },
-            style: "cancel"
+            text: 'Ok, lo intentaré despues',
+            onPress: () => {
+              limpiar_error_registrar();
+              setClave(''), setCorreo('');
+            },
+            style: 'cancel',
           },
         ],
-        { cancelable: false }
+        {cancelable: false},
+      );
+    }
+  }, [error_registrar]);
+  useEffect(() => {
+    if (error_entrar) {
+      Alert.alert(
+        'Oops!',
+        'ha ocurrido un error al ingresar',
+        [
+          {
+            text: 'Ok, lo intentaré despues',
+            onPress: () => {
+              limpiar_error_entrar();
+              setClave(''), setCorreo('');
+            },
+            style: 'cancel',
+          },
+        ],
+        {cancelable: false},
       );
     } else {
       if (usuario) {
-        setClave("");
-        setCorreo("");
+        setClave('');
+        setCorreo('');
       }
     }
-
-  }, [error_entrar])
-
+  }, [error_entrar]);
 
   useEffect(() => {
     if (cargando_entrar) {
-      setShowIndicator(true)
+      setShowIndicator(true);
     } else {
-      setShowIndicator(false)
+      setShowIndicator(false);
     }
   }, [cargando_entrar]);
   useEffect(() => {
     if (cargando_registrar) {
-      setShowIndicator(true)
+      setShowIndicator(true);
     } else {
-      setShowIndicator(false)
+      setShowIndicator(false);
     }
   }, [cargando_registrar]);
 
   const BotonD = () => {
-
-
-
     const action = () => {
-      let msj = "";
-      let validadorEmail = validante.validate({ correo: correo }, constraintsEmail);
-      let validadorPwd = validante.validate({ clave: clave }, constraintsPwd);
+      let msj = '';
+      let validadorEmail = validante.validate(
+        {correo: correo},
+        constraintsEmail,
+      );
+      let validadorPwd = validante.validate({clave: clave}, constraintsPwd);
 
       if (typeof validadorEmail !== 'undefined') {
-        msj += ("\n * " + validadorEmail.correo + " \n ");
-        setCorreo("")
+        msj += '\n * ' + validadorEmail.correo + ' \n ';
+        setCorreo('');
       }
 
       if (typeof validadorPwd !== 'undefined') {
-        msj += ("\n * " + validadorPwd.clave + " \n ");
-        setClave("")
+        msj += '\n * ' + validadorPwd.clave + ' \n ';
+        setClave('');
       }
 
-
-      if (msj == "") {
-
-        if (type == "crear") {
-          registrar({ correo: correo, clave: clave });
-          
+      if (msj == '') {
+        if (type == 'crear') {
+          registrar({correo: correo, clave: clave});
         }
-        if (type == "login") {
-          entrar({ correo: correo, clave: clave });
+        if (type == 'login') {
+          entrar({correo: correo, clave: clave});
         }
-
       } else {
-        alert("Errores en algunos campos: \n  " + msj);
+        alert('Errores en algunos campos: \n  ' + msj);
       }
-    }
+    };
 
-    if (type == "crear") {
-      return <Boton titulo="Crear mi cuenta" onPress={() => action()} />
+    if (type == 'crear') {
+      return <Boton titulo="Crear mi cuenta" onPress={() => action()} />;
     } else {
-      return <Boton titulo="Entrar" onPress={() => action()} />
+      return <Boton titulo="Entrar" onPress={() => action()} />;
     }
   };
-
 
   if (!showIndicator) {
     return (
@@ -174,16 +198,15 @@ const Splash = props => {
               autoCapitalize="none"
               autoCorrect={false}
               blurOnSubmit={false}
-              onChangeText={(value) => setCorreo(value)}
+              onChangeText={value => setCorreo(value)}
               value={correo}
-
             />
             <Text style={styles.texto}>Contraseña:</Text>
             <TextInput
               style={[styles.input]}
               secureTextEntry={true}
               returnKeyLabel="Enviar"
-              onChangeText={(value) => setClave(value)}
+              onChangeText={value => setClave(value)}
               value={clave}
             />
           </View>
@@ -192,13 +215,14 @@ const Splash = props => {
             <TextoUnderline />
           </View>
         </View>
-
       </>
     );
   } else {
-    return (<>
-      <ActivityIndicator size="large" color="white" />
-    </>);
+    return (
+      <>
+        <ActivityIndicator size="large" color="white" />
+      </>
+    );
   }
 };
 
@@ -211,9 +235,9 @@ const styles = StyleSheet.create({
   },
   contain: {
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
     height: hp(50),
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
     // backgroundColor: "blue",
   },
   c1: {
@@ -243,8 +267,8 @@ const mapDispatchToProps = dispatch => {
     registrar: value => dispatch(registrar(value)),
     limpiar_error_entrar: () => dispatch(limpiar_error()),
     limpiar_error_registrar: () => dispatch(limpiar_error_r()),
-  }
-}
+  };
+};
 const mapStateToProps = estado => {
   return {
     usuario: estado.entrarReducer.usuario,
@@ -253,8 +277,10 @@ const mapStateToProps = estado => {
     cargando_registrar: estado.registrarReducer.cargando,
     error_registrar: estado.registrarReducer.error,
     registrado: estado.registrarReducer.registrado,
-  }
-}
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Splash);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Splash);

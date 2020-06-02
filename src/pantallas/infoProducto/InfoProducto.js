@@ -6,7 +6,7 @@ import Menu from '../menu/Menu';
 import Boton from '../../componentes/Boton';
 import CantidadProducto from '../../componentes/CantidadProducto';
 
-const InfoCategoria = ({navigation}) => {
+const InfoProducto = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
@@ -84,4 +84,4 @@ const InfoCategoria = ({navigation}) => {
   );
 };
 
-export default InfoCategoria;
+export default InfoProducto;

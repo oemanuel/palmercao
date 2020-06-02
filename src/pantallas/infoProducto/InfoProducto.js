@@ -4,6 +4,7 @@ import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import styles from './styles';
 import Menu from '../menu/Menu';
 import Boton from '../../componentes/Boton';
+import CantidadProducto from '../../componentes/CantidadProducto';
 
 const InfoCategoria = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -56,18 +57,26 @@ const InfoCategoria = ({navigation}) => {
           style={{
             alignItems: 'center',
             justifyContent: 'space-between',
-            flex: 0.53,
+            flex: 0.25,
           }}>
           <Text style={[styles.texto, {color: '#FF694E'}]}>
             Nombre producto
           </Text>
-          <Text style={[styles.texto, {color: '#707070', fontSize: hp('2')}]}>
-            aqui va una descripción
+          <Text
+            style={[
+              styles.texto,
+              {
+                color: '#707070',
+                fontSize: hp('2'),
+                fontFamily: 'OpenSans-Regular',
+              },
+            ]}>
+            correo
           </Text>
-          <Text style={[styles.texto, {color: '#707070'}]}>cantidad:0</Text>
           <Text style={[styles.texto, {color: '#030303'}]}>$1500</Text>
         </View>
-        <View style={{flex: 0.2, justifyContent: 'flex-start'}}>
+        <CantidadProducto />
+        <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
           <Boton titulo="Agregar a la lista" />
         </View>
       </View>

@@ -6,45 +6,42 @@ import {
 
 const styles = StyleSheet.create({
   texto: {
-    color: '#FF694E',
+    color: 'white',
+    textAlignVertical: 'center',
+    marginLeft: wp('5'),
     fontSize: hp('3'),
     fontFamily: Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Bold',
   },
-  header: {
-    height: hp(7),
+  info: {
+    flex: 0.07,
     backgroundColor: '#FF694E',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    borderBottomLeftRadius: hp('5'),
+    borderBottomRightRadius: hp('5'),
   },
-  menu: {
-    height: hp('7'),
-    width: wp('7'),
-    resizeMode: 'contain',
-    marginRight: wp('5'),
-  },
-  textoc: {
-    // flex: 0.2,
 
-    justifyContent: 'center',
-    // marginLeft: wp('5'),
-    marginTop: hp('5'),
-    paddingHorizontal: wp(2),
-    // backgroundColor:"yellow"
-  },
-  fondo: {
+  contain: {
     flex: 1,
     backgroundColor: 'white',
   },
-  categoriac: {
-    height: hp(26),
-    flexDirection: 'row',
-    overflow: 'scroll',
-    // backgroundColor: "blue",
-    // alignItems:"center"
+  menu: {
+    height: hp('7'),
+    width: wp('6'),
+    resizeMode: 'contain',
+    marginRight: wp('5'),
   },
-  productoc: {
-    alignItems: 'center',
+  flecha: {
+    height: hp('7'),
+    width: wp('6'),
+    resizeMode: 'contain',
+    marginLeft: wp('5'),
+  },
+  header: {
+    height: hp('7'),
+    flexDirection: 'row',
+    backgroundColor: '#FF694E',
     justifyContent: 'space-between',
+    borderBottomLeftRadius: wp('5'),
+    borderBottomRightRadius: wp('5'),
   },
 });
 

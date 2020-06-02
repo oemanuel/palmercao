@@ -9,7 +9,13 @@ import Menu from '../menu/Menu';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 const Catalogo = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [lista, setLista] = useState([{key:"1"}, {key:"2"}, {key:"3"}, {key:"4"}, {key:"5"}]);
+  const [lista, setLista] = useState([
+    { key: '1' },
+    { key: '2' },
+    { key: '3' },
+    { key: '4' },
+    { key: '5' },
+  ]);
   return (
     <>
       <Menu
@@ -19,7 +25,6 @@ const Catalogo = ({ navigation }) => {
       />
       <View style={styles.fondo}>
         <View style={styles.header}>
-
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => setMenuVisible(true)}>
@@ -31,14 +36,19 @@ const Catalogo = ({ navigation }) => {
         </View>
         <FlatList
           ListHeaderComponent={
-
             <>
-              <Informacion />
+              <Informacion>
+                <BarraBusqueda />
+              </Informacion>
               <View style={styles.textoc}>
                 <Text style={styles.texto}>Categorias</Text>
               </View>
               <View style={styles.categoriac}>
-                <ScrollView alwaysBounceHorizontal showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={{ alignItems: "center" }}>
+                <ScrollView
+                  alwaysBounceHorizontal
+                  showsHorizontalScrollIndicator={false}
+                  horizontal
+                  contentContainerStyle={{ alignItems: 'center' }}>
                   <ContenedorCategoria navigation={navigation} />
                   <ContenedorCategoria navigation={navigation} />
                   <ContenedorCategoria navigation={navigation} />
@@ -48,12 +58,13 @@ const Catalogo = ({ navigation }) => {
               <View style={styles.textoc}>
                 <Text style={styles.texto}>Populares</Text>
               </View>
-            </>}
+            </>
+          }
           data={lista}
-          contentContainerStyle={{alignItems:"center"}}
-          renderItem={() => { return <ContenedorProducto/> }}
-
-          
+          contentContainerStyle={{ alignItems: 'center' }}
+          renderItem={() => {
+            return <ContenedorProducto navigation={navigation} />;
+          }}
         />
       </View>
     </>

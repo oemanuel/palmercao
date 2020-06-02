@@ -17,7 +17,7 @@ class BarraBusqueda extends React.Component {
           />
         </View>
         <TextInput style={styles.input} placeholder="Buscar producto" />
-{/* 
+        {/* 
         <View style={styles.filtroc}>
           <Image
             style={styles.filtro}
@@ -30,14 +30,14 @@ class BarraBusqueda extends React.Component {
 }
 const styles = StyleSheet.create({
   barra: {
-    width: wp('7'),
+    width: wp('10'),
     height: hp('7'),
     flexDirection: 'row',
     backgroundColor: 'white',
     borderTopLeftRadius: wp('5'),
-    borderBottomLeftRadius:wp('5'),
+    borderBottomLeftRadius: wp('5'),
     alignItems: 'center',
-    justifyContent:"center",
+    justifyContent: 'center',
     // shadowColor: '#000',
     // shadowOffset: {
     //   width: 0,
@@ -49,20 +49,19 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   contain: {
+    height: hp('7'),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor:"blue"
   },
   lupa: {
-    
     resizeMode: 'contain',
     tintColor: '#FF694E',
-    width: "80%",
-    height: "80%",
-    
-    // backgroundColor:"yellow"
+    width: wp('6%'),
+    height: wp('6%'),
 
+    // backgroundColor:"yellow"
   },
   filtro: {
     resizeMode: 'contain',
@@ -70,21 +69,19 @@ const styles = StyleSheet.create({
     width: wp('4'),
     height: hp('4'),
     // backgroundColor:"green"
-
   },
   input: {
-    width: "60%",
-    height: "100%",
+    width: '60%',
+    height: '100%',
     color: '#FF694E',
     fontSize: hp('2.5'),
     borderTopRightRadius: wp('5'),
-    borderBottomRightRadius:wp('5'),
-    
+    borderBottomRightRadius: wp('5'),
+
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
-      backgroundColor:"white",
-      elevation: 10,
-    
+    backgroundColor: 'white',
+    elevation: 10,
   },
   filtroc: {
     width: hp('7'),

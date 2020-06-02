@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import BarraBusqueda from '../../componentes/BarraBusqueda';
-import ContenedorProducto from '../../componentes/ContenedorProducto';
+import Formulario from '../../componentes/Formulario';
 import Menu from '../menu/Menu';
 
-const InfoCategoria = ({navigation}) => {
+const DatosPedidos = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
@@ -25,7 +24,7 @@ const InfoCategoria = ({navigation}) => {
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
+            <Text style={styles.texto}>Comprar</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -36,18 +35,10 @@ const InfoCategoria = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.info}>
-          <View style={styles.children}>
-            <BarraBusqueda />
-          </View>
-        </View>
-        <View style={styles.separador} />
-        <View style={{alignItems: 'center', flex: 0.73}}>
-          <ContenedorProducto navigation={navigation} />
-        </View>
+        <Formulario />
       </View>
     </>
   );
 };
 
-export default InfoCategoria;
+export default DatosPedidos;

@@ -6,18 +6,11 @@ import styles from './styles';
 import Boton from '../../componentes/Boton';
 
 //cositas de redux
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
-const Registro = ({ navigation, usuario }) => {
+const Registro = ({ navigation}) => {
 
 
-
-  useEffect(() => {
-
-    if (usuario) {
-      navigation.navigate("Bienvenida")
-    }
-  }, [usuario]);
   return (
     <>
       <Fondo>
@@ -52,9 +45,9 @@ const Registro = ({ navigation, usuario }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    usuario: state.auth.user
-  }
-}
-export default connect(mapStateToProps, null)(Registro);
+// const mapStateToProps = state => {
+//   return {
+//     usuario: state.auth.user
+//   }
+// }
+export default Registro;

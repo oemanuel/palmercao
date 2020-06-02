@@ -8,15 +8,9 @@ import Modal from '../../componentes/Modal';
 import Menu from '../menu/Menu';
 
 const ListaCompras = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
-      <Modal
-        exito={false}
-        visible={modalVisible}
-        setModalVisible={setModalVisible}
-      />
       <Menu
         navigation={navigation}
         visible={menuVisible}
@@ -63,7 +57,8 @@ const ListaCompras = ({navigation}) => {
         <View style={styles.boton}>
           <Boton
             titulo="Comprar"
-            onPress={() => {
+            onPress={() =>
+              /*{
               setModalVisible(true);
               setTimeout(
                 () => {
@@ -72,7 +67,10 @@ const ListaCompras = ({navigation}) => {
                 5000,
                 this,
               );
-            }}
+            }*/ navigation.navigate(
+                'DatosPedidos',
+              )
+            }
           />
         </View>
       </View>

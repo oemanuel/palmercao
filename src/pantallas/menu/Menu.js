@@ -13,8 +13,14 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+//cositas de redux
+import { connect } from 'react-redux';
+import {salir  } from "../../redux/auth/login/actions/entrar.actions";
+
+
+
 const Menu = props => {
-  const {navigation, visible, setMenuVisible} = props;
+  const {navigation, visible, setMenuVisible, salir} = props;
   return (
     <Modal
       visible={visible}
@@ -43,20 +49,33 @@ const Menu = props => {
               source={require('../../assets/logo/Componente2.png')}
             />
           </View>
-
-          <Boton
-            titulo="Lista de compra"
-            onPress={() => {
-              setMenuVisible(false);
-              navigation.navigate('ListaCompra');
-            }}
-          />
+          <View style={styles.botones}>
+            <Boton
+              titulo="Lista de compra"
+              onPress={() => {
+                setMenuVisible(false);
+                navigation.navigate('ListaCompra');
+              }}
+            />
+            <Boton
+              titulo="Mi cuenta"
+              onPress={() => {
+                setMenuVisible(false);
+                navigation.navigate('MiCuenta');
+              }}
+            />
+          </View>
           <View style={styles.textoc}>
             <TouchableOpacity activeOpacity={0.5}>
-              <Text onPress={() => {
-              setMenuVisible(false);
-              navigation.navigate('Registro');
-            }} style={styles.texto}>Cerrar sesión</Text>
+              <Text
+                onPress={() => {
+                  setMenuVisible(false);
+                  salir();
+                  // navigation.navigate('Registro');
+                }}
+                style={styles.texto}>
+                Cerrar sesión
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{flex: 0.4, justifyContent: 'flex-end'}}>
@@ -124,6 +143,16 @@ const styles = StyleSheet.create({
     marginLeft: wp('7'),
     marginTop: hp('2'),
   },
+  botones: {
+    flex: 0.25,
+    justifyContent: 'space-between',
+  },
 });
 
-export default Menu;
+const mapDispatchToProps = dispatch => { 
+  return {
+    salir: () => dispatch(salir()),
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Menu);

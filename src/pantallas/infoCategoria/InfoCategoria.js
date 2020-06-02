@@ -43,7 +43,7 @@ const InfoCategoria = ({navigation}) => {
         </View>
         <View style={styles.separador} />
         <View style={{alignItems: 'center', flex: 0.73}}>
-          <ContenedorProducto />
+          <ContenedorProducto navigation={navigation} />
         </View>
       </View>
     </>

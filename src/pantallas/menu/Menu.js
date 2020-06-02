@@ -13,8 +13,14 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+//cositas de redux
+import { connect } from 'react-redux';
+import {salir  } from "../../redux/auth/login/actions/entrar.actions";
+
+
+
 const Menu = props => {
-  const {navigation, visible, setMenuVisible} = props;
+  const {navigation, visible, setMenuVisible, salir} = props;
   return (
     <Modal
       visible={visible}
@@ -64,7 +70,8 @@ const Menu = props => {
               <Text
                 onPress={() => {
                   setMenuVisible(false);
-                  navigation.navigate('Registro');
+                  salir();
+                  // navigation.navigate('Registro');
                 }}
                 style={styles.texto}>
                 Cerrar sesión
@@ -142,4 +149,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Menu;
+const mapDispatchToProps = dispatch => { 
+  return {
+    salir: () => dispatch(salir()),
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Menu);

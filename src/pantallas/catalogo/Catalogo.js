@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import Informacion from '../../componentes/InformacionCatalogo';
 import ContenedorCategoria from '../../componentes/ContenedorCategoria';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Menu from '../menu/Menu';
-import {ScrollView, FlatList} from 'react-native-gesture-handler';
-const Catalogo = ({navigation}) => {
+import { ScrollView, FlatList } from 'react-native-gesture-handler';
+const Catalogo = ({ navigation }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [lista, setLista] = useState([
-    {key: '1'},
-    {key: '2'},
-    {key: '3'},
-    {key: '4'},
-    {key: '5'},
+    { key: '1' },
+    { key: '2' },
+    { key: '3' },
+    { key: '4' },
+    { key: '5' },
   ]);
   return (
     <>
@@ -37,7 +37,9 @@ const Catalogo = ({navigation}) => {
         <FlatList
           ListHeaderComponent={
             <>
-              <Informacion />
+              <Informacion>
+                <BarraBusqueda />
+              </Informacion>
               <View style={styles.textoc}>
                 <Text style={styles.texto}>Categorias</Text>
               </View>
@@ -46,7 +48,7 @@ const Catalogo = ({navigation}) => {
                   alwaysBounceHorizontal
                   showsHorizontalScrollIndicator={false}
                   horizontal
-                  contentContainerStyle={{alignItems: 'center'}}>
+                  contentContainerStyle={{ alignItems: 'center' }}>
                   <ContenedorCategoria navigation={navigation} />
                   <ContenedorCategoria navigation={navigation} />
                   <ContenedorCategoria navigation={navigation} />
@@ -59,7 +61,7 @@ const Catalogo = ({navigation}) => {
             </>
           }
           data={lista}
-          contentContainerStyle={{alignItems: 'center'}}
+          contentContainerStyle={{ alignItems: 'center' }}
           renderItem={() => {
             return <ContenedorProducto navigation={navigation} />;
           }}

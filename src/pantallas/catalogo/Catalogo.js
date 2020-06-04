@@ -77,14 +77,20 @@ const Catalogo = ({navigation}) => {
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Bebidas"
-                    color={'#00BA6A'}
-                    icono={require('../../assets/IconoCategoria/Licores.png')}
+                    color={'#BA64F2'}
+                    icono={require('../../assets/IconoCategoria/Bebidas.png')}
+                  />
+                  <ContenedorCategoria
+                    navigation={navigation}
+                    nombre="Snacks"
+                    color="#FFC043"
+                    icono={require('../../assets/IconoCategoria/Frutas&Verduras.png')}
                   />
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Aseo"
                     color="#29A2E8"
-                    icono={require('../../assets/IconoCategoria/Frutas&Verduras.png')}
+                    icono={require('../../assets/IconoCategoria/Aseo.png')}
                   />
                   <ContenedorCategoria
                     navigation={navigation}
@@ -96,7 +102,7 @@ const Catalogo = ({navigation}) => {
                     navigation={navigation}
                     nombre="Salud&Belleza"
                     color="#FF7D9F"
-                    icono={require('../../assets/IconoCategoria/Frutas&Verduras.png')}
+                    icono={require('../../assets/IconoCategoria/Salud&Belleza.png')}
                   />
                   <ContenedorCategoria
                     navigation={navigation}

@@ -1,3 +1,4 @@
 export const PRODUCTOS = {
   SYNC: 'PRODUCTO_SYNC',
+  BUSQUEDA: 'PRODUCTO_BUSQUEDA',
 };

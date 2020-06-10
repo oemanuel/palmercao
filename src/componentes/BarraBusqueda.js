@@ -1,36 +1,73 @@
-import React from 'react';
-import {Text, StyleSheet, View, Image, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  BackHandler,
+  Alert,
+} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import {connect} from 'react-redux';
+import {busquedaProductos} from '../redux/productos/productos.action';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-class BarraBusqueda extends React.Component {
-  render() {
-    const {titulo, color} = this.props;
-    return (
-      <View style={styles.contain}>
-        <View style={styles.barra}>
+const BarraBusqueda = props => {
+  const {titulo, color, busquedaProductos, textoBusqueda} = props;
+  const [value, setValue] = useState(textoBusqueda);
+
+  useEffect(() => {
+    if (value.length == 0) {
+      busquedaProductos('');
+    }
+  }, [value]);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      busquedaProductos('');
+      if (textoBusqueda.length !== 0) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+    const bch = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    return () => bch.remove();
+  }, []);
+
+  return (
+    <View style={styles.contain}>
+      <View style={styles.barra}>
+        <TouchableOpacity onPress={() => busquedaProductos(value)}>
           <Image
             style={[styles.lupa, {tintColor: color}]}
             source={require('../assets/Icon/Lupa.png')}
           />
-        </View>
-        <TextInput
-          style={[styles.input, {color: color}]}
-          placeholder="Buscar producto"
-        />
-        {/* 
+        </TouchableOpacity>
+      </View>
+      <TextInput
+        style={[styles.input, {color: color}]}
+        placeholder="Buscar producto"
+        onChangeText={value => setValue(value)}
+        returnKeyLabel="Buscar"
+        onSubmitEditing={() => busquedaProductos(value)}
+        value={value}
+      />
+      {/* 
         <View style={styles.filtroc}>
           <Image
             style={styles.filtro}
             source={require('../assets/Icon/filtro.png')}
           />
         </View> */}
-      </View>
-    );
-  }
-}
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   barra: {
     width: wp('10'),
@@ -102,8 +139,23 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.58,
     // shadowRadius: 16.0,
     // backgroundColor:"pink",
-
     elevation: 10,
   },
 });
-export default BarraBusqueda;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    busquedaProductos: value => dispatch(busquedaProductos(value)),
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    textoBusqueda: state.productosReducer.textoBusqueda,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BarraBusqueda);

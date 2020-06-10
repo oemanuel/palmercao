@@ -6,3 +6,9 @@ export function syncProductos(productos) {
     productos,
   };
 }
+export function busquedaProductos(texto) {
+  return {
+    type: PRODUCTOS.BUSQUEDA,
+    texto,
+  };
+}

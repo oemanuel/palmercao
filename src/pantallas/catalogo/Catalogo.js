@@ -46,4 +46,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Catalogo);
+export default connect(
+  mapStateToProps,
+  null,
+)(Catalogo);

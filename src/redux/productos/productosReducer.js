@@ -2,6 +2,7 @@ import {PRODUCTOS} from './productosType';
 
 const inicial = {
   productos: [],
+  textoBusqueda: '',
 };
 
 export default (state = inicial, action) => {
@@ -10,6 +11,11 @@ export default (state = inicial, action) => {
       return {
         ...state,
         productos: {...action},
+      };
+    case PRODUCTOS.BUSQUEDA:
+      return {
+        ...state,
+        textoBusqueda: action.texto,
       };
 
     default:

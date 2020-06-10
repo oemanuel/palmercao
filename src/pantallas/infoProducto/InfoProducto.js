@@ -5,9 +5,16 @@ import styles from './styles';
 import Menu from '../menu/Menu';
 import Boton from '../../componentes/Boton';
 import CantidadProducto from '../../componentes/CantidadProducto';
+import {connect} from 'react-redux';
+import {añadir} from '../../redux/listaCompra/reducers/listaCompra';
 
-const InfoProducto = ({navigation}) => {
+const InfoProducto = ({navigation, añadir}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [cantidadP, setCantidadP] = useState(0);
+  const producto = {
+    id: 3,
+    cantidad: cantidadP,
+  };
   return (
     <>
       <Menu
@@ -26,7 +33,9 @@ const InfoProducto = ({navigation}) => {
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
+            <Text style={[styles.texto, {textAlignVertical: 'center'}]}>
+              Nombre Categoria
+            </Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -75,13 +84,31 @@ const InfoProducto = ({navigation}) => {
           </Text>
           <Text style={[styles.texto, {color: '#030303'}]}>$1500</Text>
         </View>
-        <CantidadProducto />
+        <CantidadProducto cantidadP={cantidadP} setCantidadP={setCantidadP} />
         <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
-          <Boton titulo="Agregar a la lista" />
+          {cantidadP !== 0 && (
+            <Boton
+              titulo="Agregar a la lista"
+              onPress={() => {
+                añadir(producto);
+              }}
+            />
+          )}
         </View>
       </View>
     </>
   );
 };
 
-export default InfoProducto;
+const mapStateToProps = state => {
+  console.log(state.listaCompraReducer);
+  return state;
+};
+const mapDispatchToProps = dispatch => ({
+  añadir: producto => dispatch(añadir(producto)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(InfoProducto);

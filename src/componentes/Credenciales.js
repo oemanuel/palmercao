@@ -270,13 +270,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = estado => {
+  console.log(estado);
   return {
-    usuario: estado.entrarReducer.usuario,
-    error_entrar: estado.entrarReducer.error,
-    cargando_entrar: estado.entrarReducer.cargando,
-    cargando_registrar: estado.registrarReducer.cargando,
-    error_registrar: estado.registrarReducer.error,
-    registrado: estado.registrarReducer.registrado,
+    usuario: estado.authReducer.entrarReducer.usuario,
+    error_entrar: estado.authReducer.entrarReducer.error,
+    cargando_entrar: estado.authReducer.entrarReducer.cargando,
+    cargando_registrar: estado.authReducer.registrarReducer.cargando,
+    error_registrar: estado.authReducer.registrarReducer.error,
+    registrado: estado.authReducer.registrarReducer.registrado,
   };
 };
 

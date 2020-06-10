@@ -5,23 +5,32 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const CantidadProducto = () => {
+const CantidadProducto = props => {
+  const {cantidadP, setCantidadP} = props;
+  function añadir() {
+    setCantidadP(cantidadP + 1);
+  }
+  function quitar() {
+    if (cantidadP > 0) {
+      setCantidadP(cantidadP - 1);
+    }
+  }
   return (
     <View style={styles.contain}>
       <View style={styles.separador} />
       <View style={styles.fila1}>
         <Text style={styles.texto}>Cantidad:</Text>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity activeOpacity={0.5} onPress={quitar}>
           <View style={styles.ope}>
-            <Text style={[styles.texto, {color: 'white', fontSize: wp('8')}]}>
+            <Text style={[styles.texto, {color: 'white', fontSize: wp('11')}]}>
               -
             </Text>
           </View>
         </TouchableOpacity>
         <View style={styles.cantidad}>
-          <Text style={styles.texto}>0</Text>
+          <Text style={styles.texto}>{cantidadP}</Text>
         </View>
-        <TouchableOpacity activeOpacity={0.5}>
+        <TouchableOpacity activeOpacity={0.5} onPress={añadir}>
           <View style={styles.ope}>
             <Text style={[styles.texto, {color: 'white', fontSize: wp('8')}]}>
               +

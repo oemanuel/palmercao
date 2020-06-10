@@ -12,6 +12,7 @@
   "dependencies": {
     "@firebase/app": "^0.6.4",
     "@firebase/auth": "^0.14.6",
+    "@firebase/database": "^0.6.4",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.4.0",
     "@react-navigation/stack": "^5.3.7",

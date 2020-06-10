@@ -1,20 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Menu from '../menu/Menu';
+import ListaDeProductos from '../../componentes/ListaDeProductos';
+import {connect} from 'react-redux';
 
 const InfoCategoria = props => {
   const {navigation, route} = props;
   const [menuVisible, setMenuVisible] = useState(false);
-  const [lista, setLista] = useState([
-    {key: '1'},
-    {key: '2'},
-    {key: '3'},
-    {key: '4'},
-    {key: '5'},
-  ]);
+
   return (
     <>
       <Menu
@@ -50,18 +46,9 @@ const InfoCategoria = props => {
           </View>
         </View>
         <View style={styles.separador} />
-        <FlatList
-          data={lista}
-          contentContainerStyle={{alignItems: 'center'}}
-          renderItem={() => {
-            return (
-              <ContenedorProducto
-                navigation={navigation}
-                color={route.params.color}
-                nombre={route.params.nombre}
-              />
-            );
-          }}
+        <ListaDeProductos
+          nombreCategoria={route.params.nombre}
+          iscatalogo={false}
         />
       </View>
     </>

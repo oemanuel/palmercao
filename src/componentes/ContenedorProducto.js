@@ -6,7 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 
 const Contenedor = props => {
-  const {navigation, color, nombre} = props;
+  const {navigation, color, item} = props;
   return (
     <TouchableOpacity
       activeOpacity={0.5}
@@ -25,22 +25,19 @@ const Contenedor = props => {
           <Image
             style={styles.imagen}
             source={{
-              uri:
-                'https://m.lopido.com/images/productos/sii/F/300x300/arroz_diana_premium-130127-1557347133.png',
+              uri: item.urlImagen,
             }}
           />
         </View>
         <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
           <View style={styles.titulo}>
-            <Text style={[styles.texto, {color: color}]}>
-              Arroz Diana Premiun
-            </Text>
+            <Text style={[styles.texto, {color: color}]}>{item.nombre}</Text>
             <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-              bolsa de 500gr
+              {item.descripcion.substring(0, 22)}...
             </Text>
           </View>
           <View style={styles.costo}>
-            <Text style={[styles.texto, {flex: 0.9}]}>$1500</Text>
+            <Text style={[styles.texto, {flex: 0.9}]}>COP {item.precio}</Text>
             <Image
               style={styles.icono}
               //source={require('../assets/Icon/añadir.png')}

@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('5'),
   },
   header: {
-    flex: 0.15,
+    flex: 0.1,
     flexDirection: 'row',
     backgroundColor: '#FF694E',
     justifyContent: 'space-between',

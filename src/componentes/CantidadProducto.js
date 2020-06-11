@@ -6,20 +6,28 @@ import {
 } from 'react-native-responsive-screen';
 
 const CantidadProducto = props => {
-  const {cantidadP, setCantidadP, item} = props;
+  const {cantidadP, setCantidadP,totalP, setTotalP, item} = props;
   function añadir() {
+
     if (item.tipo == 'unitario') {
       setCantidadP(cantidadP + 1);
+      setTotalP(totalP+(cantidadP*item.precio))
     } else {
       setCantidadP(cantidadP + 125);
+      setTotalP(totalP+((item.precio/500)*cantidadP))
+
     }
   }
   function quitar() {
     if (cantidadP > 0) {
       if (item.tipo == 'unitario') {
         setCantidadP(cantidadP - 1);
+      setTotalP(totalP-(cantidadP*item.precio))
+
       } else {
         setCantidadP(cantidadP - 125);
+      setTotalP(totalP-((item.precio/500)*cantidadP))
+
       }
     }
   }

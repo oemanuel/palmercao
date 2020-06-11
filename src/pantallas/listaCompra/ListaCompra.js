@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import styles from './styles';
 import BarraInfoCompra from '../../componentes/BarraInfoCompra';
@@ -7,15 +7,16 @@ import Boton from '../../componentes/Boton';
 import Modal from '../../componentes/Modal';
 import Menu from '../menu/Menu';
 
-const ListaCompras = ({navigation}) => {
+import {connect} from "react-redux"
+
+const ListaCompras = ({navigation, productosObject}) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [lista, setLista] = useState([
-    {key: '1'},
-    {key: '2'},
-    {key: '3'},
-    {key: '4'},
-    {key: '5'},
-  ]);
+  const [lista, setLista] = useState([]);
+
+useEffect(()=>{
+  productosObject? setLista(productosObject.productos):setLista([]);
+},[productosObject])
+
   return (
     <>
       <Menu
@@ -61,9 +62,13 @@ const ListaCompras = ({navigation}) => {
         <FlatList
           data={lista}
           contentContainerStyle={{alignItems: 'center'}}
-          renderItem={() => {
+
+          KeyExtractor={item=> item.identificador}
+
+          renderItem={(item) => {
+            
             return (
-              <ContenedorProducto navigation={navigation} color={'#FFC043'} />
+              <Text>{item.nombre}</Text>
             );
           }}
         />
@@ -91,4 +96,13 @@ const ListaCompras = ({navigation}) => {
     </>
   );
 };
-export default ListaCompras;
+
+
+const mapStateToProps= estado => {
+  return{
+    productos: estado.listaCompraReducer.carrito,
+  }
+}
+
+
+export default connect(mapStateToProps, null)(ListaCompras);

@@ -11,10 +11,11 @@ import {añadir} from '../../redux/listaCompra/reducers/listaCompra';
 const InfoProducto = ({navigation, añadir, route}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [cantidadP, setCantidadP] = useState(0);
-  const producto = {
-    id: 3,
-    cantidad: cantidadP,
-  };
+  const [totalP, setTotalP] = useState(0);
+
+  const producto = route.params.item;
+  producto.cantidad= cantidadP;
+  producto.total= totalP;
   return (
     <>
       <Menu
@@ -88,6 +89,8 @@ const InfoProducto = ({navigation, añadir, route}) => {
         <CantidadProducto
           cantidadP={cantidadP}
           setCantidadP={setCantidadP}
+          totalP={totalP}
+          setTotalP={setTotalP}
           item={route.params.item}
         />
         <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
@@ -105,15 +108,11 @@ const InfoProducto = ({navigation, añadir, route}) => {
   );
 };
 
-const mapStateToProps = state => {
-  console.log(state.listaCompraReducer);
-  return state;
-};
 const mapDispatchToProps = dispatch => ({
   añadir: producto => dispatch(añadir(producto)),
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(InfoProducto);

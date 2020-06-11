@@ -6,13 +6,21 @@ import {
 } from 'react-native-responsive-screen';
 
 const CantidadProducto = props => {
-  const {cantidadP, setCantidadP} = props;
+  const {cantidadP, setCantidadP, item} = props;
   function añadir() {
-    setCantidadP(cantidadP + 1);
+    if (item.tipo == 'unitario') {
+      setCantidadP(cantidadP + 1);
+    } else {
+      setCantidadP(cantidadP + 125);
+    }
   }
   function quitar() {
     if (cantidadP > 0) {
-      setCantidadP(cantidadP - 1);
+      if (item.tipo == 'unitario') {
+        setCantidadP(cantidadP - 1);
+      } else {
+        setCantidadP(cantidadP - 125);
+      }
     }
   }
   return (
@@ -28,7 +36,9 @@ const CantidadProducto = props => {
           </View>
         </TouchableOpacity>
         <View style={styles.cantidad}>
-          <Text style={styles.texto}>{cantidadP}</Text>
+          <Text style={styles.texto}>
+            {cantidadP} {item.tipo == 'unitario' ? 'und' : 'gr'}
+          </Text>
         </View>
         <TouchableOpacity activeOpacity={0.5} onPress={añadir}>
           <View style={styles.ope}>
@@ -42,7 +52,12 @@ const CantidadProducto = props => {
       <View style={styles.fila1}>
         <Text style={styles.texto}>Total:</Text>
         <View style={styles.total}>
-          <Text style={styles.texto}>$ 10494884</Text>
+          <Text style={styles.texto}>
+            COP{' '}
+            {item.tipo == 'unitario'
+              ? item.precio * cantidadP
+              : (item.precio / 500) * cantidadP}
+          </Text>
         </View>
       </View>
     </View>

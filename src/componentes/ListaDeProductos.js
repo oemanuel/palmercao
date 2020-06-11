@@ -15,6 +15,7 @@ const ListaDeProductos = props => {
     nombreCategoria,
     iscatalogo,
     textoBusqueda,
+    color,
   } = props;
   const [lista, setLista] = useState([]);
   const [isBusqueda, setIsBusqueda] = useState(false);
@@ -135,7 +136,7 @@ const ListaDeProductos = props => {
                   />
                   <ContenedorCategoria
                     navigation={navigation}
-                    nombre="Salud&Belleza"
+                    nombre="Salud & Belleza"
                     color="#FF7D9F"
                     icono={require('../assets/IconoCategoria/Salud&Belleza.png')}
                   />
@@ -197,7 +198,11 @@ const ListaDeProductos = props => {
           keyExtractor={item => item.identificador}
           renderItem={item => {
             return (
-              <ContenedorProducto navigation={navigation} item={item.item} />
+              <ContenedorProducto
+                navigation={navigation}
+                item={item.item}
+                color={color}
+              />
             );
           }}
         />

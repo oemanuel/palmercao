@@ -8,7 +8,7 @@ import CantidadProducto from '../../componentes/CantidadProducto';
 import {connect} from 'react-redux';
 import {añadir} from '../../redux/listaCompra/reducers/listaCompra';
 
-const InfoProducto = ({navigation, añadir}) => {
+const InfoProducto = ({navigation, añadir, route}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [cantidadP, setCantidadP] = useState(0);
   const producto = {
@@ -23,7 +23,7 @@ const InfoProducto = ({navigation, añadir}) => {
         setMenuVisible={setMenuVisible}
       />
       <View style={styles.contain}>
-        <View style={styles.header}>
+        <View style={[styles.header, {backgroundColor: route.params.color}]}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
@@ -34,7 +34,7 @@ const InfoProducto = ({navigation, añadir}) => {
               />
             </TouchableOpacity>
             <Text style={[styles.texto, {textAlignVertical: 'center'}]}>
-              Nombre Categoria
+              {route.params.item.categoria}
             </Text>
           </View>
           <TouchableOpacity
@@ -46,15 +46,14 @@ const InfoProducto = ({navigation, añadir}) => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.info}>
+        <View style={[styles.info, {backgroundColor: route.params.color}]}>
           <View style={styles.children}>
             <View style={styles.cartac}>
               <View style={styles.carta}>
                 <Image
                   style={styles.imagen}
                   source={{
-                    uri:
-                      'https://m.lopido.com/images/productos/sii/F/300x300/arroz_diana_premium-130127-1557347133.png',
+                    uri: route.params.item.urlImagen,
                   }}
                 />
               </View>
@@ -68,8 +67,8 @@ const InfoProducto = ({navigation, añadir}) => {
             justifyContent: 'space-between',
             flex: 0.25,
           }}>
-          <Text style={[styles.texto, {color: '#FF694E'}]}>
-            Nombre producto
+          <Text style={[styles.texto, {color: route.params.color}]}>
+            {route.params.item.nombre}
           </Text>
           <Text
             style={[
@@ -80,11 +79,17 @@ const InfoProducto = ({navigation, añadir}) => {
                 fontFamily: 'OpenSans-Regular',
               },
             ]}>
-            correo
+            {route.params.item.descripcion}
           </Text>
-          <Text style={[styles.texto, {color: '#030303'}]}>$1500</Text>
+          <Text style={[styles.texto, {color: '#030303'}]}>
+            COP {route.params.item.precio}
+          </Text>
         </View>
-        <CantidadProducto cantidadP={cantidadP} setCantidadP={setCantidadP} />
+        <CantidadProducto
+          cantidadP={cantidadP}
+          setCantidadP={setCantidadP}
+          item={route.params.item}
+        />
         <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
           {cantidadP !== 0 && (
             <Boton

@@ -47,8 +47,10 @@ const InfoCategoria = props => {
         </View>
         <View style={styles.separador} />
         <ListaDeProductos
+          navigation={navigation}
           nombreCategoria={route.params.nombre}
           iscatalogo={false}
+          color={route.params.color}
         />
       </View>
     </>

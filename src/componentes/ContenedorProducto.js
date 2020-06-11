@@ -7,11 +7,44 @@ import {
 
 const Contenedor = props => {
   const {navigation, color, item} = props;
+  const darColor = item => {
+    switch (item.categoria) {
+      case 'frutas & verduras':
+        return '#00BA6A';
+      case 'primarios':
+        return '#FFC043';
+      case 'carnes':
+        return '#FE7259';
+      case 'lacteos':
+        return '#707070';
+      case 'bebidas':
+        return '#BA64F2';
+      case 'snacks':
+        return '#FFC043';
+      case 'aseo':
+        return '#29A2E8';
+      case 'miscelanea':
+        return '#FF9750';
+      case 'salud & belleza':
+        return '#FF7D9F';
+      case 'licoreria':
+        return '#FFC043';
+      case 'mascotas':
+        return '#29A2E8';
+      case 'otros':
+        return '#29A2E8';
+      default:
+        return 'black';
+    }
+  };
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={() =>
-        navigation.navigate('InfoProducto', {nombre: nombre, color: color})
+        navigation.navigate('InfoProducto', {
+          color: darColor(item),
+          item: item,
+        })
       }>
       <View style={styles.body}>
         <View
@@ -31,7 +64,9 @@ const Contenedor = props => {
         </View>
         <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
           <View style={styles.titulo}>
-            <Text style={[styles.texto, {color: color}]}>{item.nombre}</Text>
+            <Text style={[styles.texto, {color: darColor(item)}]}>
+              {item.nombre}
+            </Text>
             <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
               {item.descripcion.substring(0, 22)}...
             </Text>

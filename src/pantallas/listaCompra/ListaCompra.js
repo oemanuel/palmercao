@@ -6,16 +6,12 @@ import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Boton from '../../componentes/Boton';
 import Modal from '../../componentes/Modal';
 import Menu from '../menu/Menu';
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 import {connect} from "react-redux"
 
-const ListaCompras = ({navigation, productosObject}) => {
+const ListaCompras = ({navigation, carrito, total}) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [lista, setLista] = useState([]);
-
-useEffect(()=>{
-  productosObject? setLista(productosObject.productos):setLista([]);
-},[productosObject])
 
   return (
     <>
@@ -52,23 +48,22 @@ useEffect(()=>{
           />
           <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text>
           <View style={styles.ccantidad}>
-            <Text style={styles.texto}>1</Text>
+            <Text style={styles.texto}>{carrito.length}</Text>
           </View>
           <View style={styles.children}>
-            <BarraInfoCompra />
+            <BarraInfoCompra cantidad={total}/>
           </View>
         </View>
         <View style={styles.separador1} />
         <FlatList
-          data={lista}
+          data={carrito}
           contentContainerStyle={{alignItems: 'center'}}
-
-          KeyExtractor={item=> item.identificador}
-
+          keyExtractor={item=> item.identificador}
           renderItem={(item) => {
+            let {item:p}= item
             
             return (
-              <Text>{item.nombre}</Text>
+              <ContenedorProducto item={p} isComprar={true}/>
             );
           }}
         />
@@ -77,16 +72,7 @@ useEffect(()=>{
           <Boton
             titulo="Comprar"
             onPress={() =>
-              /*{
-              setModalVisible(true);
-              setTimeout(
-                () => {
-                  setModalVisible(false);
-                },
-                5000,
-                this,
-              );
-            }*/ navigation.navigate(
+              navigation.navigate(
                 'DatosPedidos',
               )
             }
@@ -99,8 +85,10 @@ useEffect(()=>{
 
 
 const mapStateToProps= estado => {
+
   return{
-    productos: estado.listaCompraReducer.carrito,
+    carrito: estado.listaCompraReducer.carrito,
+    total:estado.listaCompraReducer.total,
   }
 }
 

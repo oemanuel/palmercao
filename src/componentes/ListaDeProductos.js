@@ -215,7 +215,6 @@ const ListaDeProductos = props => {
 };
 
 const mapStateToProps = state => {
-  console.log('soy el estado:', state);
   return {
     productosObject: state.productosReducer.productos,
     textoBusqueda: state.productosReducer.textoBusqueda,

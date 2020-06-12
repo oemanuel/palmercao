@@ -6,9 +6,9 @@ import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Menu from '../menu/Menu';
 import ListaDeProductos from '../../componentes/ListaDeProductos';
 import {connect} from 'react-redux';
-
+import { busquedaProductos } from "../../redux/productos/productos.action";
 const InfoCategoria = props => {
-  const {navigation, route} = props;
+  const {navigation, route, busquedaProducto} = props;
   const [menuVisible, setMenuVisible] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ const InfoCategoria = props => {
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.goBack()}>
+              onPress={() => { busquedaProducto(""); navigation.goBack()}}>
               <Image
                 style={styles.flecha}
                 source={require('../../assets/Icon/flecha.png')}
@@ -56,5 +56,9 @@ const InfoCategoria = props => {
     </>
   );
 };
-
-export default InfoCategoria;
+const mapDispatchToProps= dispatch=>{
+  return{
+    busquedaProducto: value=> dispatch(busquedaProductos(value))
+  }
+}
+export default connect(null, mapDispatchToProps)(InfoCategoria);

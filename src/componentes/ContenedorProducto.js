@@ -5,8 +5,29 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+
+import {connect} from 'react-redux'
+import { quitar, agregar, eliminar } from "../redux/listaCompra/reducers/listaCompra";
+
 const Contenedor = props => {
-  const {navigation, color, item} = props;
+  const {navigation, color, item, isComprar, añadir, quitar, eliminar} = props;
+  
+  const disminuir = () => {
+    if (item.tipo == "unitario") {
+      if (item.cantidad > 1) {
+        quitar(item);
+      }else{
+        eliminar(item)
+      }
+    } else {
+      if (item.cantidad > 130) {
+        quitar(item);
+      }else{
+        eliminar(item);
+      }
+    }
+
+  }
   const darColor = item => {
     switch (item.categoria) {
       case 'frutas & verduras':
@@ -37,7 +58,50 @@ const Contenedor = props => {
         return 'black';
     }
   };
-  return (
+  if (isComprar) {
+    return (
+    <View>
+      <View style={styles.body}>
+        <View
+          style={[
+            styles.contain,
+            {
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          ]}>
+          <Image
+            style={styles.imagen}
+            source={{
+              uri: item.urlImagen,
+            }}
+          />
+        </View>
+        <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
+          <View style={styles.titulo}>
+            <Text style={[styles.texto, {color: darColor(item)}]}>
+              {item.nombre.substring(0, 20)}...
+            </Text>
+            <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
+              COP {item.total}
+            </Text>
+          </View>
+          <View style={[styles.costo,{flexDirection:'row', alignItems:'center', justifyContent:'space-around'}]}>
+            <TouchableOpacity onPress={()=>disminuir()} style={{backgroundColor:'#00b46b',borderRadius:wp(5), width:'15%'}}>
+              <Text style={{textAlign:'center', color:'white'}}>-</Text>
+            </TouchableOpacity>
+            <Text style={[styles.texto]}>{item.cantidad}</Text>
+            <TouchableOpacity onPress={()=>añadir(item)} style={{backgroundColor:'#00b46b',borderRadius:wp(5), width:'15%'}}>
+              <Text style={{textAlign:'center', color:'white'}}>+</Text>
+            </TouchableOpacity>
+          </View>
+
+        </View>
+      </View>
+    </View>
+  );
+  }else{
+    return (
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={() =>
@@ -82,6 +146,8 @@ const Contenedor = props => {
       </View>
     </TouchableOpacity>
   );
+  }
+  
 };
 
 const styles = StyleSheet.create({
@@ -131,4 +197,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Contenedor;
+
+const mapDispatchToProps = dispatch=>{
+
+  return{
+    añadir:(value)=> dispatch(agregar(value)),
+    quitar:(value)=> dispatch(quitar(value)),
+    eliminar:(value)=> dispatch(eliminar(value)),
+    
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Contenedor);

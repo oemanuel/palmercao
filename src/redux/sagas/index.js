@@ -57,7 +57,6 @@ function* registrar({payload}) {
       payload.correo,
       payload.clave,
     );
-    console.log(user);
     yield call(rsf.auth.sendEmailVerification);
     yield put(registrar_correcto());
   } catch (error) {
@@ -65,15 +64,12 @@ function* registrar({payload}) {
   }
 }
 function* recuperar_pwd({email}) {
-  console.log('llegué a *recuperar_pwd');
 
   try {
-    console.log(email);
 
     yield call(rsf.auth.sendPasswordResetEmail, email);
     yield put(recuperar_correcto());
   } catch (error) {
-    console.log(error);
 
     yield put(recuperar_fallido(error));
   }
@@ -88,12 +84,10 @@ function* syncProductosSaga() {
   while (true) {
     const {value: productoss} = yield take(channel);
     const productos = [];
-    //console.log(productoss);
     Object.keys(productoss).map((key, index) => {
       let producto = productoss[key];
       productos.push(producto);
     });
-    console.log(productos);
     yield put(syncProductos(productos));
   }
 }

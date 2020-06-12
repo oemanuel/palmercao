@@ -10,14 +10,12 @@ const inicial = {
 export default (estado = inicial, accion) => {
     switch (accion.type) {
         case RECUPERAR.SOLICITUD:
-            console.log("recuperar solicitud");
             
             return {
                 ...estado,
                 cargando: true,
             }
         case RECUPERAR.CORRECTO:
-            console.log("recuperar correcto");
             
 
             return {
@@ -28,7 +26,6 @@ export default (estado = inicial, accion) => {
             }
         case RECUPERAR.FALLIDO:
 
-            console.log("recuperar fallido");
             
             return {
                 ...estado,
@@ -39,7 +36,6 @@ export default (estado = inicial, accion) => {
             }
         case RECUPERAR.LIMPIAR_ERROR:
 
-            console.log("recuperar limpiar error");
             
             
             return {

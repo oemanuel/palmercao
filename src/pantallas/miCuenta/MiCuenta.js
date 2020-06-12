@@ -14,10 +14,11 @@ import {
 import styles from './styles';
 import Boton from '../../componentes/Boton';
 import Menu from '../menu/Menu';
-
-const MiCuenta = ({navigation}) => {
+import {connect} from 'react-redux'
+const MiCuenta = ({navigation, usuario}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [cambioVisible, secambioVisible] = useState(false);
+
 
   const CampoDeCambio = () => {
     if (cambioVisible) {
@@ -96,18 +97,17 @@ const MiCuenta = ({navigation}) => {
                   style={styles.persona}
                   source={require('../../assets/Icon/persona.png')}
                 />
-                <Text style={styles.texto}>Nombre persona</Text>
+                {/* <Text style={styles.texto}>Nombre persona</Text> */}
               </View>
               <View style={styles.forma}>
                 <Text style={[styles.texto, styles.texto2]}>Mi correo</Text>
                 <TextInput
                   keyboardType="email-address"
                   autoCapitalize="none"
-                  style={styles.input}
-                  defaultValue="Tugorditobeelo@gmail.com"
+                  style={[styles.input,{paddingLeft:20}]}
+                  defaultValue={usuario.user.email}
                   editable={false}
                 />
-                <CampoDeCambio />
               </View>
             </View>
           </ScrollView>
@@ -117,4 +117,11 @@ const MiCuenta = ({navigation}) => {
   );
 };
 
-export default MiCuenta;
+
+const mapStateToProps= estado=>{
+  return{
+    usuario: estado.authReducer.entrarReducer.usuario,
+  }
+}
+
+export default connect(mapStateToProps, null)(MiCuenta);

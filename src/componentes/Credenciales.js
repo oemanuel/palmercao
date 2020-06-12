@@ -270,7 +270,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 const mapStateToProps = estado => {
-  console.log(estado);
   return {
     usuario: estado.authReducer.entrarReducer.usuario,
     error_entrar: estado.authReducer.entrarReducer.error,

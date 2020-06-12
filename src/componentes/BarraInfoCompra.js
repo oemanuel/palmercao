@@ -7,14 +7,14 @@ import {
 
 class BarraInfoCompra extends React.Component {
   render() {
-    const {titulo} = this.props;
+    const {titulo, cantidad} = this.props;
     return (
       <View style={styles.contain}>
         <View style={styles.barra}>
           <Text style={[styles.texto, {color: 'white'}]}>Total:</Text>
         </View>
         <View style={styles.filtroc}>
-          <Text style={[styles.texto, {color: '#707070'}]}>$15000</Text>
+          <Text style={[styles.texto, {color: '#707070'}]}>COP {cantidad}</Text>
         </View>
       </View>
     );

@@ -46,7 +46,7 @@ const Contenedor = props => {
       case 'frutas & verduras':
         return '#00BA6A';
       case 'primarios':
-        return '#FFC043';
+        return '#FFF645';
       case 'carnes':
         return '#FE7259';
       case 'lacteos':
@@ -54,7 +54,7 @@ const Contenedor = props => {
       case 'bebidas':
         return '#BA64F2';
       case 'snacks':
-        return '#FFC043';
+        return '#FFD03A';
       case 'aseo':
         return '#29A2E8';
       case 'miscelanea':
@@ -64,9 +64,9 @@ const Contenedor = props => {
       case 'licoreria':
         return '#FFC043';
       case 'mascotas':
-        return '#29A2E8';
+        return '#44DCA3';
       case 'otros':
-        return '#29A2E8';
+        return '#FF6833';
       default:
         return 'black';
     }

@@ -90,8 +90,8 @@ const ListaDeProductos = props => {
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Primarios"
-                    color="#FFC043"
-                    icono={require('../assets/IconoCategoria/Frutas&Verduras.png')}
+                    color="#FFF645"
+                    icono={require('../assets/IconoCategoria/primario.png')}
                   />
                   <ContenedorCategoria
                     navigation={navigation}
@@ -114,8 +114,8 @@ const ListaDeProductos = props => {
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Snacks"
-                    color="#FFC043"
-                    icono={require('../assets/IconoCategoria/Frutas&Verduras.png')}
+                    color="#FFD03A"
+                    icono={require('../assets/IconoCategoria/snacks.png')}
                   />
                   <ContenedorCategoria
                     navigation={navigation}
@@ -144,14 +144,14 @@ const ListaDeProductos = props => {
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Mascotas"
-                    color="#29A2E8"
-                    icono={require('../assets/IconoCategoria/Frutas&Verduras.png')}
+                    color="#44DCA3"
+                    icono={require('../assets/IconoCategoria/mascotas.png')}
                   />
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Otros"
-                    color="#29A2E8"
-                    icono={require('../assets/IconoCategoria/Frutas&Verduras.png')}
+                    color="#FF6833"
+                    icono={require('../assets/IconoCategoria/otros.png')}
                   />
                 </ScrollView>
               </View>

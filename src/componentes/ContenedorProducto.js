@@ -22,6 +22,25 @@ const Contenedor = props => {
       eliminar(item);
     }
   };
+  var formatNumber = {
+    separador: '.', // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear: function(num) {
+      num += '';
+      var splitStr = num.split('.');
+      var splitLeft = splitStr[0];
+      var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+      var regx = /(\d+)(\d{3})/;
+      while (regx.test(splitLeft)) {
+        splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+      }
+      return this.simbol + splitLeft + splitRight;
+    },
+    new: function(num, simbol) {
+      this.simbol = simbol || '';
+      return this.formatear(num);
+    },
+  };
   const darColor = item => {
     switch (item.categoria) {
       case 'frutas & verduras':
@@ -78,7 +97,7 @@ const Contenedor = props => {
               </Text>
               <Text
                 style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-                COP {parseFloat(item.total).toFixed(2)}
+                COP {formatNumber.new(parseFloat(item.total).toFixed(2))}
               </Text>
             </View>
             <View
@@ -155,7 +174,9 @@ const Contenedor = props => {
               </Text>
             </View>
             <View style={styles.costo}>
-              <Text style={[styles.texto, {flex: 0.9}]}>COP {item.precio}</Text>
+              <Text style={[styles.texto, {flex: 0.9}]}>
+                COP {formatNumber.new(item.precio)}
+              </Text>
             </View>
           </View>
         </View>

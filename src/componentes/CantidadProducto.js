@@ -13,6 +13,26 @@ const CantidadProducto = props => {
   const producto = item;
   const [cantidad, setCantidad] = useState(item.cantidad);
 
+  var formatNumber = {
+    separador: '.', // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear: function(num) {
+      num += '';
+      var splitStr = num.split('.');
+      var splitLeft = splitStr[0];
+      var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+      var regx = /(\d+)(\d{3})/;
+      while (regx.test(splitLeft)) {
+        splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+      }
+      return this.simbol + splitLeft + splitRight;
+    },
+    new: function(num, simbol) {
+      this.simbol = simbol || '';
+      return this.formatear(num);
+    },
+  };
+
   const aumentar = () => {
     producto.cantidad += producto.tipo == 'unitario' ? 1 : 100;
     setCantidad(producto.cantidad);
@@ -75,8 +95,8 @@ const CantidadProducto = props => {
           <Text style={styles.texto}>
             COP{' '}
             {producto.tipo == 'unitario'
-              ? producto.precio * producto.cantidad
-              : (producto.precio / 500) * producto.cantidad}
+              ? formatNumber.new(producto.precio * producto.cantidad)
+              : formatNumber.new((producto.precio / 500) * producto.cantidad)}
           </Text>
         </View>
       </View>
@@ -103,7 +123,7 @@ const CantidadProducto = props => {
                     style: 'cancel',
                   },
                 ],
-                {cancelable: false},
+                {cancelable: true},
               );
             }}
           />

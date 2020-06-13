@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     elevation: 19,
   },
   boton: {
-    top: hp('90%'),
+    top: hp('87%'),
     height: hp('8'),
     width: wp('100%'),
     position: 'absolute',

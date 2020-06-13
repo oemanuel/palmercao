@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,71 +11,82 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
-} from "react-native";
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-import Modal from "./Modal";
-import Boton from "./Boton";
-import * as validante from "validate.js";
-import { connect } from "react-redux";
-import { enviar_solicitud } from "../redux/listaCompra/reducers/listaCompra";
-const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
-  const [nombre, setNombre] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [barrio, setBarrio] = useState("");
-  const [apartamento, setApartamento] = useState("");
-  const [comentario, setComentario] = useState("");
+} from 'react-native-responsive-screen';
+import Modal from './Modal';
+import Boton from './Boton';
+import * as validante from 'validate.js';
+import {connect} from 'react-redux';
+import {
+  enviar_solicitud,
+  limpiaresponse,
+} from '../redux/listaCompra/reducers/listaCompra';
+const Formulario = ({
+  carrito,
+  total,
+  enviar,
+  error,
+  response,
+  cargando,
+  limpiaresponse,
+}) => {
+  const [nombre, setNombre] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [barrio, setBarrio] = useState('');
+  const [apartamento, setApartamento] = useState('');
+  const [comentario, setComentario] = useState('');
   const [visible, setModalVisible] = useState(false);
 
   const constraints = {
     nombre: {
-      presence: { allowEmpty: false },
+      presence: {allowEmpty: false},
     },
     telefono: {
-      presence: { allowEmpty: false },
+      presence: {allowEmpty: false},
     },
     direccion: {
-      presence: { allowEmpty: false },
+      presence: {allowEmpty: false},
     },
     barrio: {
-      presence: { allowEmpty: false },
-    }
+      presence: {allowEmpty: false},
+    },
   };
   const reset = () => {
-    setNombre("");
-    setTelefono("");
-    setDireccion("");
-    setBarrio("");
-    setApartamento("");
-    setComentario("");
+    setNombre('');
+    setTelefono('');
+    setDireccion('');
+    setBarrio('');
+    setApartamento('');
+    setComentario('');
   };
   useEffect(() => {
     if (error) {
-      console.log("ha ocurrido un error: ", error);
+      console.log('ha ocurrido un error: ', error);
       setModalVisible(true);
-      
     }
     if (response) {
-      console.log("genial: ", response);
+      console.log('genial: ', response);
       reset();
       setModalVisible(true);
     }
   }, [error, response]);
 
   if (!cargando) {
+    console.log('Soy el response jejej ', response, '\n');
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
         enabled
-        style={{ flex: 1 }}
-      >
+        style={{flex: 1}}>
         <Modal
           exito={response && !error}
           visible={visible}
           setModalVisible={setModalVisible}
+          limpiaresponse={limpiaresponse}
         />
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView>
@@ -84,13 +95,12 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
                 style={[
                   styles.texto,
                   {
-                    color: "#FF694E",
+                    color: '#FF694E',
                     marginTop: 10,
-                    alignSelf: "center",
-                    fontSize: hp("3"),
+                    alignSelf: 'center',
+                    fontSize: hp('3'),
                   },
-                ]}
-              >
+                ]}>
                 Verifica tus datos
               </Text>
               <View style={styles.forma}>
@@ -99,7 +109,7 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
                   keyboardType="url"
                   style={styles.input}
                   placeholder="Obligatorio"
-                  onChangeText={(value) => setNombre(value)}
+                  onChangeText={value => setNombre(value)}
                   value={nombre}
                 />
                 <Text style={styles.texto}>Telefono:</Text>
@@ -107,38 +117,37 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
                   keyboardType="numeric"
                   style={styles.input}
                   placeholder="Obligatorio"
-                  onChangeText={(value) => setTelefono(value)}
+                  onChangeText={value => setTelefono(value)}
                   value={telefono}
                 />
                 <Text style={styles.texto}>Dirección:</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="Obligatorio"
-                  onChangeText={(value) => setDireccion(value)}
+                  onChangeText={value => setDireccion(value)}
                   value={direccion}
                 />
                 <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginBottom: hp("2"),
-                  }}
-                >
-                  <View style={{ width: wp("45") }}>
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: hp('2'),
+                  }}>
+                  <View style={{width: wp('45')}}>
                     <Text style={styles.texto}>Barrio:</Text>
                     <TextInput
                       style={styles.input}
                       placeholder="Obligatorio"
-                      onChangeText={(value) => setBarrio(value)}
+                      onChangeText={value => setBarrio(value)}
                       value={barrio}
                     />
                   </View>
-                  <View style={{ width: wp("33") }}>
+                  <View style={{width: wp('33')}}>
                     <Text style={styles.texto}>Apartamento:</Text>
                     <TextInput
                       style={styles.input}
                       placeholder="Opcional"
-                      onChangeText={(value) => setApartamento(value)}
+                      onChangeText={value => setApartamento(value)}
                       value={apartamento}
                     />
                   </View>
@@ -148,7 +157,7 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
                   multiline={true}
                   style={styles.input}
                   placeholder="Opcional"
-                  onChangeText={(value) => setComentario(value)}
+                  onChangeText={value => setComentario(value)}
                   value={comentario}
                 />
                 <Boton
@@ -162,20 +171,21 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
                           direccion: direccion,
                           barrio: barrio,
                         },
-                        constraints
-                      ) !== "undefined" || carrito.filter(item=>item.cantidad!==0).length===0
+                        constraints,
+                      ) !== 'undefined' ||
+                      carrito.filter(item => item.cantidad !== 0).length === 0
                     ) {
                       Alert.alert(
-                        "Oops!",
-                        "Su carrito está vacío, de no ser así verifique si hay campos obligatorios vacíos!",
+                        'Oops!',
+                        'Su carrito está vacío, de no ser así verifique si hay campos obligatorios vacíos!',
                         [
                           {
-                            text: "Ok, lo verificaré de nuevo",
+                            text: 'Ok, lo verificaré de nuevo',
                             onPress: () => {},
-                            style: "cancel",
+                            style: 'cancel',
                           },
                         ],
-                        { cancelable: false }
+                        {cancelable: false},
                       );
                     } else {
                       enviar({
@@ -185,7 +195,7 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
                         barrio: barrio,
                         comentario: comentario,
                         apartamento: apartamento,
-                        carrito: carrito.filter(item=>item.cantidad!==0),
+                        carrito: carrito.filter(item => item.cantidad !== 0),
                         total: total,
                       });
                     }
@@ -199,7 +209,7 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
     );
   } else {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <ActivityIndicator size="large" color="#FF694E" />
       </View>
     );
@@ -208,38 +218,39 @@ const Formulario = ({ carrito, total, enviar, error, response, cargando }) => {
 
 const styles = StyleSheet.create({
   texto: {
-    color: "#707070",
-    fontSize: hp("2.5"),
+    color: '#707070',
+    fontSize: hp('2.5'),
     fontFamily:
-      Platform.OS === "ios" ? "AsCalledByFontBook" : "OpenSans-Regular",
+      Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },
   contain: {
     paddingBottom: hp(5),
   },
   forma: {
-    marginLeft: wp("7"),
-    marginRight: wp("7"),
-    marginTop: hp("2"),
+    marginLeft: wp('7'),
+    marginRight: wp('7'),
+    marginTop: hp('2'),
   },
   input: {
-    backgroundColor: "white",
-    borderRadius: wp("5"),
+    backgroundColor: 'white',
+    borderRadius: wp('5'),
     elevation: 5,
-    marginTop: wp("4"),
-    marginBottom: wp("4"),
-    color: "black",
-    fontSize: hp("2"),
+    marginTop: wp('4'),
+    marginBottom: wp('4'),
+    color: 'black',
+    fontSize: hp('2'),
     fontFamily:
-      Platform.OS === "ios" ? "AsCalledByFontBook" : "OpenSans-Regular",
+      Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },
 });
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    enviar: (value) => dispatch(enviar_solicitud(value)),
+    enviar: value => dispatch(enviar_solicitud(value)),
+    limpiaresponse: () => dispatch(limpiaresponse()),
   };
 };
 
-const mapStateToProps = (estado) => {
+const mapStateToProps = estado => {
   return {
     carrito: estado.listaCompraReducer.carrito,
     total: estado.listaCompraReducer.total,
@@ -249,4 +260,7 @@ const mapStateToProps = (estado) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Formulario);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Formulario);

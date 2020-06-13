@@ -36,11 +36,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   categoriac: {
-    height: hp(26),
+    height: hp(28),
     flexDirection: 'row',
     overflow: 'scroll',
-    // backgroundColor: "blue",
-    // alignItems:"center"
   },
   productoc: {
     alignItems: 'center',

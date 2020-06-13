@@ -13,7 +13,7 @@ import {
 } from 'react-native-responsive-screen';
 
 const Modales = props => {
-  const {exito, visible, setModalVisible} = props;
+  const {exito, visible, setModalVisible, limpiaresponse} = props;
   var imagencarreta = '',
     tx1 = '',
     tx2 = '';
@@ -36,6 +36,7 @@ const Modales = props => {
       transparent={true}
       onRequestClose={() => {
         setModalVisible(false);
+        limpiaresponse();
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
@@ -47,6 +48,7 @@ const Modales = props => {
           <TouchableOpacity
             onPress={() => {
               setModalVisible(false);
+              limpiaresponse();
             }}>
             <Text style={[styles.text, {color: '#000', fontSize: hp('2')}]}>
               Cerrar

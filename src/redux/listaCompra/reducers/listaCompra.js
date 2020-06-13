@@ -6,53 +6,59 @@ const initialState = {
   error: null,
 };
 
-const AÑADIR = "AÑADIR";
-const ELIMINAR = "ELIMINAR";
-const QUITAR = "QUITAR";
-const AGREGAR = "AGREGAR";
+const AÑADIR = 'AÑADIR';
+const ELIMINAR = 'ELIMINAR';
+const QUITAR = 'QUITAR';
+const AGREGAR = 'AGREGAR';
+const LIMPIARESPONSE = 'limpiaresponse';
+
 export const ENVIAR = {
-  SOLICITUD: "ENVIAR_SOLICITUD",
-  CORRECTO: "ENVIAR_CORRECTO",
-  FALLIDO: "ENVIAR_FALLIDO",
+  SOLICITUD: 'ENVIAR_SOLICITUD',
+  CORRECTO: 'ENVIAR_CORRECTO',
+  FALLIDO: 'ENVIAR_FALLIDO',
 };
 
-export const enviar_solicitud = (info) => ({
+export const limpiaresponse = () => ({
+  type: LIMPIARESPONSE,
+});
+
+export const enviar_solicitud = info => ({
   type: ENVIAR.SOLICITUD,
   payload: {
     ...info,
   },
 });
-export const enviar_correcto = (info) => ({
+export const enviar_correcto = info => ({
   type: ENVIAR.CORRECTO,
   payload: {
     ...info,
   },
 });
-export const enviar_fallido = (info) => ({
+export const enviar_fallido = info => ({
   type: ENVIAR.FALLIDO,
   payload: {
     ...info,
   },
 });
-export const añadir = (info) => ({
+export const añadir = info => ({
   type: AÑADIR,
   payload: {
     ...info,
   },
 });
-export const eliminar = (info) => ({
+export const eliminar = info => ({
   type: ELIMINAR,
   payload: {
     ...info,
   },
 });
-export const agregar = (info) => ({
+export const agregar = info => ({
   type: AGREGAR,
   payload: {
     ...info,
   },
 });
-export const quitar = (info) => ({
+export const quitar = info => ({
   type: QUITAR,
   payload: {
     ...info,
@@ -93,7 +99,7 @@ export default (state = initialState, action) => {
     case AÑADIR:
       if (state.carrito.length != 0) {
         itemEx = state.carrito.find(
-          (item) => item.identificador === action.payload.identificador
+          item => item.identificador === action.payload.identificador,
         );
       }
 
@@ -101,14 +107,14 @@ export default (state = initialState, action) => {
         // si el producto está en la lista
         return {
           ...state,
-          carrito: state.carrito.map((item) =>
+          carrito: state.carrito.map(item =>
             item.identificador === action.payload.identificador
               ? {
                   ...item,
                   cantidad: item.cantidad + action.payload.cantidad,
                   total: item.total + action.payload.total,
                 }
-              : item
+              : item,
           ),
           total: state.total + action.payload.total,
         };
@@ -123,13 +129,15 @@ export default (state = initialState, action) => {
       // return {...state};
       break;
     case ELIMINAR:
-        itemEx = state.carrito.find( (item) => item.identificador === action.payload.identificador);
+      itemEx = state.carrito.find(
+        item => item.identificador === action.payload.identificador,
+      );
       if (itemEx) {
         // si el producto está en la lista
         return {
           ...state,
           carrito: state.carrito.filter(
-            (item) => item.identificador !== action.payload.identificador
+            item => item.identificador !== action.payload.identificador,
           ),
         };
       } else {
@@ -143,7 +151,7 @@ export default (state = initialState, action) => {
     case AGREGAR:
       if (state.carrito.length != 0) {
         itemEx = state.carrito.find(
-          (item) => item.identificador === action.payload.identificador
+          item => item.identificador === action.payload.identificador,
         );
       }
 
@@ -151,63 +159,68 @@ export default (state = initialState, action) => {
         // si el producto está en la lista
         return {
           ...state,
-          carrito: state.carrito.map((item) =>
+          carrito: state.carrito.map(item =>
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad: item.cantidad + (item.tipo == "unitario" ? 1 : 100),
+                  cantidad: item.cantidad + (item.tipo == 'unitario' ? 1 : 100),
                   total:
                     item.total +
-                    (item.tipo != "unitario"
+                    (item.tipo != 'unitario'
                       ? (action.payload.precio / 500) * 100
                       : action.payload.precio * 1),
                 }
-              : item
+              : item,
           ),
           total:
             state.total +
-            (itemEx.tipo != "unitario"
+            (itemEx.tipo != 'unitario'
               ? (action.payload.precio / 500) * 100
               : action.payload.precio * 1),
         };
       } else {
-        return { ...state };
+        return {...state};
       }
       // return {...state};
       break;
     case QUITAR:
       if (state.carrito.length != 0) {
         itemEx = state.carrito.find(
-          (item) => item.identificador === action.payload.identificador
+          item => item.identificador === action.payload.identificador,
         );
       }
       if (itemEx) {
         return {
           ...state,
-          carrito: state.carrito.map((item) =>
+          carrito: state.carrito.map(item =>
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad: item.cantidad - (item.tipo == "unitario" ? 1 : 100),
+                  cantidad: item.cantidad - (item.tipo == 'unitario' ? 1 : 100),
                   total:
                     item.total -
-                    (item.tipo != "unitario"
+                    (item.tipo != 'unitario'
                       ? (action.payload.precio / 500) * 100
                       : action.payload.precio * 1),
                 }
-              : item
+              : item,
           ),
           total:
             state.total -
-            (itemEx.tipo != "unitario"
+            (itemEx.tipo != 'unitario'
               ? (action.payload.precio / 500) * 100
               : action.payload.precio * 1),
         };
       } else {
-        return { ...state };
+        return {...state};
       }
       break;
-
+    case LIMPIARESPONSE:
+      return {
+        ...state,
+        response: null,
+      };
+      break;
     default:
       return state;
   }

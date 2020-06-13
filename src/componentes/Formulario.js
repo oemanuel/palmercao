@@ -65,18 +65,15 @@ const Formulario = ({
   };
   useEffect(() => {
     if (error) {
-      console.log('ha ocurrido un error: ', error);
       setModalVisible(true);
     }
     if (response) {
-      console.log('genial: ', response);
       reset();
       setModalVisible(true);
     }
   }, [error, response]);
 
   if (!cargando) {
-    console.log('Soy el response jejej ', response, '\n');
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}

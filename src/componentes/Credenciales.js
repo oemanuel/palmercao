@@ -14,7 +14,6 @@ import {
 import * as validante from 'validate.js';
 import Boton from './Boton';
 
-//cositas de redux
 import {connect} from 'react-redux';
 import {
   entrar,
@@ -238,7 +237,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: hp(50),
     justifyContent: 'space-around',
-    // backgroundColor: "blue",
   },
   c1: {
     width: '80%',
@@ -257,7 +255,6 @@ const styles = StyleSheet.create({
     height: hp('5%'),
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor:"yellow"
   },
 });
 

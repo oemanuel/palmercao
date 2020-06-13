@@ -17,9 +17,8 @@ const Logo = () => {
 };
 const styles = StyleSheet.create({
   contain: {
-    justifyContent: 'center', //Centered vertically
+    justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'blue',
   },
   logo: {
     width: wp('75%'),

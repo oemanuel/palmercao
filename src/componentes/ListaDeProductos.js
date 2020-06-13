@@ -19,9 +19,6 @@ const ListaDeProductos = props => {
   } = props;
   const [lista, setLista] = useState([]);
   const [isBusqueda, setIsBusqueda] = useState(false);
-  //---------------------------------------------------------------------
-
-  //----------------------------Filtros----------------------------------
 
   const categoriaFiltro = producto => {
     return producto.categoria == nombreCategoria.toLowerCase();
@@ -33,8 +30,6 @@ const ListaDeProductos = props => {
   const nombreFiltro = producto => {
     return producto.nombre.toLowerCase().includes(textoBusqueda.toLowerCase());
   };
-
-  //----------------------------------------------------------------
 
   useEffect(() => {
     if (productosObject.productos !== null) {
@@ -61,7 +56,7 @@ const ListaDeProductos = props => {
       setLista([]);
     }
   }, [textoBusqueda, productosObject]);
-  //----------------------------------------------------------------
+
   const ListaHeader = () => {
     if (iscatalogo) {
       return (
@@ -172,7 +167,6 @@ const ListaDeProductos = props => {
     }
   };
 
-  ///-------------------------------------------------------------------
   const Cargando = () => {
     if (lista.length == 0 && !isBusqueda) {
       return (
@@ -209,7 +203,6 @@ const ListaDeProductos = props => {
       );
     }
   };
-  //------------------------------------------------------------------
 
   return <Cargando />;
 };

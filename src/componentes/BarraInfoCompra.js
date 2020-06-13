@@ -1,39 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, Image, TextInput } from "react-native";
+import React, {useEffect, useState} from 'react';
+import {Text, StyleSheet, View, Image, TextInput} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
-const BarraInfoCompra = (props) => {
-  const { titulo, cantidad } = props;
-  const [ct, setCt] = useState("");
-  // useEffect(() => {
-  //   setCt(apply());
-  // }, [cantidad]);
+const BarraInfoCompra = props => {
+  const {titulo, cantidad} = props;
+  const [ct, setCt] = useState('');
+
   const apply = () => {
-    let a = cantidad.toString().split(".");
+    let a = cantidad.toString().split('.');
     if (a.length !== 2) {
       return a;
     } else {
       let c = a[0].toString();
       let c1 = a[1].toString();
       if (c1.length < 2) {
-        return c.concat('.'+c1).concat("0");
+        return c.concat('.' + c1).concat('0');
       } else {
-        return c.concat('.'+c1.substring(0, 2));
+        return c.concat('.' + c1.substring(0, 2));
       }
     }
   };
   return (
     <View style={styles.contain}>
       <View style={styles.barra}>
-        <Text style={[styles.texto, { color: "white" }]}>Total:</Text>
+        <Text style={[styles.texto, {color: 'white'}]}>Total:</Text>
       </View>
       <View style={styles.filtroc}>
-        <Text style={[styles.texto, { color: "#707070" }]}>
-          COP {cantidad}
-        </Text>
+        <Text style={[styles.texto, {color: '#707070'}]}>COP {cantidad}</Text>
       </View>
     </View>
   );
@@ -41,18 +37,18 @@ const BarraInfoCompra = (props) => {
 
 const styles = StyleSheet.create({
   texto: {
-    color: "white",
-    textAlign: "center",
-    fontSize: hp("3"),
-    fontFamily: Platform.OS === "ios" ? "AsCalledByFontBook" : "OpenSans-Bold",
+    color: 'white',
+    textAlign: 'center',
+    fontSize: hp('3'),
+    fontFamily: Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Bold',
   },
   barra: {
-    width: wp("20"),
-    height: hp("7"),
-    backgroundColor: "#FFC043",
-    borderRadius: wp("6"),
-    justifyContent: "center",
-    shadowColor: "#000",
+    width: wp('20'),
+    height: hp('7'),
+    backgroundColor: '#FFC043',
+    borderRadius: wp('6'),
+    justifyContent: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 12,
@@ -63,18 +59,18 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   contain: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   filtroc: {
-    width: hp("30"),
-    height: hp("7"),
-    backgroundColor: "white",
-    borderRadius: wp("6"),
-    marginLeft: wp("1"),
-    justifyContent: "center",
-    shadowColor: "#000",
+    width: hp('30'),
+    height: hp('7'),
+    backgroundColor: 'white',
+    borderRadius: wp('6'),
+    marginLeft: wp('1'),
+    justifyContent: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 12,

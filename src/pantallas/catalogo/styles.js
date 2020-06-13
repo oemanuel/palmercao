@@ -23,13 +23,9 @@ const styles = StyleSheet.create({
     marginRight: wp('5'),
   },
   textoc: {
-    // flex: 0.2,
-
     justifyContent: 'center',
-    // marginLeft: wp('5'),
     marginTop: hp('5'),
     paddingHorizontal: wp(2),
-    // backgroundColor:"yellow"
   },
   fondo: {
     flex: 1,

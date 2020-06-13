@@ -58,13 +58,6 @@ const BarraBusqueda = props => {
         onSubmitEditing={() => busquedaProductos(value)}
         value={value}
       />
-      {/* 
-        <View style={styles.filtroc}>
-          <Image
-            style={styles.filtro}
-            source={require('../assets/Icon/filtro.png')}
-          />
-        </View> */}
     </View>
   );
 };
@@ -78,13 +71,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: wp('5'),
     alignItems: 'center',
     justifyContent: 'center',
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 12,
-    // },
-    // shadowOpacity: 0.58,
-    // shadowRadius: 16.0,
 
     elevation: 10,
   },
@@ -93,27 +79,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor:"blue"
   },
   lupa: {
     resizeMode: 'contain',
     tintColor: '#FF694E',
     width: wp('6%'),
     height: wp('6%'),
-
-    // backgroundColor:"yellow"
   },
   filtro: {
     resizeMode: 'contain',
     tintColor: '#FF694E',
     width: wp('4'),
     height: hp('4'),
-    // backgroundColor:"green"
   },
   input: {
     width: '60%',
     height: '100%',
-    //color: '#FF694E',
     fontSize: hp('2.5'),
     borderTopRightRadius: wp('5'),
     borderBottomRightRadius: wp('5'),
@@ -131,14 +112,6 @@ const styles = StyleSheet.create({
     marginLeft: wp('1'),
     justifyContent: 'center',
     alignItems: 'center',
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 12,
-    // },
-    // shadowOpacity: 0.58,
-    // shadowRadius: 16.0,
-    // backgroundColor:"pink",
     elevation: 10,
   },
 });

@@ -5,21 +5,23 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-
-import {connect} from 'react-redux'
-import { quitar, agregar, eliminar } from "../redux/listaCompra/reducers/listaCompra";
+import {connect} from 'react-redux';
+import {
+  quitar,
+  agregar,
+  eliminar,
+} from '../redux/listaCompra/reducers/listaCompra';
 
 const Contenedor = props => {
   const {navigation, color, item, isComprar, añadir, quitar, eliminar} = props;
 
   const disminuir = () => {
-    if(item.cantidad>0){
+    if (item.cantidad > 0) {
       quitar(item);
-    }else{
+    } else {
       eliminar(item);
     }
-
-  }
+  };
   const darColor = item => {
     switch (item.categoria) {
       case 'frutas & verduras':
@@ -52,94 +54,114 @@ const Contenedor = props => {
   };
   if (isComprar) {
     return (
-    <View>
-      <View style={styles.body}>
-        <View
-          style={[
-            styles.contain,
-            {
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
-          ]}>
-          <Image
-            style={styles.imagen}
-            source={{
-              uri: item.urlImagen,
-            }}
-          />
-        </View>
-        <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
-          <View style={styles.titulo}>
-            <Text style={[styles.texto, {color: darColor(item)}]}>
-              {item.nombre.substring(0, 20)}...
-            </Text>
-            <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-              COP {parseFloat(item.total).toFixed(2)}
-            </Text>
-          </View>
-          <View style={[styles.costo,{flexDirection:'row', alignItems:'center', justifyContent:'space-around'}]}>
-            <TouchableOpacity onPress={()=>disminuir()} style={{backgroundColor:item.cantidad!=0?'#00b46b':'red',borderRadius:wp(5), width:item.cantidad!=0?'15%':'30%'}}>
-              <Text style={{textAlign:'center', color:'white'}}>{item.cantidad==0?'quitar':'-'}</Text>
-            </TouchableOpacity>
-            <Text style={[styles.texto]}>{item.cantidad} {item.tipo=='unitario'?'und':'gr'}</Text>
-            <TouchableOpacity onPress={()=>añadir(item)} style={{backgroundColor:'#00b46b',borderRadius:wp(5), width:'15%'}}>
-              <Text style={{textAlign:'center', color:'white'}}>+</Text>
-            </TouchableOpacity>
-          </View>
-
-        </View>
-      </View>
-    </View>
-  );
-  }else{
-    return (
-    <TouchableOpacity
-      activeOpacity={0.5}
-      onPress={() =>
-        navigation.navigate('InfoProducto', {
-          color: darColor(item),
-          item: item,
-        })
-      }>
-      <View style={styles.body}>
-        <View
-          style={[
-            styles.contain,
-            {
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
-          ]}>
-          <Image
-            style={styles.imagen}
-            source={{
-              uri: item.urlImagen,
-            }}
-          />
-        </View>
-        <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
-          <View style={styles.titulo}>
-            <Text style={[styles.texto, {color: darColor(item)}]}>
-              {item.nombre}
-            </Text>
-            <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-              {item.descripcion.substring(0, 22)}...
-            </Text>
-          </View>
-          <View style={styles.costo}>
-            <Text style={[styles.texto, {flex: 0.9}]}>COP {item.precio}</Text>
+      <View>
+        <View style={styles.body}>
+          <View
+            style={[
+              styles.contain,
+              {
+                justifyContent: 'center',
+                alignItems: 'center',
+              },
+            ]}>
             <Image
-              style={styles.icono}
-              //source={require('../assets/Icon/añadir.png')}
+              style={styles.imagen}
+              source={{
+                uri: item.urlImagen,
+              }}
             />
           </View>
+          <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
+            <View style={styles.titulo}>
+              <Text style={[styles.texto, {color: darColor(item)}]}>
+                {item.nombre.substring(0, 20)}...
+              </Text>
+              <Text
+                style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
+                COP {parseFloat(item.total).toFixed(2)}
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.costo,
+                {
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-around',
+                },
+              ]}>
+              <TouchableOpacity
+                onPress={() => disminuir()}
+                style={{
+                  backgroundColor: item.cantidad != 0 ? '#00b46b' : 'red',
+                  borderRadius: wp(5),
+                  width: item.cantidad != 0 ? '15%' : '30%',
+                }}>
+                <Text style={{textAlign: 'center', color: 'white'}}>
+                  {item.cantidad == 0 ? 'quitar' : '-'}
+                </Text>
+              </TouchableOpacity>
+              <Text style={[styles.texto]}>
+                {item.cantidad} {item.tipo == 'unitario' ? 'und' : 'gr'}
+              </Text>
+              <TouchableOpacity
+                onPress={() => añadir(item)}
+                style={{
+                  backgroundColor: '#00b46b',
+                  borderRadius: wp(5),
+                  width: '15%',
+                }}>
+                <Text style={{textAlign: 'center', color: 'white'}}>+</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
-    </TouchableOpacity>
-  );
+    );
+  } else {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() =>
+          navigation.navigate('InfoProducto', {
+            color: darColor(item),
+            item: item,
+          })
+        }>
+        <View style={styles.body}>
+          <View
+            style={[
+              styles.contain,
+              {
+                justifyContent: 'center',
+                alignItems: 'center',
+              },
+            ]}>
+            <Image
+              style={styles.imagen}
+              source={{
+                uri: item.urlImagen,
+              }}
+            />
+          </View>
+          <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
+            <View style={styles.titulo}>
+              <Text style={[styles.texto, {color: darColor(item)}]}>
+                {item.nombre}
+              </Text>
+              <Text
+                style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
+                {item.descripcion.substring(0, 22)}...
+              </Text>
+            </View>
+            <View style={styles.costo}>
+              <Text style={[styles.texto, {flex: 0.9}]}>COP {item.precio}</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
   }
-  
 };
 
 const styles = StyleSheet.create({
@@ -189,15 +211,15 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapDispatchToProps = dispatch => {
+  return {
+    añadir: value => dispatch(agregar(value)),
+    quitar: value => dispatch(quitar(value)),
+    eliminar: value => dispatch(eliminar(value)),
+  };
+};
 
-const mapDispatchToProps = dispatch=>{
-
-  return{
-    añadir:(value)=> dispatch(agregar(value)),
-    quitar:(value)=> dispatch(quitar(value)),
-    eliminar:(value)=> dispatch(eliminar(value)),
-    
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Contenedor);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Contenedor);

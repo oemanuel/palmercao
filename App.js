@@ -1,12 +1,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import Flow from "./src/navigations";
+import Flow from './src/navigations';
 
-
-//lmejiaf
-import { Provider } from 'react-redux';
-import store from "./src/redux/store"
-
+import {Provider} from 'react-redux';
+import store from './src/redux/store';
 
 const App = () => {
   return (

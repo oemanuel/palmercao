@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'stretch',
     alignSelf: 'flex-start',
-    // backgroundColor: 'blue',
   },
   v1: {
     width: '50%',
@@ -44,9 +43,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: wp('61.8%'),
     bottom: hp('2%'),
-    // backgroundColor: 'green',
-
-    // backgroundColor: 'green',
   },
   v2: {
     width: '50%',
@@ -54,7 +50,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: wp('55%'),
     bottom: hp('2%'),
-    // backgroundColor: 'green',
   },
   enviar: {
     flex: 0.2,

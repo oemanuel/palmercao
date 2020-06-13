@@ -6,8 +6,6 @@ const inicial = {
 };
 
 export default (state = inicial, action) => {
-  console.log(action);
-  
   switch (action.type) {
     case PRODUCTOS.SYNC:
       return {

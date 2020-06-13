@@ -104,7 +104,6 @@ export default (state = initialState, action) => {
       }
 
       if (itemEx) {
-        // si el producto está en la lista
         return {
           ...state,
           carrito: state.carrito.map(item =>
@@ -119,21 +118,18 @@ export default (state = initialState, action) => {
           total: state.total + action.payload.total,
         };
       } else {
-        //si el producto no existe
         return {
           ...state,
           carrito: [action.payload, ...state.carrito],
           total: state.total + action.payload.total,
         };
       }
-      // return {...state};
       break;
     case ELIMINAR:
       itemEx = state.carrito.find(
         item => item.identificador === action.payload.identificador,
       );
       if (itemEx) {
-        // si el producto está en la lista
         return {
           ...state,
           carrito: state.carrito.filter(
@@ -141,12 +137,10 @@ export default (state = initialState, action) => {
           ),
         };
       } else {
-        //si el producto no existe
         return {
           ...state,
         };
       }
-      // return {...state};
       break;
     case AGREGAR:
       if (state.carrito.length != 0) {
@@ -156,7 +150,6 @@ export default (state = initialState, action) => {
       }
 
       if (itemEx) {
-        // si el producto está en la lista
         return {
           ...state,
           carrito: state.carrito.map(item =>
@@ -181,7 +174,6 @@ export default (state = initialState, action) => {
       } else {
         return {...state};
       }
-      // return {...state};
       break;
     case QUITAR:
       if (state.carrito.length != 0) {
@@ -219,6 +211,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         response: null,
+        error: null,
       };
       break;
     default:

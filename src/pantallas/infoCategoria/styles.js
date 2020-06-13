@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
   },
   info: {
     height: hp('5'),
-    //backgroundColor: '#FF694E',
     borderBottomLeftRadius: hp('5'),
     borderBottomRightRadius: hp('5'),
   },
@@ -39,7 +38,6 @@ const styles = StyleSheet.create({
   header: {
     height: hp('10'),
     flexDirection: 'row',
-    //backgroundColor: '#FF694E',
     justifyContent: 'space-between',
     alignItems: 'center',
   },

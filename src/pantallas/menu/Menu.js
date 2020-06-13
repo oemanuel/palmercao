@@ -13,7 +13,6 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-//cositas de redux
 import {connect} from 'react-redux';
 import {salir} from '../../redux/auth/login/actions/entrar.actions';
 
@@ -76,7 +75,6 @@ const Menu = props => {
                 onPress={() => {
                   setMenuVisible(false);
                   salir();
-                  // navigation.navigate('Registro');
                 }}
                 style={styles.texto}>
                 Cerrar sesión

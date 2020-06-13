@@ -12,7 +12,7 @@ const InfoProducto = ({ navigation, añadir, route, itemId }) => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const it = () => {
-    route.params.item.cantidad = route.params.item.tipo == "unitario" ? 1 : 130
+    route.params.item.cantidad = route.params.item.tipo == "unitario" ? 1 : 100
     return route.params.item;
   };
 

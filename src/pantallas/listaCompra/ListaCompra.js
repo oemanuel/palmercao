@@ -46,7 +46,7 @@ const ListaCompras = ({navigation, carrito, total}) => {
             style={styles.canasta}
             source={require('../../assets/Img/canastaCompra.png')}
           />
-          <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text>
+          {/* <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text> */}
           <View style={styles.ccantidad}>
             <Text style={styles.texto}>{carrito.length}</Text>
           </View>
@@ -89,8 +89,10 @@ const mapStateToProps= estado => {
   return{
     carrito: estado.listaCompraReducer.carrito,
     total:estado.listaCompraReducer.total,
+    
   }
 }
+
 
 
 export default connect(mapStateToProps, null)(ListaCompras);

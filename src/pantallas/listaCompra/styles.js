@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: hp('5'),
   },
   separador: {
-    height: hp('10'),
+    height: hp('12'),
   },
   separador1: {
     height: hp('4'),
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     elevation: 19,
   },
   boton: {
-    top: hp('87%'),
+    top: hp('90%'),
     height: hp('8'),
     width: wp('100%'),
     position: 'absolute',

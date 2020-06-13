@@ -14,7 +14,7 @@ const CantidadProducto = (props) => {
   const [cantidad, setCantidad] = useState(item.cantidad);
 
   const aumentar = () => {
-    producto.cantidad += producto.tipo == "unitario" ? 1 : 130;
+    producto.cantidad += producto.tipo == "unitario" ? 1 : 100;
     setCantidad(producto.cantidad);
   };
   const disminuir = () => {
@@ -24,8 +24,8 @@ const CantidadProducto = (props) => {
         setCantidad(producto.cantidad);
       }
     } else {
-      if (producto.cantidad > 130) {
-        producto.cantidad -= 130;
+      if (producto.cantidad > 100) {
+        producto.cantidad -= 100;
         setCantidad(producto.cantidad);
       }
     }
@@ -44,7 +44,7 @@ const CantidadProducto = (props) => {
     return producto;
   };
   const reset = () => {
-    producto.cantidad = producto.tipo == "unitario" ? 1 : 130;
+    producto.cantidad = producto.tipo == "unitario" ? 1 : 100;
     producto.total = producto.precio;
     setCantidad(producto.cantidad);
   };

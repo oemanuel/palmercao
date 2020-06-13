@@ -11,20 +11,12 @@ import { quitar, agregar, eliminar } from "../redux/listaCompra/reducers/listaCo
 
 const Contenedor = props => {
   const {navigation, color, item, isComprar, añadir, quitar, eliminar} = props;
-  
+
   const disminuir = () => {
-    if (item.tipo == "unitario") {
-      if (item.cantidad > 1) {
-        quitar(item);
-      }else{
-        eliminar(item)
-      }
-    } else {
-      if (item.cantidad > 130) {
-        quitar(item);
-      }else{
-        eliminar(item);
-      }
+    if(item.cantidad>0){
+      quitar(item);
+    }else{
+      eliminar(item);
     }
 
   }
@@ -83,14 +75,14 @@ const Contenedor = props => {
               {item.nombre.substring(0, 20)}...
             </Text>
             <Text style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-              COP {item.total}
+              COP {parseFloat(item.total).toFixed(2)}
             </Text>
           </View>
           <View style={[styles.costo,{flexDirection:'row', alignItems:'center', justifyContent:'space-around'}]}>
-            <TouchableOpacity onPress={()=>disminuir()} style={{backgroundColor:'#00b46b',borderRadius:wp(5), width:'15%'}}>
-              <Text style={{textAlign:'center', color:'white'}}>-</Text>
+            <TouchableOpacity onPress={()=>disminuir()} style={{backgroundColor:item.cantidad!=0?'#00b46b':'red',borderRadius:wp(5), width:item.cantidad!=0?'15%':'30%'}}>
+              <Text style={{textAlign:'center', color:'white'}}>{item.cantidad==0?'quitar':'-'}</Text>
             </TouchableOpacity>
-            <Text style={[styles.texto]}>{item.cantidad}</Text>
+            <Text style={[styles.texto]}>{item.cantidad} {item.tipo=='unitario'?'und':'gr'}</Text>
             <TouchableOpacity onPress={()=>añadir(item)} style={{backgroundColor:'#00b46b',borderRadius:wp(5), width:'15%'}}>
               <Text style={{textAlign:'center', color:'white'}}>+</Text>
             </TouchableOpacity>

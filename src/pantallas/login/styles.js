@@ -6,7 +6,7 @@ import {
 
 const styles = StyleSheet.create({
   sociales: {
-    height: hp('25%'),
+    height: hp('18%'),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -24,10 +24,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   separadores: {
-    
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom:hp(2),
+    marginBottom: hp(2),
   },
   c5: {
     flex: 0.6,

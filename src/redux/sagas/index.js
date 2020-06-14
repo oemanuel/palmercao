@@ -87,13 +87,22 @@ function* syncProductosSaga() {
   const channel = yield call(rsf.database.channel, COLLECTIONS.PRODUCTOS);
 
   while (true) {
-    const {value: productoss} = yield take(channel);
-    const productos = [];
-    Object.keys(productoss).map((key, index) => {
-      let producto = productoss[key];
-      productos.push(producto);
-    });
-    yield put(syncProductos(productos));
+    if (channel) {
+      const {value: productoss} = yield take(channel);
+      const productos = [];
+      if (productoss) {
+        Object.keys(productoss).map((key, index) => {
+          let producto = productoss[key];
+          productos.push(producto);
+        });
+        console.log(productos);
+        yield put(syncProductos(productos));
+      } else {
+        yield put(syncProductos([]));
+      }
+    } else {
+      yield put(syncProductos([]));
+    }
   }
 }
 

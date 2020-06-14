@@ -6,6 +6,9 @@ import {
   TextInput,
   ActivityIndicator,
   Alert,
+  CheckBox,
+  TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -14,6 +17,7 @@ import {
 import * as validante from 'validate.js';
 import Boton from './Boton';
 
+//cositas de redux
 import {connect} from 'react-redux';
 import {
   entrar,
@@ -61,13 +65,17 @@ const Splash = props => {
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const [showIndicator, setShowIndicator] = useState(false);
+  const [politicas, setPoliticas] = useState(false);
 
   const TextoUnderline = () => {
     if (type == 'crear') {
       return (
         <Text
           onPress={() => navigation.navigate('Login')}
-          style={[styles.texto, {textDecorationLine: 'underline'}]}>
+          style={[
+            styles.texto,
+            {textDecorationLine: 'underline', marginTop: hp(10)},
+          ]}>
           Iniciar sesión
         </Text>
       );
@@ -178,7 +186,39 @@ const Splash = props => {
     };
 
     if (type == 'crear') {
-      return <Boton titulo="Crear mi cuenta" onPress={() => action()} />;
+      return (
+        <>
+          <View style={{marginBottom: hp(4)}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <CheckBox value={politicas} onValueChange={setPoliticas} />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => {
+                  Linking.openURL(
+                    'https://firebasestorage.googleapis.com/v0/b/palmercao-3c01f.appspot.com/o/politicas%2FTerminos%20y%20condiciones.pdf?alt=media&token=af693412-3bbe-4a88-9064-88faafb7d870',
+                  );
+                }}>
+                <Text style={[styles.texto, {textDecorationLine: 'underline'}]}>
+                  Aceptar terminos y condiciones
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Boton
+            titulo="Crear mi cuenta"
+            onPress={() => {
+              if (!politicas) {
+                Alert.alert(
+                  'Opps!!',
+                  'Usted no ha aceptado los terminos y condiciones',
+                );
+              } else {
+                action();
+              }
+            }}
+          />
+        </>
+      );
     } else {
       return <Boton titulo="Entrar" onPress={() => action()} />;
     }

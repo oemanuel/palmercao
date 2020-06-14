@@ -178,9 +178,9 @@ const Confimacion = ({
 };
 const mapStateToProps = estado => {
   return {
-    enviado: estado.recuperarReducer.enviado,
-    error: estado.recuperarReducer.error,
-    cargando: estado.recuperarReducer.cargando,
+    enviado: estado.authReducer.recuperarReducer.enviado,
+    error: estado.authReducer.recuperarReducer.error,
+    cargando: estado.authReducer.recuperarReducer.cargando,
   };
 };
 const mapDispatchToProps = dispatch => {

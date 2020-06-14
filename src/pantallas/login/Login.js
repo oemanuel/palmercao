@@ -11,17 +11,16 @@ import {
 import Fondo from '../../componentes/Fondo';
 import styles from './styles';
 import Credendiales from '../../componentes/Credenciales';
-const Splash = ({ navigation }) => {
+const Splash = ({navigation}) => {
   return (
     <Fondo>
       <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
         enabled
-        style={{ flex: 1 }}>
+        style={{flex: 1}}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView>
-            <View style={styles.sociales}>
-            </View>
+            <View style={styles.sociales} />
             <View style={styles.separadores}>
               <View style={styles.c2} />
               <View style={styles.c5}>
@@ -30,7 +29,7 @@ const Splash = ({ navigation }) => {
               <View style={styles.c2} />
             </View>
             <View style={styles.credenciales}>
-              <Credendiales type="login" navigation={navigation}/>
+              <Credendiales type="login" navigation={navigation} />
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>

@@ -32,6 +32,7 @@ const Formulario = ({
   response,
   cargando,
   limpiaresponse,
+  usuario,
 }) => {
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -219,6 +220,7 @@ const Formulario = ({
                       enviar({
                         nombre: nombre,
                         telefono: telefono,
+                        email: usuario.user.email,
                         direccion: direccion,
                         barrio: barrio,
                         comentario: comentario,
@@ -287,6 +289,7 @@ const mapStateToProps = estado => {
     cargando: estado.listaCompraReducer.cargando,
     response: estado.listaCompraReducer.response,
     error: estado.listaCompraReducer.error,
+    usuario: estado.authReducer.entrarReducer.usuario,
   };
 };
 

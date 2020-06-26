@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import styles from './styles';
 import Menu from '../menu/Menu';
@@ -38,6 +38,12 @@ const InfoProducto = ({navigation, añadir, route, itemId}) => {
 
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor={route.params.color}
+        //translucent={true}
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}

@@ -10,6 +10,7 @@ import {
   ScrollView,
   Keyboard,
   Platform,
+  StatusBar,
 } from 'react-native';
 import styles from './styles';
 import Boton from '../../componentes/Boton';
@@ -50,6 +51,11 @@ const MiCuenta = ({navigation, usuario}) => {
   };
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#FFC043"
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}

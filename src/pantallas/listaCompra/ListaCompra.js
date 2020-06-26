@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   Alert,
+  StatusBar,
 } from 'react-native';
 import styles from './styles';
 import BarraInfoCompra from '../../componentes/BarraInfoCompra';
@@ -25,6 +26,11 @@ const ListaCompras = ({navigation, carrito, total}) => {
 
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#FF694E"
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}

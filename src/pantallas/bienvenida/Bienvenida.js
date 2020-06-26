@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StatusBar} from 'react-native';
 import styles from './styles';
 import Bn from './Bn';
 const Bienvenida = ({navigation}) => {
@@ -57,6 +57,12 @@ const Bienvenida = ({navigation}) => {
   });
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor={colorFondo}
+        //translucent={true}
+      />
       <View style={[styles.contain, {backgroundColor: colorFondo}]}>
         <View style={styles.info}>
           <Bn f1={f1} f2={f2} navigation={navigation} />

@@ -1,18 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Menu from '../menu/Menu';
 import ListaDeProductos from '../../componentes/ListaDeProductos';
 import {connect} from 'react-redux';
-import { busquedaProductos } from "../../redux/productos/productos.action";
+import {busquedaProductos} from '../../redux/productos/productos.action';
 const InfoCategoria = props => {
   const {navigation, route, busquedaProducto} = props;
   const [menuVisible, setMenuVisible] = useState(false);
 
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor={route.params.color}
+        //translucent={true}
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}
@@ -23,7 +29,10 @@ const InfoCategoria = props => {
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => { busquedaProducto(""); navigation.goBack()}}>
+              onPress={() => {
+                busquedaProducto('');
+                navigation.goBack();
+              }}>
               <Image
                 style={styles.flecha}
                 source={require('../../assets/Icon/flecha.png')}
@@ -56,9 +65,12 @@ const InfoCategoria = props => {
     </>
   );
 };
-const mapDispatchToProps= dispatch=>{
-  return{
-    busquedaProducto: value=> dispatch(busquedaProductos(value))
-  }
-}
-export default connect(null, mapDispatchToProps)(InfoCategoria);
+const mapDispatchToProps = dispatch => {
+  return {
+    busquedaProducto: value => dispatch(busquedaProductos(value)),
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps,
+)(InfoCategoria);

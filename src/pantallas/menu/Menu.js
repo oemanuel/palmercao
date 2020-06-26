@@ -92,7 +92,7 @@ const Menu = props => {
             </TouchableOpacity>
           </View>
           <Text style={[styles.texto, {fontSize: hp('2')}]}>
-            ¿Tu dimicilio no llega?, llama
+            ¿Tu domicilio no llega?, llama
           </Text>
           <Text
             style={[styles.texto, {fontSize: hp('2')}]}

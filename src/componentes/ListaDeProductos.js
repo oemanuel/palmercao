@@ -90,7 +90,7 @@ const ListaDeProductos = props => {
                   <ContenedorCategoria
                     navigation={navigation}
                     nombre="Primarios"
-                    color="#FFF645"
+                    color="#B2AC30"
                     icono={require('../assets/IconoCategoria/primario.png')}
                   />
                   <ContenedorCategoria
@@ -101,7 +101,7 @@ const ListaDeProductos = props => {
                   />
                   <ContenedorCategoria
                     navigation={navigation}
-                    nombre="Lácteos"
+                    nombre="Lacteos"
                     color="#707070"
                     icono={require('../assets/IconoCategoria/Lacteos.png')}
                   />
@@ -156,7 +156,7 @@ const ListaDeProductos = props => {
                 </ScrollView>
               </View>
               <View style={styles.textoc}>
-                <Text style={styles.texto}>Populares</Text>
+                <Text style={styles.texto}>Promociones</Text>
               </View>
             </>
           )}
@@ -168,7 +168,7 @@ const ListaDeProductos = props => {
   };
 
   const Cargando = () => {
-    if (lista.length == 0 && !isBusqueda) {
+    if (lista.length == 0 && !isBusqueda && !iscatalogo) {
       return (
         <>
           <View style={{alignItems: 'center'}}>

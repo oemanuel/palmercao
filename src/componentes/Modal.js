@@ -19,12 +19,12 @@ const Modales = props => {
     tx2 = '';
   if (exito) {
     imagencarreta =
-      'https://firebasestorage.googleapis.com/v0/b/palmercao-3c01f.appspot.com/o/imagenes%2FPedidoExitoso.png?alt=media&token=6f50f0b1-fe3e-4314-b0bc-b7d96fd2fc06';
+      'https://prodsbucket.s3-sa-east-1.amazonaws.com/PedidoExitoso.png';
     tx1 = '¡Su pedido fue exitoso!';
     tx2 = 'Gracias por su compra';
   } else {
     imagencarreta =
-      'https://firebasestorage.googleapis.com/v0/b/palmercao-3c01f.appspot.com/o/imagenes%2FPedidoFallo.png?alt=media&token=d8cf1602-e085-4424-84e7-a52737e89be0';
+      'https://prodsbucket.s3-sa-east-1.amazonaws.com/PedidoFallo.png';
     tx1 = '¡Falla en el pedido!';
     tx2 = 'Intente nuevamente';
   }

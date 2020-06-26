@@ -1,5 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+
+import FastImage from 'react-native-fast-image';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,7 +16,7 @@ import {
 } from '../redux/listaCompra/reducers/listaCompra';
 
 const Contenedor = props => {
-  const {navigation, color, item, isComprar, añadir, quitar, eliminar} = props;
+  const {navigation, item, isComprar, añadir, quitar, eliminar} = props;
 
   const disminuir = () => {
     if (item.cantidad > 0) {
@@ -46,7 +49,7 @@ const Contenedor = props => {
       case 'frutas & verduras':
         return '#00BA6A';
       case 'primarios':
-        return '#FFF645';
+        return '#B2AC30';
       case 'carnes':
         return '#FE7259';
       case 'lacteos':
@@ -83,11 +86,13 @@ const Contenedor = props => {
                 alignItems: 'center',
               },
             ]}>
-            <Image
+            <FastImage
               style={styles.imagen}
-              source={{
-                uri: item.urlImagen,
-              }}
+              source={
+                item.urlImagen.includes('firebasestorage')
+                  ? require('../assets/Img/CarretaFondoBlanco.png')
+                  : {uri: item.urlImagen}
+              }
             />
           </View>
           <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
@@ -156,17 +161,19 @@ const Contenedor = props => {
                 alignItems: 'center',
               },
             ]}>
-            <Image
+            <FastImage
               style={styles.imagen}
-              source={{
-                uri: item.urlImagen,
-              }}
+              source={
+                item.urlImagen.includes('firebasestorage')
+                  ? require('../assets/Img/CarretaFondoBlanco.png')
+                  : {uri: item.urlImagen}
+              }
             />
           </View>
           <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
             <View style={styles.titulo}>
               <Text style={[styles.texto, {color: darColor(item)}]}>
-                {item.nombre}
+                {item.nombre.substring(0, 20)}...
               </Text>
               <Text
                 style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>

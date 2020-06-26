@@ -32,7 +32,7 @@ const InfoProducto = ({navigation, añadir, route, itemId}) => {
   };
 
   const it = () => {
-    route.params.item.cantidad = route.params.item.tipo == 'unitario' ? 1 : 100;
+    route.params.item.cantidad = route.params.item.tipo == 'unitario' ? 1 : 500;
     return route.params.item;
   };
 
@@ -71,23 +71,27 @@ const InfoProducto = ({navigation, añadir, route, itemId}) => {
           <View style={styles.children}>
             <View style={styles.cartac}>
               <View style={styles.carta}>
-                <Image
-                  style={styles.imagen}
-                  source={{
-                    uri: route.params.item.urlImagen,
-                  }}
-                />
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  onPress={() =>
+                    navigation.navigate('VistaImagen', {
+                      imagen: route.params.item.urlImagen,
+                    })
+                  }>
+                  <Image
+                    style={styles.imagen}
+                    source={
+                      route.params.item.urlImagen.includes('firebasestorage')
+                        ? require('../../assets/Img/CarretaFondoBlanco.png')
+                        : {uri: route.params.item.urlImagen}
+                    }
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
         </View>
-        <View style={styles.separador} />
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flex: 0.25,
-          }}>
+        <View style={styles.contenido}>
           <Text style={[styles.texto, {color: route.params.color}]}>
             {route.params.item.nombre}
           </Text>

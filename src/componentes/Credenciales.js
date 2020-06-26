@@ -195,7 +195,7 @@ const Splash = props => {
                 activeOpacity={0.5}
                 onPress={() => {
                   Linking.openURL(
-                    'https://firebasestorage.googleapis.com/v0/b/palmercao-3c01f.appspot.com/o/politicas%2FTerminos%20y%20condiciones.pdf?alt=media&token=af693412-3bbe-4a88-9064-88faafb7d870',
+                    'https://prodsbucket.s3-sa-east-1.amazonaws.com/Terminos+y+condiciones.pdf',
                   );
                 }}>
                 <Text style={[styles.texto, {textDecorationLine: 'underline'}]}>

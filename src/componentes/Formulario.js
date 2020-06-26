@@ -37,6 +37,8 @@ const Formulario = ({
   const [telefono, setTelefono] = useState('');
   const [direccion, setDireccion] = useState('');
   const [barrio, setBarrio] = useState('');
+  const [billete, setBillete] = useState('');
+  const [propina, setPropina] = useState('');
   const [apartamento, setApartamento] = useState('');
   const [comentario, setComentario] = useState('');
   const [visible, setModalVisible] = useState(false);
@@ -62,6 +64,8 @@ const Formulario = ({
     setBarrio('');
     setApartamento('');
     setComentario('');
+    setBillete('');
+    setPropina('');
   };
   useEffect(() => {
     if (error) {
@@ -149,6 +153,33 @@ const Formulario = ({
                     />
                   </View>
                 </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: hp('2'),
+                  }}>
+                  <View style={{width: wp('40')}}>
+                    <Text style={styles.texto}>¿Necesita vuelto?</Text>
+                    <TextInput
+                      style={styles.input}
+                      keyboardType="numeric"
+                      placeholder="Escriba cuanto"
+                      onChangeText={value => setBillete(value)}
+                      value={billete}
+                    />
+                  </View>
+                  <View style={{width: wp('40')}}>
+                    <Text style={styles.texto}>Propina:</Text>
+                    <TextInput
+                      style={styles.input}
+                      keyboardType="numeric"
+                      placeholder="Opcional"
+                      onChangeText={value => setPropina(value)}
+                      value={propina}
+                    />
+                  </View>
+                </View>
                 <Text style={styles.texto}>Comentarios:</Text>
                 <TextInput
                   multiline={true}
@@ -192,6 +223,8 @@ const Formulario = ({
                         barrio: barrio,
                         comentario: comentario,
                         apartamento: apartamento,
+                        billete: billete,
+                        propina: propina,
                         carrito: carrito.filter(item => item.cantidad !== 0),
                         total: total,
                       });

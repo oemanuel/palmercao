@@ -95,7 +95,6 @@ function* syncProductosSaga() {
           let producto = productoss[key];
           productos.push(producto);
         });
-        console.log(productos);
         yield put(syncProductos(productos));
       } else {
         yield put(syncProductos([]));

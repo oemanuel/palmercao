@@ -34,7 +34,7 @@ const CantidadProducto = props => {
   };
 
   const aumentar = () => {
-    producto.cantidad += producto.tipo == 'unitario' ? 1 : 100;
+    producto.cantidad += producto.tipo == 'unitario' ? 1 : 500;
     setCantidad(producto.cantidad);
   };
   const disminuir = () => {
@@ -44,8 +44,8 @@ const CantidadProducto = props => {
         setCantidad(producto.cantidad);
       }
     } else {
-      if (producto.cantidad > 100) {
-        producto.cantidad -= 100;
+      if (producto.cantidad > 500) {
+        producto.cantidad -= 500;
         setCantidad(producto.cantidad);
       }
     }
@@ -58,13 +58,16 @@ const CantidadProducto = props => {
     return producto;
   };
   const reset = () => {
-    producto.cantidad = producto.tipo == 'unitario' ? 1 : 100;
+    producto.cantidad = producto.tipo == 'unitario' ? 1 : 500;
     producto.total = producto.precio;
     setCantidad(producto.cantidad);
   };
 
   return (
     <View style={styles.contain}>
+      <Text style={[styles.texto, {fontSize: hp('2'), textAlign: 'center'}]}>
+        Existencia: {producto.existencia}
+      </Text>
       <View style={styles.separador} />
       <View style={styles.fila1}>
         <Text style={styles.texto}>Cantidad:</Text>
@@ -101,7 +104,7 @@ const CantidadProducto = props => {
         </View>
       </View>
       <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
-        {producto.cantidad !== 0 && (
+        {producto.existencia == 'disponible' && (
           <Boton
             titulo="Agregar"
             onPress={() => {
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   separador: {
-    width: wp('80'),
+    width: wp('90'),
     height: hp('0.1'),
     backgroundColor: '#707070',
     alignSelf: 'center',

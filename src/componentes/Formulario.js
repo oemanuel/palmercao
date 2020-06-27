@@ -44,6 +44,23 @@ const Formulario = ({
   const [comentario, setComentario] = useState('');
   const [visible, setModalVisible] = useState(false);
 
+  const hoyFecha = () => {
+    const addZero = i => {
+      if (i < 10) {
+        i = '0' + i;
+      }
+      return i;
+    };
+    let hoy = new Date();
+    let dd = hoy.getDate();
+    let mm = hoy.getMonth() + 1;
+    let yyyy = hoy.getFullYear();
+
+    dd = addZero(dd);
+    mm = addZero(mm);
+    console.log(dd + '/' + mm + '/' + yyyy);
+    return dd + '/' + mm + '/' + yyyy;
+  };
   const constraints = {
     nombre: {
       presence: {allowEmpty: false},
@@ -176,7 +193,11 @@ const Formulario = ({
                       style={styles.input}
                       keyboardType="numeric"
                       placeholder="Opcional"
-                      onChangeText={value => setPropina(value)}
+                      onChangeText={value => {
+                        Number.isInteger(Number.parseInt(value))
+                          ? setPropina(value)
+                          : setPropina(propina);
+                      }}
                       value={propina}
                     />
                   </View>
@@ -229,6 +250,7 @@ const Formulario = ({
                         propina: propina,
                         carrito: carrito.filter(item => item.cantidad !== 0),
                         total: total,
+                        fecha: hoyFecha(),
                       });
                     }
                   }}

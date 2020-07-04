@@ -49,9 +49,9 @@ const Confimacion = ({
   useEffect(() => {
     if (enviado) {
       limpiar_error();
-      navigation.navigate('Confirmacion');
+      navigation.navigate('Confirmacion', {vengode: 'recuperar'});
     }
-  }, [enviado]);
+  }, [enviado, limpiar_error, navigation]);
   useEffect(() => {
     if (cargando) {
       setShowIndicator(true);
@@ -77,7 +77,7 @@ const Confimacion = ({
         {cancelable: false},
       );
     }
-  }, [error]);
+  }, [error, limpiar_error]);
   if (!showIndicator) {
     return (
       <Fondo>

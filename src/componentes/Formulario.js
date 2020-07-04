@@ -67,6 +67,13 @@ const Formulario = ({
     },
     telefono: {
       presence: {allowEmpty: false},
+      numericality: {
+        onlyInteger: true,
+      },
+      length: {
+        minimum: 5,
+        maximum: 11,
+      },
     },
     direccion: {
       presence: {allowEmpty: false},
@@ -125,7 +132,7 @@ const Formulario = ({
               <View style={styles.forma}>
                 <Text style={styles.texto}>Pedido a nombre de:</Text>
                 <TextInput
-                  keyboardType="url"
+                  keyboardType="default"
                   style={styles.input}
                   placeholder="Obligatorio"
                   onChangeText={value => setNombre(value)}
@@ -133,9 +140,9 @@ const Formulario = ({
                 />
                 <Text style={styles.texto}>Telefono:</Text>
                 <TextInput
-                  keyboardType="numeric"
+                  keyboardType="phone-pad"
                   style={styles.input}
-                  placeholder="Obligatorio"
+                  placeholder="Obligatorio, evite letras o simbolos"
                   onChangeText={value => setTelefono(value)}
                   value={telefono}
                 />
@@ -181,24 +188,22 @@ const Formulario = ({
                     <Text style={styles.texto}>¿Necesita vuelto?</Text>
                     <TextInput
                       style={styles.input}
-                      keyboardType="numeric"
+                      keyboardType="phone-pad"
                       placeholder="Escriba cuanto"
                       onChangeText={value => setBillete(value)}
-                      value={billete}
+                      value={billete.toString()}
                     />
                   </View>
                   <View style={{width: wp('40')}}>
                     <Text style={styles.texto}>Propina:</Text>
                     <TextInput
                       style={styles.input}
-                      keyboardType="numeric"
+                      keyboardType="phone-pad"
                       placeholder="Opcional"
                       onChangeText={value => {
-                        Number.isInteger(Number.parseInt(value))
-                          ? setPropina(value)
-                          : setPropina(propina);
+                        setPropina(value);
                       }}
-                      value={propina}
+                      value={propina.toString()}
                     />
                   </View>
                 </View>
@@ -227,7 +232,7 @@ const Formulario = ({
                     ) {
                       Alert.alert(
                         'Oops!',
-                        'Su carrito está vacío, de no ser así verifique si hay campos obligatorios vacíos!',
+                        'Su carrito está vacío, de no ser así verifique si hay campos obligatorios vacíos! o estén escritos erradamente',
                         [
                           {
                             text: 'Ok, lo verificaré de nuevo',
@@ -238,20 +243,76 @@ const Formulario = ({
                         {cancelable: false},
                       );
                     } else {
-                      enviar({
-                        nombre: nombre,
-                        telefono: telefono,
-                        email: usuario.user.email,
-                        direccion: direccion,
-                        barrio: barrio,
-                        comentario: comentario,
-                        apartamento: apartamento,
-                        billete: billete,
-                        propina: propina,
-                        carrito: carrito.filter(item => item.cantidad !== 0),
-                        total: total,
-                        fecha: hoyFecha(),
-                      });
+                      let msj = '';
+                      if (propina.trim().length !== 0) {
+                        let regex = /\D/;
+                        if (regex.exec(propina) !== null) {
+                          msj =
+                            msj +
+                            '\n' +
+                            '* La propina no está bien escrita, NO DEBE contener letras o simbolos ' +
+                            '\n';
+                        }
+                        if (Number.isNaN(Number.parseInt(propina))) {
+                          msj =
+                            msj +
+                            '\n' +
+                            '* La propina no está bien escrita, debe ser un número, y no contener simbolos ' +
+                            '\n';
+                        }
+                      }
+                      if (billete.trim().length !== 0) {
+                        let regex = /\D/;
+                        if (regex.exec(billete) !== null) {
+                          msj =
+                            msj +
+                            '\n' +
+                            '* El vuelto no está bien escrito, NO DEBE contener letras o simbolos ' +
+                            '\n';
+                        }
+                        if (Number.isNaN(Number.parseInt(billete))) {
+                          msj =
+                            msj +
+                            '\n' +
+                            '* El vuelto no está bien escrito, debe ser un número' +
+                            '\n';
+                        }
+                      }
+                      if (msj.length !== 0) {
+                        Alert.alert(
+                          'Oops!',
+                          msj,
+                          [
+                            {
+                              text: 'Ok, lo verificaré de nuevo',
+                              onPress: () => {},
+                              style: 'cancel',
+                            },
+                          ],
+                          {cancelable: false},
+                        );
+                      } else {
+                        enviar({
+                          nombre: nombre,
+                          telefono: telefono,
+                          email: usuario.user.email,
+                          direccion: direccion,
+                          barrio: barrio,
+                          comentario: comentario,
+                          apartamento: apartamento,
+                          billete:
+                            billete.trim().length === 0
+                              ? 0
+                              : Number.parseInt(billete),
+                          propina:
+                            propina.trim().length === 0
+                              ? 0
+                              : Number.parseInt(propina),
+                          carrito: carrito.filter(item => item.cantidad !== 0),
+                          total: total,
+                          fecha: hoyFecha(),
+                        });
+                      }
                     }
                   }}
                 />

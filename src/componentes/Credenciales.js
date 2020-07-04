@@ -92,7 +92,7 @@ const Splash = props => {
   useEffect(() => {
     if (registrado) {
       limpiar_error_registrar();
-      navigation.navigate('Confirmacion');
+      navigation.navigate('Confirmacion', {vengode: 'registro'});
     }
   }, [registrado]);
   useEffect(() => {

@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   },
 
   contain: {
-    flex: 1,
     backgroundColor: 'white',
   },
   menu: {
@@ -54,7 +53,6 @@ const styles = StyleSheet.create({
     width: wp('30'),
   },
   forma: {
-    height: hp('55'),
     margin: wp('5'),
   },
   input: {
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: wp('5'),
     elevation: 5,
     marginTop: wp('4'),
-    marginBottom: wp('4x'),
+    marginBottom: wp('4'),
     color: 'black',
     fontSize: hp('2'),
     fontFamily:

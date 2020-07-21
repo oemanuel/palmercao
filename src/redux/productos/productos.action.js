@@ -6,6 +6,17 @@ export function syncProductos(productos) {
     productos,
   };
 }
+export function syncPedidos(pedidos) {
+  return {
+    type: PRODUCTOS.SYNC_PEDIDOS,
+    pedidos,
+  };
+}
+export function stopPedidos() {
+  return {
+    type: PRODUCTOS.CLEAN_PEDIDOS,
+  };
+}
 export function busquedaProductos(texto) {
   return {
     type: PRODUCTOS.BUSQUEDA,

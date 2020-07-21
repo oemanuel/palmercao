@@ -11,6 +11,7 @@ const ELIMINAR = 'ELIMINAR';
 const QUITAR = 'QUITAR';
 const AGREGAR = 'AGREGAR';
 const LIMPIARESPONSE = 'limpiaresponse';
+const CLEANCARRITO = 'cleancarrito';
 
 export const ENVIAR = {
   SOLICITUD: 'ENVIAR_SOLICITUD',
@@ -20,6 +21,9 @@ export const ENVIAR = {
 
 export const limpiaresponse = () => ({
   type: LIMPIARESPONSE,
+});
+export const cleancarrito = () => ({
+  type: CLEANCARRITO,
 });
 
 export const enviar_solicitud = info => ({
@@ -156,7 +160,8 @@ export default (state = initialState, action) => {
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad: item.cantidad + (item.tipo == 'unitario' ? 1 : 500),
+                  cantidad:
+                    item.cantidad + (item.tipo == 'unitario' ? 1 : 500),
                   total:
                     item.total +
                     (item.tipo != 'unitario'
@@ -188,7 +193,8 @@ export default (state = initialState, action) => {
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad: item.cantidad - (item.tipo == 'unitario' ? 1 : 500),
+                  cantidad:
+                    item.cantidad - (item.tipo == 'unitario' ? 1 : 500),
                   total:
                     item.total -
                     (item.tipo != 'unitario'
@@ -212,6 +218,13 @@ export default (state = initialState, action) => {
         ...state,
         response: null,
         error: null,
+      };
+      break;
+    case CLEANCARRITO:
+      return {
+        ...state,
+        carrito: [],
+        total: 0,
       };
       break;
     default:

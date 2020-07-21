@@ -58,7 +58,7 @@ const Bienvenida = ({navigation}) => {
   return (
     <>
       <StatusBar
-        barStyle="dark-content"
+        barStyle="light-content"
         hidden={false}
         backgroundColor={colorFondo}
         //translucent={true}
@@ -80,7 +80,7 @@ const Bienvenida = ({navigation}) => {
                       backgroundColor: f1 ? 'white' : colorFondo,
                     },
                   ]}>
-                  O
+                  1
                 </Text>
               </TouchableOpacity>
             </View>
@@ -95,7 +95,7 @@ const Bienvenida = ({navigation}) => {
                       backgroundColor: f2 ? 'white' : colorFondo,
                     },
                   ]}>
-                  O
+                  2
                 </Text>
               </TouchableOpacity>
             </View>
@@ -109,10 +109,11 @@ const Bienvenida = ({navigation}) => {
                       backgroundColor: f3 ? 'white' : colorFondo,
                     },
                   ]}>
-                  O
+                  3
                 </Text>
               </TouchableOpacity>
             </View>
+            {/* <Text style={{color:'white'}}>{'  >>'}</Text> */}
           </View>
         </View>
       </View>

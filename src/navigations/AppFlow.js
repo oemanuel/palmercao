@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -12,10 +12,13 @@ import ListaCompra from '../pantallas/listaCompra/ListaCompra';
 import DatosPedidos from '../pantallas/datosPedidos/DatosPedidos';
 import MiCuenta from '../pantallas/miCuenta/MiCuenta';
 import VistaImagen from '../pantallas/vistaImagen/VistaImagen';
+import {connect} from 'react-redux';
 
-const AppFlow = () => {
+// additionalUserInfo;
+const AppFlow = ({usuario}) => {
+
   return (
-    <Stack.Navigator initialRouteName="Bienvenida">
+    <Stack.Navigator initialRouteName={usuario && usuario.nuevo?"Bienvenida":"Catalogo"}>
       <Stack.Screen
         name="Bienvenida"
         component={Bienvenida}
@@ -59,5 +62,13 @@ const AppFlow = () => {
     </Stack.Navigator>
   );
 };
+const mapStateToProps = estado => {
+  return {
+    usuario: estado.authReducer.entrarReducer.usuario,
+  };
+};
 
-export default AppFlow;
+export default connect(
+  mapStateToProps,
+  null,
+)(AppFlow);

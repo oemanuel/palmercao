@@ -4,7 +4,6 @@ import Fondo from '../../componentes/Fondo';
 import styles from './styles';
 import Boton from '../../componentes/Boton';
 const Confimacion = ({navigation, route}) => {
-  console.log(route);
 
   return (
     <Fondo>
@@ -24,7 +23,7 @@ const Confimacion = ({navigation, route}) => {
             </Text>
             <Text style={[styles.texto, {color: '#FF694E', marginTop: 10}]}>
               {route.params.vengode == 'registro'
-                ? 'SI NO LO HACES no tendrás acceso a nuestra plataforma'
+                ? 'SI NO LO HACES no podrás realizar tus pedidos'
                 : 'revisa tu correo.'}
             </Text>
           </View>

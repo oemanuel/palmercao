@@ -13,4 +13,5 @@ const firebaseApp = firebase.initializeApp({
   measurementId: 'G-ZFCKDQ4YWF',
 });
 const rsf = new RSF(firebaseApp);
+export const fire = firebase;
 export default rsf;

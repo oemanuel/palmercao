@@ -7,16 +7,23 @@ import {
   takeLatest,
   fork,
   select,
+  cancel,
 } from 'redux-saga/effects';
 import rsf from '../firebase';
+import {fire} from '../firebase';
 import {ENTRAR, SALIDA} from '../auth/login/actionTypes';
 import {REGISTRO} from '../auth/registrar/actionTypes';
 import {RECUPERAR} from '../auth/recuperar/actionTypes';
-import {syncProductos} from '../productos/productos.action';
+import {
+  syncProductos,
+  syncPedidos,
+  stopPedidos,
+} from '../productos/productos.action';
 import {
   ENVIAR,
   enviar_fallido,
   enviar_correcto,
+  cleancarrito,
 } from '../listaCompra/reducers/listaCompra';
 
 import {
@@ -41,7 +48,46 @@ function* entrar({payload}) {
       payload.correo,
       payload.clave,
     );
-    yield put(entrar_correcto(usuario));
+    const user = yield call(
+      rsf.database.read,
+      'usuarios/'.concat(usuario.user.uid),
+    );
+    yield put(entrar_correcto({...usuario, nuevo: user.nuevo}));
+
+    if (user.nuevo) {
+      yield call(rsf.database.patch, 'usuarios/'.concat(usuario.user.uid), {
+        nuevo: false,
+      });
+    }
+    // const channel = yield call(rsf.database.channel, 'pedidos');
+    const filterPedidos = pedido => {
+      return pedido.email == usuario.user.email;
+    };
+    // (rsf.firebase.database);
+    // Wait for the logout action, then stop sync
+    const pedidosTransformer = ({value}) =>
+      value
+        ? Object.keys(value)
+            .map(key => ({
+              ...value[key],
+            }))
+            .reverse()
+        : [];
+    let pedidos = [];
+    let task = yield fork(
+      rsf.database.sync,
+      fire
+        .database()
+        .ref('pedidos')
+        .orderByChild('email')
+        .equalTo(usuario.user.email),
+      {
+        successActionCreator: syncPedidos,
+        transform: pedidosTransformer,
+      },
+    );
+    yield take(SALIDA.SOLICITUD);
+    yield cancel(task);
   } catch (error) {
     yield put(entrar_fallido(error));
   }
@@ -51,6 +97,8 @@ function* salir() {
   try {
     const data = yield call(rsf.auth.signOut);
     yield put(salir_correcto());
+    yield put(cleancarrito());
+    yield put(stopPedidos());
   } catch (error) {
     yield put(salir_fallido(error));
   }
@@ -63,6 +111,9 @@ function* registrar({payload}) {
       payload.correo,
       payload.clave,
     );
+    yield call(rsf.database.patch, 'usuarios/'.concat(user.user.uid), {
+      nuevo: true,
+    });
     yield call(rsf.auth.sendEmailVerification);
     yield put(registrar_correcto());
   } catch (error) {

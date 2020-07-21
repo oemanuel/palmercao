@@ -30,7 +30,7 @@ const Bn2 = () => {
           style={[
             styles.texto,
             {
-              fontSize: hp('3'),
+              fontSize: hp('2.5'),
             },
           ]}>
           ¡Busca por medio de categorías!

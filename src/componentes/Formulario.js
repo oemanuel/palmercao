@@ -58,7 +58,6 @@ const Formulario = ({
 
     dd = addZero(dd);
     mm = addZero(mm);
-    console.log(dd + '/' + mm + '/' + yyyy);
     return dd + '/' + mm + '/' + yyyy;
   };
   const constraints = {
@@ -278,6 +277,13 @@ const Formulario = ({
                             '\n';
                         }
                       }
+                      if (!usuario.user.emailVerified) {
+                        msj =
+                          msj +
+                          '\n' +
+                          '* Esta cuenta no está verificada, para comprar debes verificarla, para ello ingresa a tu correo y verificala' +
+                          '\n';
+                      }
                       if (msj.length !== 0) {
                         Alert.alert(
                           'Oops!',
@@ -311,6 +317,7 @@ const Formulario = ({
                           carrito: carrito.filter(item => item.cantidad !== 0),
                           total: total,
                           fecha: hoyFecha(),
+                          createAt: Date.now(),
                         });
                       }
                     }

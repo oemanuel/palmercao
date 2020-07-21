@@ -131,14 +131,14 @@ const Splash = props => {
         ],
         {cancelable: false},
       );
-    } else {
-      if (usuario) {
-        setClave('');
-        setCorreo('');
-      }
     }
   }, [error_entrar]);
-
+  useEffect(() => {
+    if (usuario) {
+      setClave('');
+      setCorreo('');
+    }
+  }, [usuario]);
   useEffect(() => {
     if (cargando_entrar) {
       setShowIndicator(true);

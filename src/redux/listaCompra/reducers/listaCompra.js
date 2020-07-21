@@ -134,12 +134,23 @@ export default (state = initialState, action) => {
         item => item.identificador === action.payload.identificador,
       );
       if (itemEx) {
-        return {
-          ...state,
-          carrito: state.carrito.filter(
-            item => item.identificador !== action.payload.identificador,
-          ),
-        };
+        console.log(itemEx.cantidad % 125 != 0 && itemEx.tipo != 'unitario');
+        if (itemEx.cantidad % 125 != 0 && itemEx.tipo != 'unitario') {
+          return {
+            ...state,
+            carrito: state.carrito.filter(
+              item => item.identificador !== action.payload.identificador,
+            ),
+            total: state.total - itemEx.total,
+          };
+        } else {
+          return {
+            ...state,
+            carrito: state.carrito.filter(
+              item => item.identificador !== action.payload.identificador,
+            ),
+          };
+        }
       } else {
         return {
           ...state,

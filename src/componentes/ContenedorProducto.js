@@ -19,10 +19,15 @@ const Contenedor = props => {
   const {navigation, item, isComprar, añadir, quitar, eliminar} = props;
 
   const disminuir = () => {
-    if (item.cantidad > 0) {
-      quitar(item);
-    } else {
+    if (item.cantidad % 125 != 0 && item.tipo != 'unitario') {
       eliminar(item);
+      //console.log('Vamo a eliminar gg', item);
+    } else {
+      if (item.cantidad > 0) {
+        quitar(item);
+      } else {
+        eliminar(item);
+      }
     }
   };
   var formatNumber = {
@@ -117,12 +122,23 @@ const Contenedor = props => {
               <TouchableOpacity
                 onPress={() => disminuir()}
                 style={{
-                  backgroundColor: item.cantidad != 0 ? '#00b46b' : 'red',
+                  backgroundColor:
+                    item.cantidad == 0 ||
+                    (item.cantidad % 125 != 0 && item.tipo != 'unitario')
+                      ? 'red'
+                      : '#00b46b',
                   borderRadius: wp(5),
-                  width: item.cantidad != 0 ? '15%' : '30%',
+                  width:
+                    item.cantidad == 0 ||
+                    (item.cantidad % 125 != 0 && item.tipo != 'unitario')
+                      ? '30%'
+                      : '15%',
                 }}>
                 <Text style={{textAlign: 'center', color: 'white'}}>
-                  {item.cantidad == 0 ? 'quitar' : '-'}
+                  {item.cantidad == 0 ||
+                  (item.cantidad % 125 != 0 && item.tipo != 'unitario')
+                    ? 'quitar'
+                    : '-'}
                 </Text>
               </TouchableOpacity>
               <Text style={[styles.texto]}>
@@ -131,6 +147,7 @@ const Contenedor = props => {
                   : item.cantidad.toFixed(2)}{' '}
                 {item.tipo == 'unitario' ? 'und' : 'gr'}
               </Text>
+
               <TouchableOpacity
                 onPress={() => añadir(item)}
                 style={{

@@ -5,10 +5,19 @@ import ListaDeProductos from '../../componentes/ListaDeProductos';
 import Menu from '../menu/Menu';
 import Horario from '../../componentes/Horario';
 import {ScrollView, FlatList} from 'react-native-gesture-handler';
+import {connect} from 'react-redux';
 
-const Catalogo = ({navigation}) => {
+const Catalogo = ({navigation, estado}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [horario, setHorario] = useState(true);
+
+  useEffect(() => {
+    if (estado === true) {
+      setHorario(false);
+    } else {
+      setHorario(true);
+    }
+  }, [estado]);
   return (
     <>
       <StatusBar
@@ -43,5 +52,14 @@ const Catalogo = ({navigation}) => {
     </>
   );
 };
+const mapStateToProps = estado => {
+  console.log('estado: a ver: ', estado.estadoReducer.estado);
+  return {
+    estado: estado.estadoReducer.estado,
+  };
+};
 
-export default Catalogo;
+export default connect(
+  mapStateToProps,
+  null,
+)(Catalogo);

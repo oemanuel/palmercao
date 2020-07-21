@@ -147,11 +147,12 @@ function* syncEstadoSaga() {
   while (true) {
     if (channel) {
       const {value: abierto} = yield take(channel);
+      console.log('its: ', abierto);
       if (abierto != null) {
-        yield put(setEstado(abierto));
+        yield put(setEstado({estado: abierto}));
       }
     } else {
-      yield put(setEstado(false));
+      yield put(setEstado({estado: false}));
     }
   }
 }
@@ -181,7 +182,7 @@ export default function* rootSaga() {
     // takeEvery(REGISTRO.SOLICITUD, registrar),
     // takeEvery(RECUPERAR.SOLICITUD, recuperar_pwd),
     takeEvery(ENVIAR.SOLICITUD, addPedido),
-    fork(syncProductosSaga),
     fork(syncEstadoSaga),
+    fork(syncProductosSaga),
   ]);
 }

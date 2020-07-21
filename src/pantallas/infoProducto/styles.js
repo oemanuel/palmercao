@@ -83,5 +83,8 @@ const styles = StyleSheet.create({
     width: wp('40'),
     height: wp('40'),
   },
+  scrol: {
+    height: hp('100&'),
+  },
 });
 export default styles;

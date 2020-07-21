@@ -86,12 +86,12 @@ const ListaCompras = ({navigation, carrito, total}) => {
           <Boton
             titulo="Comprar"
             onPress={() => {
-              if (total >= 10000) {
+              if (total >= 7000) {
                 navigation.navigate('DatosPedidos');
               } else {
                 Alert.alert(
                   'Opps!',
-                  'Su compra debe ser mayor a 10000 COP, añada más productos a su lista!!!.',
+                  'Su compra debe ser mayor a 7000 COP, añada más productos a su lista!!!.',
                   [
                     {
                       text: 'Ok',

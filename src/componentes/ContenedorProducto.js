@@ -19,10 +19,15 @@ const Contenedor = props => {
   const {navigation, item, isComprar, añadir, quitar, eliminar} = props;
 
   const disminuir = () => {
-    if (item.cantidad > 0) {
-      quitar(item);
-    } else {
+    if (item.cantidad % 125 != 0 && item.tipo != 'unitario') {
       eliminar(item);
+      //console.log('Vamo a eliminar gg', item);
+    } else {
+      if (item.cantidad > 0) {
+        quitar(item);
+      } else {
+        eliminar(item);
+      }
     }
   };
   var formatNumber = {
@@ -117,17 +122,32 @@ const Contenedor = props => {
               <TouchableOpacity
                 onPress={() => disminuir()}
                 style={{
-                  backgroundColor: item.cantidad != 0 ? '#00b46b' : 'red',
+                  backgroundColor:
+                    item.cantidad == 0 ||
+                    (item.cantidad % 125 != 0 && item.tipo != 'unitario')
+                      ? 'red'
+                      : '#00b46b',
                   borderRadius: wp(5),
-                  width: item.cantidad != 0 ? '15%' : '30%',
+                  width:
+                    item.cantidad == 0 ||
+                    (item.cantidad % 125 != 0 && item.tipo != 'unitario')
+                      ? '30%'
+                      : '15%',
                 }}>
                 <Text style={{textAlign: 'center', color: 'white'}}>
-                  {item.cantidad == 0 ? 'quitar' : '-'}
+                  {item.cantidad == 0 ||
+                  (item.cantidad % 125 != 0 && item.tipo != 'unitario')
+                    ? 'quitar'
+                    : '-'}
                 </Text>
               </TouchableOpacity>
               <Text style={[styles.texto]}>
-                {item.cantidad} {item.tipo == 'unitario' ? 'und' : 'gr'}
+                {item.tipo == 'unitario'
+                  ? item.cantidad
+                  : item.cantidad.toFixed(2)}{' '}
+                {item.tipo == 'unitario' ? 'und' : 'gr'}
               </Text>
+
               <TouchableOpacity
                 onPress={() => añadir(item)}
                 style={{
@@ -172,12 +192,22 @@ const Contenedor = props => {
           </View>
           <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
             <View style={styles.titulo}>
-              <Text style={[styles.texto, {color: darColor(item)}]}>
-                {item.nombre.substring(0, 20)}...
+              <Text
+                style={[
+                  styles.texto,
+                  {
+                    color: darColor(item),
+                    maxHeight: '60%',
+                  },
+                ]}>
+                {item.nombre.substring(0, 20)}
               </Text>
               <Text
-                style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-                {item.descripcion.substring(0, 22)}...
+                style={[
+                  styles.texto,
+                  {fontSize: wp('2.8'), height: '50%', color: '#707070'},
+                ]}>
+                {item.descripcion.substring(0, 22)}
               </Text>
             </View>
             <View style={styles.costo}>
@@ -195,7 +225,7 @@ const Contenedor = props => {
 const styles = StyleSheet.create({
   texto: {
     color: '#000000',
-    fontSize: hp('2'),
+    fontSize: wp('3.5'),
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },

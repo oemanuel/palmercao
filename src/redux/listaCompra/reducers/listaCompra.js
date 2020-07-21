@@ -134,12 +134,23 @@ export default (state = initialState, action) => {
         item => item.identificador === action.payload.identificador,
       );
       if (itemEx) {
-        return {
-          ...state,
-          carrito: state.carrito.filter(
-            item => item.identificador !== action.payload.identificador,
-          ),
-        };
+        console.log(itemEx.cantidad % 125 != 0 && itemEx.tipo != 'unitario');
+        if (itemEx.cantidad % 125 != 0 && itemEx.tipo != 'unitario') {
+          return {
+            ...state,
+            carrito: state.carrito.filter(
+              item => item.identificador !== action.payload.identificador,
+            ),
+            total: state.total - itemEx.total,
+          };
+        } else {
+          return {
+            ...state,
+            carrito: state.carrito.filter(
+              item => item.identificador !== action.payload.identificador,
+            ),
+          };
+        }
       } else {
         return {
           ...state,
@@ -160,12 +171,11 @@ export default (state = initialState, action) => {
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad:
-                    item.cantidad + (item.tipo == 'unitario' ? 1 : 500),
+                  cantidad: item.cantidad + (item.tipo == 'unitario' ? 1 : 125),
                   total:
                     item.total +
                     (item.tipo != 'unitario'
-                      ? (action.payload.precio / 500) * 500
+                      ? (action.payload.precio / 500) * 125
                       : action.payload.precio * 1),
                 }
               : item,
@@ -173,7 +183,7 @@ export default (state = initialState, action) => {
           total:
             state.total +
             (itemEx.tipo != 'unitario'
-              ? (action.payload.precio / 500) * 500
+              ? (action.payload.precio / 500) * 125
               : action.payload.precio * 1),
         };
       } else {
@@ -193,12 +203,11 @@ export default (state = initialState, action) => {
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad:
-                    item.cantidad - (item.tipo == 'unitario' ? 1 : 500),
+                  cantidad: item.cantidad - (item.tipo == 'unitario' ? 1 : 125),
                   total:
                     item.total -
                     (item.tipo != 'unitario'
-                      ? (action.payload.precio / 500) * 500
+                      ? (action.payload.precio / 500) * 125
                       : action.payload.precio * 1),
                 }
               : item,
@@ -206,7 +215,7 @@ export default (state = initialState, action) => {
           total:
             state.total -
             (itemEx.tipo != 'unitario'
-              ? (action.payload.precio / 500) * 500
+              ? (action.payload.precio / 500) * 125
               : action.payload.precio * 1),
         };
       } else {

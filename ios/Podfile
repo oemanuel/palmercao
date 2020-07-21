@@ -79,6 +79,8 @@ target 'palmercado' do
 
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
+  pod 'RNCMaskedView', :path => '../node_modules/@react-native-community/masked-view'
+
   target 'palmercadoTests' do
     inherit! :complete
     # Pods for testing

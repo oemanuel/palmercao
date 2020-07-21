@@ -1,21 +1,35 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+  StatusBar,
+} from 'react-native';
 import styles from './styles';
 import BarraInfoCompra from '../../componentes/BarraInfoCompra';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Boton from '../../componentes/Boton';
 import Modal from '../../componentes/Modal';
 import Menu from '../menu/Menu';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
-const ListaCompras = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(false);
+import {connect} from 'react-redux';
+
+const ListaCompras = ({navigation, carrito, total}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+
   return (
     <>
-      <Modal
-        exito={false}
-        visible={modalVisible}
-        setModalVisible={setModalVisible}
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#FF694E"
       />
       <Menu
         navigation={navigation}
@@ -48,30 +62,46 @@ const ListaCompras = ({navigation}) => {
             style={styles.canasta}
             source={require('../../assets/Img/canastaCompra.png')}
           />
-          <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text>
+          {/* <Text style={[styles.texto, styles.titulo]}>Lista de compra</Text> */}
           <View style={styles.ccantidad}>
-            <Text style={styles.texto}>1</Text>
+            <Text style={styles.texto}>{carrito.length}</Text>
           </View>
           <View style={styles.children}>
-            <BarraInfoCompra />
+            <BarraInfoCompra cantidad={total} />
           </View>
         </View>
+        <View style={styles.separador1} />
+        <FlatList
+          data={carrito}
+          contentContainerStyle={{alignItems: 'center'}}
+          keyExtractor={item => item.identificador}
+          renderItem={item => {
+            let {item: p} = item;
+
+            return <ContenedorProducto item={p} isComprar={true} />;
+          }}
+        />
         <View style={styles.separador} />
-        <View style={{alignItems: 'center', flex: 0.73}}>
-          <ContenedorProducto />
-        </View>
         <View style={styles.boton}>
           <Boton
             titulo="Comprar"
             onPress={() => {
-              setModalVisible(true);
-              setTimeout(
-                () => {
-                  setModalVisible(false);
-                },
-                5000,
-                this,
-              );
+              if (total >= 10000) {
+                navigation.navigate('DatosPedidos');
+              } else {
+                Alert.alert(
+                  'Opps!',
+                  'Su compra debe ser mayor a 10000 COP, añada más productos a su lista!!!.',
+                  [
+                    {
+                      text: 'Ok',
+                      onPress: () => {},
+                      style: 'cancel',
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              }
             }}
           />
         </View>
@@ -79,4 +109,15 @@ const ListaCompras = ({navigation}) => {
     </>
   );
 };
-export default ListaCompras;
+
+const mapStateToProps = estado => {
+  return {
+    carrito: estado.listaCompraReducer.carrito,
+    total: estado.listaCompraReducer.total,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null,
+)(ListaCompras);

@@ -30,7 +30,7 @@ const Bn2 = () => {
           style={[
             styles.texto,
             {
-              fontSize: hp('3'),
+              fontSize: hp('2.5'),
             },
           ]}>
           ¡Busca por medio de categorías!
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   figuras: {
-    flex: 0.6,
+    flex: 0.8,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },
   texto1: {
-    flex: 0.15,
+    flex: 0.1,
     justifyContent: 'flex-start',
   },
 });

@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
+  Clipboard,
+  ToastAndroid,
 } from 'react-native';
 import Boton from '../../componentes/Boton';
 import {
@@ -13,8 +15,14 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+import {connect} from 'react-redux';
+import {salir} from '../../redux/auth/login/actions/entrar.actions';
+
 const Menu = props => {
-  const {navigation, visible, setMenuVisible} = props;
+  const {navigation, visible, setMenuVisible, salir} = props;
+  const showToast = () => {
+    ToastAndroid.show('Copiado en el portapapeles', ToastAndroid.SHORT);
+  };
   return (
     <Modal
       visible={visible}
@@ -43,21 +51,78 @@ const Menu = props => {
               source={require('../../assets/logo/Componente2.png')}
             />
           </View>
-
-          <Boton
-            titulo="Lista de compra"
-            onPress={() => {
-              setMenuVisible(false);
-              navigation.navigate('ListaCompra');
-            }}
-          />
+          <View style={styles.botones}>
+            <Boton
+              titulo="Lista de compra"
+              onPress={() => {
+                setMenuVisible(false);
+                navigation.navigate('ListaCompra');
+              }}
+            />
+            <Boton
+              titulo="Mi cuenta"
+              onPress={() => {
+                setMenuVisible(false);
+                navigation.navigate('MiCuenta');
+              }}
+            />
+            <Boton
+              titulo="Catalogo"
+              onPress={() => {
+                setMenuVisible(false);
+                navigation.navigate('Catalogo');
+              }}
+            />
+          </View>
           <View style={styles.textoc}>
             <TouchableOpacity activeOpacity={0.5}>
-              <Text style={styles.texto}>Cerrar cesision</Text>
+              <Text
+                onPress={() => {
+                  setMenuVisible(false);
+                  salir();
+                }}
+                style={[
+                  styles.texto,
+                  {
+                    textDecorationLine: 'underline',
+                  },
+                ]}>
+                Cerrar sesión
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={{flex: 0.4, justifyContent: 'flex-end'}}>
-            <Text style={styles.texto2}>Pa'l Mercado App</Text>
+          <Text style={[styles.texto, {fontSize: hp('2')}]}>
+            ¿Tu domicilio no llega?, llama
+          </Text>
+          <Text
+            style={[styles.texto, {fontSize: hp('2')}]}
+            onPress={() => {
+              Clipboard.setString('3192059');
+              showToast();
+            }}>
+            3192059
+          </Text>
+          <Text
+            style={[styles.texto, {fontSize: hp('2')}]}
+            onPress={() => {
+              Clipboard.setString('3128206676');
+              showToast();
+            }}>
+            3128206676
+          </Text>
+          <Text style={[styles.texto, {fontSize: hp('1.5')}]}>
+            ¿Quejas, reclamos o sugerencias?, escribenos
+          </Text>
+          <Text
+            style={[styles.texto, {fontSize: hp('1.5')}]}
+            onPress={() => {
+              Clipboard.setString('palmercao.atencionalusuario@gmail.co');
+              showToast();
+            }}>
+            palmercao.atencionalusuario@gmail.com
+          </Text>
+          <View style={{flex: 0.2, justifyContent: 'flex-end'}}>
+            <Text style={styles.texto2}>Pa'l Mercao App</Text>
           </View>
         </View>
       </View>
@@ -102,7 +167,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   texto: {
-    textDecorationLine: 'underline',
     color: 'white',
     fontSize: hp('3'),
     textAlign: 'center',
@@ -121,6 +185,19 @@ const styles = StyleSheet.create({
     marginLeft: wp('7'),
     marginTop: hp('2'),
   },
+  botones: {
+    flex: 0.45,
+    justifyContent: 'space-between',
+  },
 });
 
-export default Menu;
+const mapDispatchToProps = dispatch => {
+  return {
+    salir: () => dispatch(salir()),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Menu);

@@ -1,15 +1,24 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import Informacion from '../../componentes/InformacionCatalogo';
 import ContenedorCategoria from '../../componentes/ContenedorCategoria';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
+import ListaDeProductos from '../../componentes/ListaDeProductos';
 import Menu from '../menu/Menu';
+import {ScrollView, FlatList} from 'react-native-gesture-handler';
+
 const Catalogo = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   return (
     <>
+      <StatusBar
+        barStyle="light-content"
+        hidden={false}
+        backgroundColor={'#FF694E'}
+        //translucent={true}
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}
@@ -26,32 +35,14 @@ const Catalogo = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-        <Informacion>
-          <BarraBusqueda />
-        </Informacion>
-        <View style={styles.textoc}>
-          <Text style={styles.texto}>Categorias</Text>
-        </View>
-        <View style={styles.categoriac}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('InfoCategoria')}>
-            <ContenedorCategoria />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.textoc}>
-          <Text style={styles.texto}>Populares</Text>
-        </View>
-
-        <View style={styles.productoc}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('InfoProducto')}>
-            <ContenedorProducto />
-          </TouchableOpacity>
-        </View>
+        <ListaDeProductos
+          navigation={navigation}
+          iscatalogo={true}
+          nombreCategoria={'otros'}
+        />
       </View>
     </>
   );
 };
+
 export default Catalogo;

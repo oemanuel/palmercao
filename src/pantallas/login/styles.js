@@ -6,13 +6,8 @@ import {
 
 const styles = StyleSheet.create({
   sociales: {
-    height: hp('25%'),
+    height: hp('18%'),
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  enviar: {
-    flex: 0.2,
-    justifyContent: 'space-around',
     alignItems: 'center',
   },
   c1: {
@@ -25,12 +20,13 @@ const styles = StyleSheet.create({
     height: hp('0.25'),
   },
   credenciales: {
-    height: hp('30%'),
+    height: hp('50%'),
     justifyContent: 'center',
   },
   separadores: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: hp(2),
   },
   c5: {
     flex: 0.6,

@@ -1,21 +1,56 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import styles from './styles';
 import Menu from '../menu/Menu';
 import Boton from '../../componentes/Boton';
+import CantidadProducto from '../../componentes/CantidadProducto';
+import {connect} from 'react-redux';
+import {añadir} from '../../redux/listaCompra/reducers/listaCompra';
 
-const InfoCategoria = ({navigation}) => {
+const InfoProducto = ({navigation, añadir, route, itemId}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+
+  var formatNumber = {
+    separador: '.', // separador para los miles
+    sepDecimal: ',', // separador para los decimales
+    formatear: function(num) {
+      num += '';
+      var splitStr = num.split('.');
+      var splitLeft = splitStr[0];
+      var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+      var regx = /(\d+)(\d{3})/;
+      while (regx.test(splitLeft)) {
+        splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+      }
+      return this.simbol + splitLeft + splitRight;
+    },
+    new: function(num, simbol) {
+      this.simbol = simbol || '';
+      return this.formatear(num);
+    },
+  };
+
+  const it = () => {
+    route.params.item.cantidad = route.params.item.tipo == 'unitario' ? 1 : 500;
+    return route.params.item;
+  };
+
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor={route.params.color}
+        //translucent={true}
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}
         setMenuVisible={setMenuVisible}
       />
       <View style={styles.contain}>
-        <View style={styles.header}>
+        <View style={[styles.header, {backgroundColor: route.params.color}]}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
@@ -25,7 +60,9 @@ const InfoCategoria = ({navigation}) => {
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
+            <Text style={[styles.texto, {textAlignVertical: 'center'}]}>
+              {route.params.item.categoria}
+            </Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -36,43 +73,63 @@ const InfoCategoria = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.info}>
+        <View style={[styles.info, {backgroundColor: route.params.color}]}>
           <View style={styles.children}>
             <View style={styles.cartac}>
               <View style={styles.carta}>
-                <Image
-                  style={styles.imagen}
-                  source={{
-                    uri:
-                      'https://m.lopido.com/images/productos/sii/F/300x300/arroz_diana_premium-130127-1557347133.png',
-                  }}
-                />
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  onPress={() =>
+                    navigation.navigate('VistaImagen', {
+                      imagen: route.params.item.urlImagen,
+                    })
+                  }>
+                  <Image
+                    style={styles.imagen}
+                    source={
+                      route.params.item.urlImagen.includes('firebasestorage')
+                        ? require('../../assets/Img/CarretaFondoBlanco.png')
+                        : {uri: route.params.item.urlImagen}
+                    }
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
         </View>
-        <View style={styles.separador} />
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flex: 0.53,
-          }}>
-          <Text style={[styles.texto, {color: '#FF694E'}]}>
-            Nombre producto
+        <View style={styles.contenido}>
+          <Text style={[styles.texto, {color: route.params.color}]}>
+            {route.params.item.nombre}
           </Text>
-          <Text style={[styles.texto, {color: '#707070', fontSize: hp('2')}]}>
-            aqui va una descripción
+          <Text
+            style={[
+              styles.texto,
+              {
+                color: '#707070',
+                fontSize: hp('2'),
+                fontFamily: 'OpenSans-Regular',
+              },
+            ]}>
+            {route.params.item.descripcion}
           </Text>
-          <Text style={[styles.texto, {color: '#707070'}]}>cantidad:0</Text>
-          <Text style={[styles.texto, {color: '#030303'}]}>$1500</Text>
+          <Text style={[styles.texto, {color: '#030303'}]}>
+            COP {formatNumber.new(route.params.item.precio)}
+          </Text>
         </View>
-        <View style={{flex: 0.2, justifyContent: 'flex-start'}}>
-          <Boton titulo="Agregar a la lista" />
-        </View>
+        <CantidadProducto navigation={navigation} item={it()} />
       </View>
     </>
   );
 };
 
-export default InfoCategoria;
+const mapDispatchToProps = dispatch => ({
+  añadir: producto => dispatch(añadir(producto)),
+});
+const mapStateToProps = estado => ({
+  itemId: estado.listaCompraReducer.itemId,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(InfoProducto);

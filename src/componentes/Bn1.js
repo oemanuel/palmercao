@@ -31,8 +31,9 @@ const Bn1 = () => {
           Pa'l mercao es una tienda y distribuidora
         </Text>
         <Text style={styles.texto}>
-          virtual de productos variados con servicio a domicilio
+          virtual de productos variados con servicio
         </Text>
+        <Text style={styles.texto}>a domicilio.</Text>
       </View>
     </View>
   );
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   texto: {
     color: 'white',
     textAlign: 'center',
-    fontSize: hp('2.5'),
+    fontSize: hp('2.3'),
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },

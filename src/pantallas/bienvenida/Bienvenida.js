@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StatusBar} from 'react-native';
 import styles from './styles';
 import Bn from './Bn';
 const Bienvenida = ({navigation}) => {
@@ -57,6 +57,12 @@ const Bienvenida = ({navigation}) => {
   });
   return (
     <>
+      <StatusBar
+        barStyle="light-content"
+        hidden={false}
+        backgroundColor={colorFondo}
+        //translucent={true}
+      />
       <View style={[styles.contain, {backgroundColor: colorFondo}]}>
         <View style={styles.info}>
           <Bn f1={f1} f2={f2} navigation={navigation} />
@@ -74,7 +80,7 @@ const Bienvenida = ({navigation}) => {
                       backgroundColor: f1 ? 'white' : colorFondo,
                     },
                   ]}>
-                  O
+                  1
                 </Text>
               </TouchableOpacity>
             </View>
@@ -83,12 +89,13 @@ const Bienvenida = ({navigation}) => {
                 <Text
                   style={[
                     styles.circulo,
+
                     {
                       color: f2 ? '#FACC43' : 'white',
                       backgroundColor: f2 ? 'white' : colorFondo,
                     },
                   ]}>
-                  O
+                  2
                 </Text>
               </TouchableOpacity>
             </View>
@@ -102,10 +109,11 @@ const Bienvenida = ({navigation}) => {
                       backgroundColor: f3 ? 'white' : colorFondo,
                     },
                   ]}>
-                  O
+                  3
                 </Text>
               </TouchableOpacity>
             </View>
+            {/* <Text style={{color:'white'}}>{'  >>'}</Text> */}
           </View>
         </View>
       </View>

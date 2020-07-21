@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
 import Fondo from '../../componentes/Fondo';
 import styles from './styles';
 import Boton from '../../componentes/Boton';
-const Confimacion = ({navigation}) => {
+const Confimacion = ({navigation, route}) => {
+
   return (
     <Fondo>
       <View style={styles.contain}>
@@ -14,33 +15,29 @@ const Confimacion = ({navigation}) => {
               source={require('../../assets/Icon/aviso.png')}
             />
           </View>
-          <View style={styles.texto1}>
+          <View style={[styles.texto1, {marginTop: 10}]}>
             <Text style={[styles.texto, {color: '#FF694E'}]}>
-              Tu solicitud ha sido enviada,
+              {route.params.vengode == 'registro'
+                ? 'ES OBLIGATORIO que REVISES tu CORREO y VERIFICAR tu CUENTA.'
+                : 'Para cambiar la contraseña,'}
             </Text>
-            <Text style={[styles.texto, {color: '#FF694E'}]}>
-              revisa tu correo.
+            <Text style={[styles.texto, {color: '#FF694E', marginTop: 10}]}>
+              {route.params.vengode == 'registro'
+                ? 'SI NO LO HACES no podrás realizar tus pedidos'
+                : 'revisa tu correo.'}
             </Text>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate('Login')}>
-            <Boton titulo="Salir" />
-          </TouchableOpacity>
-          <View style={styles.texto2}>
-            <TouchableOpacity activeOpacity={0.5}>
-              <Text
-                style={[
-                  styles.texto,
-                  {color: '#00B46B', textDecorationLine: 'underline'},
-                ]}>
-                ¿Volver a enviar?
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <Boton
+            titulo="Salir"
+            onPress={() => {
+              navigation.navigate('Registro');
+            }}
+          />
+          <View style={styles.texto2} />
         </View>
       </View>
     </Fondo>
   );
 };
+
 export default Confimacion;

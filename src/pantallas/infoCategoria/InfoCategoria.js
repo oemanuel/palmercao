@@ -1,31 +1,44 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
 import styles from './styles';
 import BarraBusqueda from '../../componentes/BarraBusqueda';
 import ContenedorProducto from '../../componentes/ContenedorProducto';
 import Menu from '../menu/Menu';
-
-const InfoCategoria = ({navigation}) => {
+import ListaDeProductos from '../../componentes/ListaDeProductos';
+import {connect} from 'react-redux';
+import {busquedaProductos} from '../../redux/productos/productos.action';
+const InfoCategoria = props => {
+  const {navigation, route, busquedaProducto} = props;
   const [menuVisible, setMenuVisible] = useState(false);
+
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor={route.params.color}
+        //translucent={true}
+      />
       <Menu
         navigation={navigation}
         visible={menuVisible}
         setMenuVisible={setMenuVisible}
       />
       <View style={styles.contain}>
-        <View style={styles.header}>
+        <View style={[styles.header, {backgroundColor: route.params.color}]}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.goBack()}>
+              onPress={() => {
+                busquedaProducto('');
+                navigation.goBack();
+              }}>
               <Image
                 style={styles.flecha}
                 source={require('../../assets/Icon/flecha.png')}
               />
             </TouchableOpacity>
-            <Text style={styles.texto}>Nombre Categoria</Text>
+            <Text style={styles.texto}>{route.params.nombre}</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -36,18 +49,28 @@ const InfoCategoria = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.info}>
+        <View style={[styles.info, {backgroundColor: route.params.color}]}>
           <View style={styles.children}>
-            <BarraBusqueda />
+            <BarraBusqueda color={route.params.color} />
           </View>
         </View>
         <View style={styles.separador} />
-        <View style={{alignItems: 'center', flex: 0.73}}>
-          <ContenedorProducto />
-        </View>
+        <ListaDeProductos
+          navigation={navigation}
+          nombreCategoria={route.params.nombre}
+          iscatalogo={false}
+          color={route.params.color}
+        />
       </View>
     </>
   );
 };
-
-export default InfoCategoria;
+const mapDispatchToProps = dispatch => {
+  return {
+    busquedaProducto: value => dispatch(busquedaProductos(value)),
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps,
+)(InfoCategoria);

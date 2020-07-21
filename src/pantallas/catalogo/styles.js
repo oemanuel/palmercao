@@ -11,28 +11,30 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Bold',
   },
   header: {
-    flex: 0.12,
+    height: hp(7),
     backgroundColor: '#FF694E',
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
   menu: {
-    height: hp('6'),
-    width: wp('6'),
+    height: hp('7'),
+    width: wp('7'),
     resizeMode: 'contain',
     marginRight: wp('5'),
   },
   textoc: {
-    flex: 0.2,
     justifyContent: 'center',
-    marginLeft: wp('5'),
+    marginTop: hp('5'),
+    paddingHorizontal: wp(2),
   },
   fondo: {
     flex: 1,
     backgroundColor: 'white',
   },
   categoriac: {
-    flex: 0.4,
+    height: hp(28),
+    flexDirection: 'row',
+    overflow: 'scroll',
   },
   productoc: {
     alignItems: 'center',

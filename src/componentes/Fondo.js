@@ -5,7 +5,12 @@ import LinearGradient from 'react-native-linear-gradient';
 const Fondo = ({children}) => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#FE7259"
+        translucent={true}
+      />
       <LinearGradient
         style={{flex: 1}}
         start={{x: 1, y: 0}}

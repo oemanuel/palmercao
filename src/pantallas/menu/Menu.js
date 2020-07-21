@@ -15,8 +15,8 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import {connect} from 'react-redux';
-import {salir} from '../../redux/auth/login/actions/entrar.actions';
+// import {connect} from 'react-redux';
+// import {salir} from '../../redux/auth/login/actions/entrar.actions';
 
 const Menu = props => {
   const {navigation, visible, setMenuVisible, salir} = props;
@@ -59,13 +59,13 @@ const Menu = props => {
                 navigation.navigate('ListaCompra');
               }}
             />
-            <Boton
+            {/* <Boton
               titulo="Mi cuenta"
               onPress={() => {
                 setMenuVisible(false);
                 navigation.navigate('MiCuenta');
               }}
-            />
+            /> */}
             <Boton
               titulo="Catalogo"
               onPress={() => {
@@ -74,7 +74,7 @@ const Menu = props => {
               }}
             />
           </View>
-          <View style={styles.textoc}>
+          {/* <View style={styles.textoc}>
             <TouchableOpacity activeOpacity={0.5}>
               <Text
                 onPress={() => {
@@ -90,7 +90,7 @@ const Menu = props => {
                 Cerrar sesión
               </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           <Text style={[styles.texto, {fontSize: hp('2')}]}>
             ¿Tu domicilio no llega?, llama
           </Text>
@@ -187,17 +187,14 @@ const styles = StyleSheet.create({
   },
   botones: {
     flex: 0.45,
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
   },
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    salir: () => dispatch(salir()),
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     salir: () => dispatch(salir()),
+//   };
+// };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Menu);
+export default Menu;

@@ -10,15 +10,13 @@ import InfoCategoria from '../pantallas/infoCategoria/InfoCategoria';
 import InfoProducto from '../pantallas/infoProducto/InfoProducto';
 import ListaCompra from '../pantallas/listaCompra/ListaCompra';
 import DatosPedidos from '../pantallas/datosPedidos/DatosPedidos';
-import MiCuenta from '../pantallas/miCuenta/MiCuenta';
+// import MiCuenta from '../pantallas/miCuenta/MiCuenta';
 import VistaImagen from '../pantallas/vistaImagen/VistaImagen';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 
-// additionalUserInfo;
-const AppFlow = ({usuario}) => {
-
+const AppFlow = () => {
   return (
-    <Stack.Navigator initialRouteName={usuario && usuario.nuevo?"Bienvenida":"Catalogo"}>
+    <Stack.Navigator initialRouteName="Bienvenida">
       <Stack.Screen
         name="Bienvenida"
         component={Bienvenida}
@@ -54,21 +52,18 @@ const AppFlow = ({usuario}) => {
         component={DatosPedidos}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="MiCuenta"
         component={MiCuenta}
         options={{headerShown: false}}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };
-const mapStateToProps = estado => {
-  return {
-    usuario: estado.authReducer.entrarReducer.usuario,
-  };
-};
+// const mapStateToProps = estado => {
+//   return {
+//     usuario: estado.authReducer.entrarReducer.usuario,
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  null,
-)(AppFlow);
+export default AppFlow;

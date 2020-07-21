@@ -49,7 +49,7 @@ const BarraInfoCompra = props => {
       </View>
       <View style={styles.filtroc}>
         <Text style={[styles.texto, {color: '#707070'}]}>
-          COP {formatNumber.new(cantidad)}
+          COP {formatNumber.new(parseFloat(cantidad).toFixed(2))}
         </Text>
         <Text style={[styles.texto, {color: '#707070', fontSize: hp('1.5')}]}>
           {cantidad == 0 ? '' : '+ 1.000 COP domicilio'}

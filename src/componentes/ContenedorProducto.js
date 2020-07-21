@@ -126,7 +126,10 @@ const Contenedor = props => {
                 </Text>
               </TouchableOpacity>
               <Text style={[styles.texto]}>
-                {item.cantidad} {item.tipo == 'unitario' ? 'und' : 'gr'}
+                {item.tipo == 'unitario'
+                  ? item.cantidad
+                  : item.cantidad.toFixed(2)}{' '}
+                {item.tipo == 'unitario' ? 'und' : 'gr'}
               </Text>
               <TouchableOpacity
                 onPress={() => añadir(item)}
@@ -172,12 +175,22 @@ const Contenedor = props => {
           </View>
           <View style={[styles.contain, {width: wp('50'), padding: wp('2')}]}>
             <View style={styles.titulo}>
-              <Text style={[styles.texto, {color: darColor(item)}]}>
-                {item.nombre.substring(0, 20)}...
+              <Text
+                style={[
+                  styles.texto,
+                  {
+                    color: darColor(item),
+                    maxHeight: '60%',
+                  },
+                ]}>
+                {item.nombre.substring(0, 20)}
               </Text>
               <Text
-                style={[styles.texto, {fontSize: hp('2'), color: '#707070'}]}>
-                {item.descripcion.substring(0, 22)}...
+                style={[
+                  styles.texto,
+                  {fontSize: wp('2.8'), height: '50%', color: '#707070'},
+                ]}>
+                {item.descripcion.substring(0, 22)}
               </Text>
             </View>
             <View style={styles.costo}>
@@ -195,7 +208,7 @@ const Contenedor = props => {
 const styles = StyleSheet.create({
   texto: {
     color: '#000000',
-    fontSize: hp('2'),
+    fontSize: wp('3.5'),
     fontFamily:
       Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },

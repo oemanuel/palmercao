@@ -160,12 +160,11 @@ export default (state = initialState, action) => {
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad:
-                    item.cantidad + (item.tipo == 'unitario' ? 1 : 500),
+                  cantidad: item.cantidad + (item.tipo == 'unitario' ? 1 : 125),
                   total:
                     item.total +
                     (item.tipo != 'unitario'
-                      ? (action.payload.precio / 500) * 500
+                      ? (action.payload.precio / 500) * 125
                       : action.payload.precio * 1),
                 }
               : item,
@@ -173,7 +172,7 @@ export default (state = initialState, action) => {
           total:
             state.total +
             (itemEx.tipo != 'unitario'
-              ? (action.payload.precio / 500) * 500
+              ? (action.payload.precio / 500) * 125
               : action.payload.precio * 1),
         };
       } else {
@@ -193,12 +192,11 @@ export default (state = initialState, action) => {
             item.identificador === action.payload.identificador
               ? {
                   ...item,
-                  cantidad:
-                    item.cantidad - (item.tipo == 'unitario' ? 1 : 500),
+                  cantidad: item.cantidad - (item.tipo == 'unitario' ? 1 : 125),
                   total:
                     item.total -
                     (item.tipo != 'unitario'
-                      ? (action.payload.precio / 500) * 500
+                      ? (action.payload.precio / 500) * 125
                       : action.payload.precio * 1),
                 }
               : item,
@@ -206,7 +204,7 @@ export default (state = initialState, action) => {
           total:
             state.total -
             (itemEx.tipo != 'unitario'
-              ? (action.payload.precio / 500) * 500
+              ? (action.payload.precio / 500) * 125
               : action.payload.precio * 1),
         };
       } else {

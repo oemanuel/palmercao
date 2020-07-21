@@ -1,5 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  ScrollView,
+  Keyboard,
+} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import styles from './styles';
 import Menu from '../menu/Menu';
@@ -32,7 +42,7 @@ const InfoProducto = ({navigation, añadir, route, itemId}) => {
   };
 
   const it = () => {
-    route.params.item.cantidad = route.params.item.tipo == 'unitario' ? 1 : 500;
+    route.params.item.cantidad = route.params.item.tipo == 'unitario' ? 1 : 125;
     return route.params.item;
   };
 
@@ -49,75 +59,88 @@ const InfoProducto = ({navigation, añadir, route, itemId}) => {
         visible={menuVisible}
         setMenuVisible={setMenuVisible}
       />
-      <View style={styles.contain}>
-        <View style={[styles.header, {backgroundColor: route.params.color}]}>
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => navigation.goBack()}>
-              <Image
-                style={styles.flecha}
-                source={require('../../assets/Icon/flecha.png')}
-              />
-            </TouchableOpacity>
-            <Text style={[styles.texto, {textAlignVertical: 'center'}]}>
-              {route.params.item.categoria}
-            </Text>
-          </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => setMenuVisible(true)}>
-            <Image
-              style={styles.menu}
-              source={require('../../assets/Icon/menu.png')}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.info, {backgroundColor: route.params.color}]}>
-          <View style={styles.children}>
-            <View style={styles.cartac}>
-              <View style={styles.carta}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        enabled
+        style={{flex: 1}}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView contentContainerStyle={styles.scrol}>
+            <View style={styles.contain}>
+              <View
+                style={[styles.header, {backgroundColor: route.params.color}]}>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() => navigation.goBack()}>
+                    <Image
+                      style={styles.flecha}
+                      source={require('../../assets/Icon/flecha.png')}
+                    />
+                  </TouchableOpacity>
+                  <Text style={[styles.texto, {textAlignVertical: 'center'}]}>
+                    {route.params.item.categoria}
+                  </Text>
+                </View>
                 <TouchableOpacity
                   activeOpacity={0.5}
-                  onPress={() =>
-                    navigation.navigate('VistaImagen', {
-                      imagen: route.params.item.urlImagen,
-                    })
-                  }>
+                  onPress={() => setMenuVisible(true)}>
                   <Image
-                    style={styles.imagen}
-                    source={
-                      route.params.item.urlImagen.includes('firebasestorage')
-                        ? require('../../assets/Img/CarretaFondoBlanco.png')
-                        : {uri: route.params.item.urlImagen}
-                    }
+                    style={styles.menu}
+                    source={require('../../assets/Icon/menu.png')}
                   />
                 </TouchableOpacity>
               </View>
+              <View
+                style={[styles.info, {backgroundColor: route.params.color}]}>
+                <View style={styles.children}>
+                  <View style={styles.cartac}>
+                    <View style={styles.carta}>
+                      <TouchableOpacity
+                        activeOpacity={0.5}
+                        onPress={() =>
+                          navigation.navigate('VistaImagen', {
+                            imagen: route.params.item.urlImagen,
+                          })
+                        }>
+                        <Image
+                          style={styles.imagen}
+                          source={
+                            route.params.item.urlImagen.includes(
+                              'firebasestorage',
+                            )
+                              ? require('../../assets/Img/CarretaFondoBlanco.png')
+                              : {uri: route.params.item.urlImagen}
+                          }
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.contenido}>
+                <Text style={[styles.texto, {color: route.params.color}]}>
+                  {route.params.item.nombre}
+                </Text>
+                <Text
+                  style={[
+                    styles.texto,
+                    {
+                      color: '#707070',
+                      fontSize: hp('2'),
+                      fontFamily: 'OpenSans-Regular',
+                    },
+                  ]}>
+                  {route.params.item.descripcion}
+                </Text>
+                <Text style={[styles.texto, {color: '#030303'}]}>
+                  COP {formatNumber.new(route.params.item.precio)}
+                </Text>
+              </View>
+              <CantidadProducto navigation={navigation} item={it()} />
             </View>
-          </View>
-        </View>
-        <View style={styles.contenido}>
-          <Text style={[styles.texto, {color: route.params.color}]}>
-            {route.params.item.nombre}
-          </Text>
-          <Text
-            style={[
-              styles.texto,
-              {
-                color: '#707070',
-                fontSize: hp('2'),
-                fontFamily: 'OpenSans-Regular',
-              },
-            ]}>
-            {route.params.item.descripcion}
-          </Text>
-          <Text style={[styles.texto, {color: '#030303'}]}>
-            COP {formatNumber.new(route.params.item.precio)}
-          </Text>
-        </View>
-        <CantidadProducto navigation={navigation} item={it()} />
-      </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </>
   );
 };

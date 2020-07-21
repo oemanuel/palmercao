@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  TextInput,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -9,10 +16,6 @@ import {connect} from 'react-redux';
 import {añadir, quitar} from '../redux/listaCompra/reducers/listaCompra';
 
 const CantidadProducto = props => {
-  const {navigation, item, add, quit, carrito} = props;
-  const producto = item;
-  const [cantidad, setCantidad] = useState(item.cantidad);
-
   var formatNumber = {
     separador: '.', // separador para los miles
     sepDecimal: ',', // separador para los decimales
@@ -33,10 +36,23 @@ const CantidadProducto = props => {
     },
   };
 
+  const {navigation, item, add, quit, carrito} = props;
+  const producto = item;
+  const [cantidad, setCantidad] = useState(item.cantidad);
+  const [value, setValue] = useState(
+    formatNumber.new((producto.precio / 500) * producto.cantidad),
+  );
+
   const aumentar = () => {
-    producto.cantidad += producto.tipo == 'unitario' ? 1 : 500;
+    producto.cantidad += producto.tipo == 'unitario' ? 1 : 125;
     setCantidad(producto.cantidad);
+    setValue(
+      formatNumber.new(
+        ((producto.precio / 500) * producto.cantidad).toFixed(2),
+      ),
+    );
   };
+
   const disminuir = () => {
     if (producto.tipo == 'unitario') {
       if (producto.cantidad > 1) {
@@ -44,9 +60,14 @@ const CantidadProducto = props => {
         setCantidad(producto.cantidad);
       }
     } else {
-      if (producto.cantidad > 500) {
-        producto.cantidad -= 500;
+      if (producto.cantidad > 125) {
+        producto.cantidad -= 125;
         setCantidad(producto.cantidad);
+        setValue(
+          formatNumber.new(
+            ((producto.precio / 500) * producto.cantidad).toFixed(2),
+          ),
+        );
       }
     }
   };
@@ -55,12 +76,23 @@ const CantidadProducto = props => {
       producto.tipo != 'unitario'
         ? producto.cantidad * (producto.precio / 500)
         : producto.cantidad * producto.precio;
+    console.log(producto);
     return producto;
   };
   const reset = () => {
-    producto.cantidad = producto.tipo == 'unitario' ? 1 : 500;
+    producto.cantidad = producto.tipo == 'unitario' ? 1 : 125;
     producto.total = producto.precio;
     setCantidad(producto.cantidad);
+    setValue(
+      formatNumber.new(
+        ((producto.precio / 500) * producto.cantidad).toFixed(2),
+      ),
+    );
+  };
+
+  const valueChange = value => {
+    setValue(value);
+    setCantidad((500 * value) / producto.precio);
   };
 
   return (
@@ -80,7 +112,8 @@ const CantidadProducto = props => {
         </TouchableOpacity>
         <View style={styles.cantidad}>
           <Text style={styles.texto}>
-            {cantidad} {item.tipo == 'unitario' ? 'und' : 'gr'}
+            {item.tipo == 'unitario' ? cantidad : cantidad.toFixed(2)}{' '}
+            {item.tipo == 'unitario' ? 'und' : 'gr'}
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.5} onPress={() => aumentar()}>
@@ -95,12 +128,19 @@ const CantidadProducto = props => {
       <View style={styles.fila1}>
         <Text style={styles.texto}>Total:</Text>
         <View style={styles.total}>
-          <Text style={styles.texto}>
-            COP{' '}
-            {producto.tipo == 'unitario'
-              ? formatNumber.new(producto.precio * producto.cantidad)
-              : formatNumber.new((producto.precio / 500) * producto.cantidad)}
-          </Text>
+          <Text style={styles.texto}>COP </Text>
+          {producto.tipo == 'unitario' && (
+            <Text>{formatNumber.new(producto.precio * producto.cantidad)}</Text>
+          )}
+          {producto.tipo != 'unitario' && (
+            <TextInput
+              style={styles.input}
+              keyboardType="numeric"
+              value={value}
+              onChangeText={value => valueChange(value)}
+              onSubmitEditing={() => setValue(formatNumber.new(value))}
+            />
+          )}
         </View>
       </View>
       <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
@@ -108,26 +148,46 @@ const CantidadProducto = props => {
           <Boton
             titulo="Agregar"
             onPress={() => {
-              add(totalizar());
-              reset();
-              Alert.alert(
-                'Genial!',
-                'El producto fue añadido a su lista de compra',
-                [
-                  {
-                    text: 'Ir a la lista',
-                    onPress: () => {
-                      navigation.navigate('ListaCompra');
+              if (producto.tipo != 'unitario' && cantidad < 125) {
+                Alert.alert(
+                  'Oppss!!',
+                  'El total no debe ser menor a '.concat(
+                    formatNumber.new(
+                      (producto.precio / 500) * producto.cantidad,
+                    ),
+                  ),
+                  [
+                    {
+                      text: 'Cerrar',
+                      onPress: () => {},
+                      style: 'cancel',
                     },
-                  },
-                  {
-                    text: 'Cerrar',
-                    onPress: () => {},
-                    style: 'cancel',
-                  },
-                ],
-                {cancelable: true},
-              );
+                  ],
+                  {cancelable: true},
+                );
+              } else {
+                producto.cantidad = cantidad;
+                add(totalizar());
+                reset();
+                Alert.alert(
+                  'Genial!',
+                  'El producto fue añadido a su lista de compra',
+                  [
+                    {
+                      text: 'Ir a la lista',
+                      onPress: () => {
+                        navigation.navigate('ListaCompra');
+                      },
+                    },
+                    {
+                      text: 'Cerrar',
+                      onPress: () => {},
+                      style: 'cancel',
+                    },
+                  ],
+                  {cancelable: true},
+                );
+              }
             }}
           />
         )}
@@ -179,13 +239,22 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   total: {
-    width: hp('36'),
-    height: hp('5'),
+    width: wp('70'),
+    height: hp('7'),
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: wp('5'),
     elevation: 2,
+    flexDirection: 'row',
+  },
+  input: {
+    color: '#707070',
+    textAlign: 'center',
+    fontSize: hp('2.5'),
+    //width: '80%',
+    fontFamily:
+      Platform.OS === 'ios' ? 'AsCalledByFontBook' : 'OpenSans-Regular',
   },
 });
 

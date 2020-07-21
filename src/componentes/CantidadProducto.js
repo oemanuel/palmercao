@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Alert,
   TextInput,
+  ToastAndroid,
+  Image,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -145,51 +147,87 @@ const CantidadProducto = props => {
       </View>
       <View style={{flex: 0.1, justifyContent: 'flex-start'}}>
         {producto.existencia == 'disponible' && (
-          <Boton
-            titulo="Agregar"
-            onPress={() => {
-              if (producto.tipo != 'unitario' && cantidad < 125) {
-                Alert.alert(
-                  'Oppss!!',
-                  'El total no debe ser menor a '.concat(
-                    formatNumber.new(
-                      (producto.precio / 500) * producto.cantidad,
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+            }}>
+            <Boton
+              titulo="Agregar"
+              onPress={() => {
+                if (producto.tipo != 'unitario' && cantidad < 125) {
+                  Alert.alert(
+                    'Oppss!!',
+                    'El total no debe ser menor a '.concat(
+                      formatNumber.new(
+                        (producto.precio / 500) * producto.cantidad,
+                      ),
                     ),
-                  ),
-                  [
-                    {
-                      text: 'Cerrar',
-                      onPress: () => {},
-                      style: 'cancel',
-                    },
-                  ],
-                  {cancelable: true},
-                );
-              } else {
-                producto.cantidad = cantidad;
-                add(totalizar());
-                reset();
-                Alert.alert(
-                  'Genial!',
-                  'El producto fue añadido a su lista de compra',
-                  [
-                    {
-                      text: 'Ir a la lista',
-                      onPress: () => {
-                        navigation.navigate('ListaCompra');
+                    [
+                      {
+                        text: 'Cerrar',
+                        onPress: () => {},
+                        style: 'cancel',
                       },
-                    },
-                    {
-                      text: 'Cerrar',
-                      onPress: () => {},
-                      style: 'cancel',
-                    },
-                  ],
-                  {cancelable: true},
-                );
-              }
-            }}
-          />
+                    ],
+                    {cancelable: true},
+                  );
+                } else {
+                  producto.cantidad = cantidad;
+                  add(totalizar());
+                  reset();
+                  ToastAndroid.showWithGravity(
+                    'Genial, hemos añadido esto a la lista',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER,
+                  );
+                  // Alert.alert(
+                  //   'Genial!',
+                  //   'El producto fue añadido a su lista de compra',
+                  //   [
+                  //     {
+                  //       text: 'Ir a la lista',
+                  //       onPress: () => {
+                  //         navigation.navigate('ListaCompra');
+                  //       },
+                  //     },
+                  //     {
+                  //       text: 'Cerrar',
+                  //       onPress: () => {},
+                  //       style: 'cancel',
+                  //     },
+                  //   ],
+                  //   {cancelable: true},
+                  // );
+                }
+              }}
+            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ListaCompra')}
+              style={[
+                {
+                  borderRadius: 100,
+
+                  backgroundColor: '#00B46B',
+                  width: wp('15%'),
+                  height: hp('7%'),
+                },
+                {textDecorationLine: 'underline'},
+              ]}>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Image
+                  source={require('../assets/Img/canastaCompra.png')}
+                  style={{
+                    resizeMode: 'contain',
+                    width: '60%',
+                    height: hp(6),
+                    marginVertical: hp(0.5),
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     </View>

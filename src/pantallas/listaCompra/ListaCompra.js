@@ -91,7 +91,7 @@ const ListaCompras = ({navigation, carrito, total}) => {
               } else {
                 Alert.alert(
                   'Opps!',
-                  'Su compra debe ser mayor a 7000 COP, añada más productos a su lista!!!.',
+                  'Su compra debe ser mayor  o igual a 7000 COP, añada más productos a su lista!!!.',
                   [
                     {
                       text: 'Ok',

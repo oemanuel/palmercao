@@ -10,6 +10,7 @@ import {
   enviar_fallido,
   enviar_correcto,
 } from '../listaCompra/reducers/listaCompra';
+import {setEstado} from '../estado.reducer';
 
 // import {
 //   entrar_correcto,
@@ -140,6 +141,20 @@ function* syncProductosSaga() {
     }
   }
 }
+function* syncEstadoSaga() {
+  const channel = yield call(rsf.database.channel, 'abierto');
+
+  while (true) {
+    if (channel) {
+      const {value: abierto} = yield take(channel);
+      if (abierto != null) {
+        yield put(setEstado(abierto));
+      }
+    } else {
+      yield put(setEstado(false));
+    }
+  }
+}
 
 function* addPedido(pedido) {
   try {
@@ -167,5 +182,6 @@ export default function* rootSaga() {
     // takeEvery(RECUPERAR.SOLICITUD, recuperar_pwd),
     takeEvery(ENVIAR.SOLICITUD, addPedido),
     fork(syncProductosSaga),
+    fork(syncEstadoSaga),
   ]);
 }
